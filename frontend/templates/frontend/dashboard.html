@@ -1,0 +1,171 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card card-statistics">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="d-flex justify-content-between border-right card-statistics-item">
+                            <div>
+                                <h1>28893</h1>
+                                <p class="text-muted mb-0">域名数据</p>
+                            </div>
+                            <i class="icon-layers text-primary icon-lg"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="d-flex justify-content-between border-right card-statistics-item">
+                            <div>
+                                <h1>217</h1>
+                                <p class="text-muted mb-0">IP数据</p>
+                            </div>
+                            <i class="icon-people text-primary icon-lg"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="d-flex justify-content-between border-right card-statistics-item">
+                            <div>
+                                <h1>6875</h1>
+                                <p class="text-muted mb-0">漏洞数量</p>
+                            </div>
+                            <i class="icon-pin text-primary icon-lg"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="d-flex justify-content-between card-statistics-item">
+                            <div>
+                                <h1>45596</h1>
+                                <p class="text-muted mb-0">插件库</p>
+                            </div>
+                            <i class="icon-refresh text-primary icon-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">任务量报告</h4>
+                <div class="w-75 mx-auto">
+                    <canvas id="earning-report" width="100" height="100"></canvas>
+                </div>
+                <div class="py-4 d-flex justify-content-center align-items-end">
+                    <h1 class="text-center text-md-left mb-0">1.2M</h1>
+                    <p class="text-muted mb-0 ml-2">Total</p>
+                </div>
+                <div id="earning-report-legend" class="earning-report-legend"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 grid-margin stretch-card">
+        <div class="card">
+            <div class="row h-100">
+                <div class="col-md-5 border-right">
+                    <div class="card-body">
+                        <h4 class="card-title">总况</h4>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <h6>已完成任务队列</h6>
+                                    <p class="text-muted mb-0">相比上周增加/减少</p>
+                                </td>
+                                <td>
+                                    <h3 class="text-primary">
+                                        +2009
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>IP数据</h6>
+                                    <p class="text-muted mb-0">每月 历史数据 对比</p>
+                                </td>
+                                <td>
+                                    <h3 class="text-danger">
+                                        +91
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>域名数据</h6>
+                                    <p class="text-muted mb-0">每月 历史数据 对比</p>
+                                </td>
+                                <td>
+                                    <h3 class="text-success">
+                                        -200
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>Pending</h6>
+                                    <p class="text-muted mb-0">Pending Tasks</p>
+                                </td>
+                                <td>
+                                    <h3 class="text-warning">
+                                        +5152
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>漏洞数量</h6>
+                                    <p class="text-muted mb-0">5% increase</p>
+                                </td>
+                                <td>
+                                    <h3 class="text-primary">
+                                        +89
+                                    </h3>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h4 class="card-title">任务</h4>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td class="py-1">
+                                    <img src="https://via.placeholder.com/40x40" alt="profile"
+                                         class="img-sm rounded-circle">
+                                </td>
+                                <td>
+                                    XX系统资产发现
+                                </td>
+                                <td>
+                                    <label class="badge badge-success">Finished</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">
+                                    <img src="https://via.placeholder.com/40x40" alt="profile"
+                                         class="img-sm rounded-circle">
+                                </td>
+                                <td>
+                                    Tencent资产收集
+                                </td>
+                                <td>
+                                    <label class="badge badge-danger">Running</label>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      "ti-icons@0.1.2",
+      "/Users/linsamozilor/project/cloudui/light"
+    ]
+  ],
+  "_from": "ti-icons@0.1.2",
+  "_id": "ti-icons@0.1.2",
+  "_inBundle": false,
+  "_integrity": "sha1-i9m5bS+r0f/h78dTTT3TuYllH5M=",
+  "_location": "/ti-icons",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "ti-icons@0.1.2",
+    "name": "ti-icons",
+    "escapedName": "ti-icons",
+    "rawSpec": "0.1.2",
+    "saveSpec": null,
+    "fetchSpec": "0.1.2"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ti-icons/-/ti-icons-0.1.2.tgz",
+  "_spec": "0.1.2",
+  "_where": "/Users/linsamozilor/project/cloudui/light",
+  "author": {
+    "name": "themify.me"
+  },
+  "bugs": {
+    "url": "https://github.com/lykmapipo/themify-icons/issues"
+  },
+  "description": "Pixel-perfect, hand-crafted icons that draw inspiration from Apple iOS 7",
+  "homepage": "https://github.com/lykmapipo/themify-icons#readme",
+  "keywords": [
+    "icons",
+    "line",
+    "iOS",
+    "pixel",
+    "perfect",
+    "draw"
+  ],
+  "license": "MIT",
+  "name": "ti-icons",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lykmapipo/themify-icons.git"
+  },
+  "version": "0.1.2"
+}
