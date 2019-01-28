@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from frontend import views
+from application.frontend import views as frontend
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='recent'),
-    url(r'^home/', views.dashboard, name='dashboard'),
-    url(r'^ip/', views.ipdetail, name='ip'),
-    url(r'^domain/', views.domain, name='domain')
+    url(r'^$', frontend.index, name='recent'),
+    url(r'^home/', frontend.dashboard, name='dashboard'),
+    url(r'^ip/', frontend.ipdetail, name='ip'),
+    url(r'^domain/', frontend.domain, name='domain'),
+
+    url(r'^api/v1/', include("application.api.urls"))
 ]
