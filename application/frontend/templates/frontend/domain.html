@@ -1,0 +1,427 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+    <div class="row profile-page">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body ipdetail">
+                    <h3 class="card-title">Domain detail [域名详情]</h3>
+                    <p class="card-description">
+                    <ul class="list-ticked">
+                        <li>域名: baidu.com</li>
+                        <li>子域名: 291</li>
+                        <li>IP: 5</li>
+                        <li>History record:1</li>
+                    </ul>
+                    </p>
+
+                    <div class="profile-body">
+                        <ul class="nav tab-switch" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="user-profile-info-tab" data-toggle="pill"
+                                   href="#user-profile-info" role="tab" aria-controls="user-profile-info"
+                                   aria-selected="true">Basic</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="domain-subdomain-info-tab" data-toggle="pill"
+                                   href="#domain-subdomain-info" role="tab" aria-controls="domain-subdomain-info"
+                                   aria-selected="false">Subdomain</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="user-profile-activity-tab" data-toggle="pill"
+                                   href="#user-profile-activity" role="tab" aria-controls="user-profile-activity"
+                                   aria-selected="false">History record</a>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="tab-content tab-body" id="profile-log-switch">
+                                    <div class="tab-pane fade show active pr-3" id="user-profile-info"
+                                         role="tabpanel" aria-labelledby="user-profile-info-tab">
+                                        <table class="table table-borderless w-100 mt-4">
+                                            <tbody>
+                                            <tr>
+                                                <td><strong>Domain :</strong> a.baidu.com</td>
+                                                <td><strong>Website :</strong> https://staradmin.com:998</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Title :</strong> Hello world</td>
+                                                <td><strong>Pleform :</strong> Windows</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Languages :</strong> English, German,
+                                                    Spanish.
+                                                </td>
+                                                <td><strong>Technology :</strong> asp.net</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row mt-5 pb-4 border-bottom">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-start pb-3 border-bottom">
+                                                    <img src="https://via.placeholder.com/49x49" alt="brand logo">
+                                                    <div class="wrapper pl-4">
+                                                        <p class="font-weight-bold mb-0">Whois</p>
+                                                        <small>邮箱:ssss@master.com</br>注册单位:Tencent</br>注册域名商:CSC
+                                                            CORPORATE DOMAINS, INC.
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-start py-3 border-bottom">
+                                                    <img src="https://via.placeholder.com/49x49" alt="brand logo">
+                                                    <div class="wrapper pl-4">
+                                                        <p class="font-weight-bold mb-0">关联性域名</p>
+                                                        <small>tencent.com qq.com</small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-start py-3">
+                                                    <img src="https://via.placeholder.com/49x49" alt="brand logo">
+                                                    <div class="wrapper pl-4">
+                                                        <p class="font-weight-bold mb-0">使用技术</p>
+                                                        <small>some icons</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 mt-5">
+                                                <h5 class="mb-5">关联性分析</h5>
+                                                <div class="stage-wrapper pl-4">
+                                                    <div class="stages border-left pl-5 pb-4">
+                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-success">
+                                                            <i class="icon-event"></i>
+                                                        </div>
+                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
+                                                            <h5 class="mb-0">IPs</h5>
+                                                            <small class="text-muted">28 mins ago</small>
+                                                        </div>
+                                                        <p>
+                                                        <ul>
+                                                            <li>111.11.22.3</li>
+                                                            <li>111.11.22.4</li>
+                                                            <li>111.11.22.5</li>
+                                                            <li>111.11.22.6</li>
+                                                            <li>111.11.22.7</li>
+                                                            <li>111.11.22.8</li>
+                                                        </ul>
+                                                        </p>
+                                                    </div>
+                                                    <div class="stages border-left pl-5 pb-4">
+                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-danger">
+                                                            <i class="icon-cloud-download"></i>
+                                                        </div>
+                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
+                                                            <h5 class="mb-0">Download Completed</h5>
+                                                            <small class="text-muted">45 mins ago</small>
+                                                        </div>
+                                                        <p>one of the best admin panel templates. With
+                                                            this bootstrap admin template, you can
+                                                            quick start your project.</p>
+                                                        <div class="file-icon-wrapper">
+                                                            <div class="btn btn-outline-danger file-icon">
+                                                                <i class="icon-envelope"></i>
+                                                            </div>
+                                                            <div class="btn btn-outline-primary file-icon">
+                                                                <i class="icon-chart"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="stages pl-5 pb-4">
+                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-primary">
+                                                            <i class="icon-checkbox-marked-circle-outline"></i>
+                                                        </div>
+                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
+                                                            <h5 class="mb-0">New Task Completed</h5>
+                                                            <small class="text-muted">55 mins ago</small>
+                                                        </div>
+                                                        <p>Admin dashboard works seamlessly on all
+                                                            major web browsers and devices.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="domain-subdomain-info" role="tabpanel"
+                                         aria-labelledby="domain-subdomain-info-tab">
+
+                                        <div class="table-responsive" style="padding-right:32px;margin-top:20px;">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        Domain
+                                                    </th>
+                                                    <th>
+                                                        Title
+                                                    </th>
+                                                    <th>
+                                                        Hostname
+                                                    </th>
+                                                    <th>
+                                                        Technology
+                                                    </th>
+                                                    <th>
+                                                        Time
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">110.tencent.com</a>
+                                                    </td>
+                                                    <td>
+                                                        Tencent Admin Login
+                                                    </td>
+                                                    <td>
+                                                        1.1.1.1
+                                                    </td>
+                                                    <td>
+                                                        technology
+                                                    </td>
+                                                    <td>
+                                                        2 mintus ago
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">110.tencent.com</a>
+                                                    </td>
+                                                    <td>
+                                                        Tencent Admin Login
+                                                    </td>
+                                                    <td>
+                                                        1.1.1.1
+                                                    </td>
+                                                    <td>
+                                                        technology
+                                                    </td>
+                                                    <td>
+                                                        2 mintus ago
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">110.tencent.com</a>
+                                                    </td>
+                                                    <td>
+                                                        Tencent Admin Login
+                                                    </td>
+                                                    <td>
+                                                        1.1.1.1
+                                                    </td>
+                                                    <td>
+                                                        technology
+                                                    </td>
+                                                    <td>
+                                                        2 mintus ago
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="#">110.tencent.com</a>
+                                                    </td>
+                                                    <td>
+                                                        Tencent Admin Login
+                                                    </td>
+                                                    <td>
+                                                        1.1.1.1
+                                                    </td>
+                                                    <td>
+                                                        technology
+                                                    </td>
+                                                    <td>
+                                                        2 mintus ago
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="tab-pane fade" id="user-profile-activity" role="tabpanel"
+                                         aria-labelledby="user-profile-activity-tab">
+                                        <div class="horizontal-timeline">
+                                            <section class="time-frame">
+                                                <h4 class="section-time-frame">Today</h4>
+                                                <div class="event">
+                                                    <p class="event-text">We’re big on real names
+                                                        around here, so people know who’s who</p>
+                                                    <div class="event-alert">You have added task #26
+                                                        Successfully to the project “Agile CRM”
+                                                    </div>
+                                                    <div class="event-info">New Dashboard Design - 9:24
+                                                        PM
+                                                    </div>
+                                                </div>
+                                                <div class="event">
+                                                    <p class="event-text">Admin is a full featured,
+                                                        multipurpose, premium bootstrap admin template
+                                                        built with Bootstrap 4 Framework</p>
+                                                    <div class="tumbnail-views">
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                    </div>
+                                                    <div class="event-info">New Dashboard Design - 9:24
+                                                        PM
+                                                    </div>
+                                                </div>
+                                                <div class="event">
+                                                    <p class="event-text">It is a fully responsive
+                                                        bootstrap admin template / bootstrap admin
+                                                        dashboard</p>
+                                                    <div class="event-alert">You have added task #26
+                                                        Successfully to the project “Agile CRM”
+                                                    </div>
+                                                    <div class="event-info">New Dashboard Design - 9:24
+                                                        PM
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section class="time-frame">
+                                                <h4 class="section-time-frame">Yesterday</h4>
+                                                <div class="event">
+                                                    <p class="event-text">Night fill together itself.
+                                                        Midst. Beginning. Behold living god had.</p>
+                                                    <div class="event-alert">You have added task #26
+                                                        Successfully to the project “Agile CRM”
+                                                    </div>
+                                                    <div class="event-info">New Dashboard Design -
+                                                        11:24 PM
+                                                    </div>
+                                                </div>
+                                                <div class="event">
+                                                    <p class="event-text">Why waste time starting from
+                                                        scratch; try out our admin dashboard template</p>
+                                                    <div class="event-info">New Dashboard Design -
+                                                        11:30 PM
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section class="time-frame">
+                                                <h4 class="section-time-frame">30 March</h4>
+                                                <div class="event">
+                                                    <p class="event-text">Gerald Vaughn changed the
+                                                        status to QA on MA-86 - Retargeting Ads</p>
+                                                    <div class="tumbnail-views">
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                        <div class="thumbnail"><img
+                                                                src="https://via.placeholder.com/99x88"
+                                                                alt="thumbnail"></div>
+                                                    </div>
+                                                    <div class="event-alert">You have added task #26
+                                                        Successfully to the project “Agile CRM”
+                                                    </div>
+                                                    <div class="event-info">New Dashboard Design -
+                                                        11:45 PM
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="my-4">Third information</h5>
+                                <div class="new-accounts">
+                                    <ul class="chats">
+                                        <li class="chat-persons">
+                                            <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                <div class="user">
+                                                    <p class="u-name">Certdb</p>
+                                                    <p class="u-designation">Business Development</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="chat-persons">
+                                            <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                <div class="user">
+                                                    <p class="u-name">ThreatBook</p>
+                                                    <p class="u-designation">SEO Expert</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="chat-persons">
+                                            <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                <div class="user">
+                                                    <p class="u-name">FindsubDomains</p>
+                                                    <p class="u-designation">UI/UX designer</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="chat-persons">
+                                            <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                <div class="user">
+                                                    <p class="u-name">X-Force</p>
+                                                    <p class="u-designation">UI/UX designer</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="chat-persons">
+                                            <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                <div class="user">
+                                                    <p class="u-name">DNSdumpster</p>
+                                                    <p class="u-designation">UI/UX designer</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrascript %}
+    <script src="/js/form-addons.js"></script>
+{% endblock %}
