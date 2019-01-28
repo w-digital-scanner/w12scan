@@ -10,6 +10,15 @@ from django.conf.urls import url
 urlpatterns = [
     url(
         regex=r'^test$',
-        view=views.ApiListView.as_view(),
+        view=views.DemoListView.as_view(),
     ),
+    url(
+        regex=r'^domain$',
+        view=views.AddDomainActionView.as_view(),
+    ),
+    url(
+        regex=r'^ip$',
+        view=views.AddIpActionView.as_view(),
+    ),
+
 ]
