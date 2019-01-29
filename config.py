@@ -6,3 +6,6 @@
 
 # Client端与Server端通信的口令
 AUTH_POST_KEY = "hello-w12scan!"
+
+# Elasticsearch 集群
+ELASTICSEARCH_HOSTS = ['127.0.0.1:9200']

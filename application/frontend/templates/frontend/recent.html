@@ -80,63 +80,46 @@
 
 
                 <div class="show-list">
+                    {% for data in datas %}
 
-                    <div class="list-item card border border-0">
-                        <div class="card-body">
-                            <div class="card-body-left">
-                                <h4 class="card-title"><a href="{% url 'ip' %}">40.121.144.130:22</a></h4>
-                                <p class="card-text"><span class="badge badge-outline-primary">22/ssh</span>
-                                    <span class="badge badge-pill badge-success"><a href="{% url 'domain' %}">www.baidu.com</a></span>
-                                </p>
-                                <p class="text-muted"><span class="flag-icon flag-icon-cn"></span> 中国
-                                    香港</p>
-                                <p class="text-muted"><i class="icon-clock"></i>六分钟前</p>
+                        <div class="list-item card border border-0">
+                            <div class="card-body">
+                            {% if data.doc_type == "ips" %}
+                                <div class="card-body-left">
+                                    <h4 class="card-title"><a href="{% url 'ip' %}">{{ data.target }}</a></h4>
+                                    <p class="card-text">
+                                    {% for info in data.info_tags %}
+                                        <span class="badge badge-diy badge-pill">{{ info }}</span>
+                                    {% endfor %}
+                                    </p>
+                                    {% if data.location %}
+                                        <p class="text-muted"><span
+                                                class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
+                                            {{ data.location.region }}</p>
+                                    {% endif %}
+                                    <p class="text-muted"><i class="icon-clock"></i>{{ data.published_from }}</p>
+                                </div>
+                                <pre>{{ data.infos }}</pre>
+                            {% elif data.doc_type == "domains" %}
+                                <div class="card-body-left">
+                                    <h4 class="card-title"><a href="{% url 'ip' %}" class="domain-inline">{{ data.target }}</a></h4>
+                                    <p class="card-text">
+                                    {% for info in data.info_tags %}
+                                        <span class="badge badge-diy badge-pill">{{ info }}</span>
+                                    {% endfor %}
+                                    </p>
+                                    {% if data.location %}
+                                        <p class="text-muted"><span
+                                                class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
+                                            {{ data.location.region }}</p>
+                                    {% endif %}
+                                    <p class="text-muted"><i class="icon-clock"></i>{{ data.published_from }}</p>
+                                </div>
+                                <pre>{{ data.infos }}</pre>
+                            {% endif %}
                             </div>
-                            <pre>HTTP/1.1 404 Not found
-Accept-Encoding:UTF-8
-Content-type:text/html
-Content-length:163                             
-                          </pre>
                         </div>
-                    </div>
-
-                    <div class="list-item card border border-0">
-                        <div class="card-body">
-                            <div class="card-body-left">
-                                <h4 class="card-title">40.121.144.130:22</h4>
-                                <p class="card-text"><span class="badge badge-outline-primary">22/ssh</span>
-                                    <span class="badge badge-pill badge-success">www.baidu.com</span>
-                                </p>
-                                <p class="text-muted"><span class="flag-icon flag-icon-cn"></span> 中国
-                                    香港</p>
-                                <p class="text-muted"><i class="icon-clock"></i>六分钟前</p>
-                            </div>
-                            <pre>HTTP/1.1 404 Not found
-    Accept-Encoding:UTF-8
-    Content-type:text/html
-    Content-length:163                             
-                              </pre>
-                        </div>
-                    </div>
-                    <div class="list-item card border border-0">
-                        <div class="card-body">
-                            <div class="card-body-left">
-                                <h4 class="card-title">40.121.144.130:22</h4>
-                                <p class="card-text"><span class="badge badge-outline-primary">22/ssh</span>
-                                    <span class="badge badge-pill badge-success">www.baidu.com</span>
-                                </p>
-                                <p class="text-muted"><span class="flag-icon flag-icon-cn"></span> 中国
-                                    香港</p>
-                                <p class="text-muted"><i class="icon-clock"></i>六分钟前</p>
-                            </div>
-                            <pre>HTTP/1.1 404 Not found
-    Accept-Encoding:UTF-8
-    Content-type:text/html
-    Content-length:163
-                              </pre>
-                        </div>
-                    </div>
-
+                    {% endfor %}
 
                 </div>
 

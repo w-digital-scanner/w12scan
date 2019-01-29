@@ -1,156 +1,225 @@
 .logo {
-	position: relative;
-	width: 46px;
-	line-height: 1
+    position: relative;
+    width: 46px;
+    line-height: 1
 }
 
 .logo .logo-status {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	font-size: 12px;
-	line-height: 40px;
-	color: #666
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 40px;
+    color: #666
 }
 
 .logo div {
-	line-height: 1;
-	height: 12px;
-	margin-bottom: 4px
+    line-height: 1;
+    height: 12px;
+    margin-bottom: 4px
 }
 
 .logo div:nth-of-type(2) {
-	height: 8px
+    height: 8px
 }
 
 .logo span {
-	display: inline-block;
-	vertical-align: top;
-	height: 100%
+    display: inline-block;
+    vertical-align: top;
+    height: 100%
 }
 
 .logo .left-yellow {
-	width: 24px;
-	margin-right: 2px;
-	background-color: #ffdc00;
-	border-radius: 6px 0 0 6px
+    width: 24px;
+    margin-right: 2px;
+    background-color: #ffdc00;
+    border-radius: 6px 0 0 6px
 }
 
 .logo .right-green {
-	width: 16px;
-	background-color: #42b983;
-	border-radius: 0 6px 6px 0
+    width: 16px;
+    background-color: #42b983;
+    border-radius: 0 6px 6px 0
 }
 
 .logo .full-green {
-	width: 42px;
-	background-color: #42b983;
-	border-radius: 4px
+    width: 42px;
+    background-color: #42b983;
+    border-radius: 4px
 }
 
 .logo .left-green {
-	width: 18px;
-	margin-right: 2px;
-	background-color: #42b983;
-	border-radius: 6px 0 0 6px
+    width: 18px;
+    margin-right: 2px;
+    background-color: #42b983;
+    border-radius: 6px 0 0 6px
 }
 
 .logo .right-red {
-	width: 22px;
-	background-color: #f44;
-	border-radius: 0 6px 6px 0
+    width: 22px;
+    background-color: #f44;
+    border-radius: 0 6px 6px 0
 }
 
-.logo-title{
+.logo-title {
     font-family: "Open Sans", sans-serif;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     color: #fff;
     font-weight: 400;
     font-size: 1.42rem;
 }
 
-.site-logo{
+.site-logo {
     transform: scale(.64);
 }
 
-.show-left{
-	margin-left:13px; 
+.show-left {
+    margin-left: 13px;
 }
+
 .show-left .list-group-item {
     padding: 7px 10px;
-	border:none;
-	font-size: 13px;
+    border: none;
+    font-size: 13px;
 }
+
 .show-left .badge {
     line-height: 12px;
 }
-.show-left h3{
-	font-size:0.83rem;
-	border-left: 3px solid #45B6F7;
+
+.show-left h3 {
+    font-size: 0.83rem;
+    border-left: 3px solid #45B6F7;
 }
-.show-left h2{
-	border-left: 5px solid #45B6F7;
-	font-size:17px;
+
+.show-left h2 {
+    border-left: 5px solid #45B6F7;
+    font-size: 17px;
 }
-.show-left .port{
-	padding-top:20px;
-	padding-bottom:15px;
+
+.show-left .port {
+    padding-top: 20px;
+    padding-bottom: 15px;
 }
-.show-center{
-	background-color:white;
-	margin-top:10px;
-	border: 1px solid #dee2e6!important;
-	border-radius: .25rem!important;
+
+.show-center {
+    background-color: white;
+    margin-top: 10px;
+    border: 1px solid #dee2e6 !important;
+    border-radius: .25rem !important;
 }
-.show-left .item{
-	margin-bottom:13px;
+
+.show-left .item {
+    margin-bottom: 13px;
 }
-.show-right{
-	border-left:1px solid #eee;
-	padding-left: 27px;
+
+.show-right {
+    border-left: 1px solid #eee;
+    padding-left: 27px;
 }
-.show-right .find{
-	margin-top:30px;
-	margin-left: -7px;
+
+.show-right .find {
+    margin-top: 30px;
+    margin-left: -7px;
 }
-.show-right .list-item pre{
-	padding: 5px;
-	height: 120px;
-	overflow: auto;
-	border: 1px solid #e0e4e5;
-	line-height: 20px;
-	margin-top: 40px;
+
+.show-right .list-item pre {
+    padding: 5px;
+    height: 120px;
+    overflow: auto;
+    border: 1px solid #e0e4e5;
+    line-height: 20px;
+    margin-top: 40px;
 }
-.show-right .list-item .card-body-left{
-	float: left;
+
+.show-right .list-item .card-body-left {
+    float: left;
     width: 300px;
 }
-.show-right .list-item .card-body{
-	padding-left: 0px;
-	padding-bottom: 5px;
-	padding-top: 15px;
+
+.show-right .list-item .card-body {
+    padding-left: 0px;
+    padding-bottom: 5px;
+    padding-top: 15px;
 }
 
-.show-list{
-	margin-top: 15px;;
+.show-list {
+    margin-top: 15px;;
 }
 
-.ipdetail h3{
-	border-left: 3px solid #45B6F7;
-	padding-left: 7px;
-}
-.ipdetail .profile-body{
-	padding-top: 23px;
+.ipdetail h3 {
+    border-left: 3px solid #45B6F7;
+    padding-left: 7px;
 }
 
-.show-list a{
-	color:inherit;
+.ipdetail .profile-body {
+    padding-top: 23px;
 }
 
-.show-list a:hover{
+.show-list a {
+    color: inherit;
+}
+
+.show-list a:hover {
     text-decoration: none;
+}
+
+.show-list .badge-diy {
+    color: white;
+}
+
+.show-list .badge-diy:nth-child(8n) {
+    border: 1px solid #00a2ca;
+    background-color: #00a2ca;
+}
+
+.show-list .badge-diy:nth-child(8n+1) {
+    border: 1px solid #5CB85C;
+    background-color: #5CB85C;
+}
+
+.show-list .badge-diy:nth-child(8n+2) {
+    border: 1px solid #D9534F;
+    background-color: #D9534F;
+}
+
+.show-list .badge-diy:nth-child(8n+3) {
+    border: 1px solid #FF6600;
+    background-color: #FF6600;
+}
+
+.show-list .badge-diy:nth-child(8n+4) {
+    border: 1px solid #B433FF;
+    background-color: #B433FF;
+}
+
+.show-list .badge-diy:nth-child(8n+5) {
+    border: 1px solid #00ABA9;
+    background-color: #00ABA9;
+}
+
+.show-list .badge-diy:nth-child(8n+6) {
+    border: 1px solid #B37333;
+    background-color: #B37333;
+}
+
+.show-list .badge-diy:nth-child(8n+7) {
+    border: 1px solid #5CB85C;
+    background-color: #5CB85C;
+}
+
+.show-list .card-title {
+    text-transform: none;
+}
+
+.show-list .domain-inline {
+    width: 500px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
 }
