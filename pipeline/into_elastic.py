@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 def save_ip():
-    filename = "/Users/boyhack/Desktop/ips.result.1.txt"
+    filename = "/Users/boyhack/Desktop/ips.result.txt"
     with open(filename) as f:
         data = json.load(f)
 
@@ -39,9 +39,12 @@ def save_domains():
 
 
 if __name__ == '__main__':
-    es = Elasticsearch(ELASTICSEARCH_HOSTS)
-    s = Search(using=es, index='w12scan', doc_type="ips").query("match", target="148.153.35.146")
-    print(s.count())
-    for hit in s:
-        d = hit.to_dict()
-        print(d)
+    # es = Elasticsearch(ELASTICSEARCH_HOSTS)
+    # s = Search(using=es, index='w12scan', doc_type="ips").query("match", target="148.153.35.146")
+    # print(s.count())
+    # for hit in s:
+    #     d = hit.to_dict()
+    #     print(d)
+    # save_domains()
+    # save_ip()
+    pass

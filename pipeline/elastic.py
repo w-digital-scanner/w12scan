@@ -53,8 +53,9 @@ class Ips(Document):
 class Domains(Document):
     status_code = Integer()
     title = Text()
+    headers = Text()
+    body = Text()
     Server = Text()
-    Langeuage = Keyword()
     ip = Keyword()
     url = Keyword()
     CMS = Keyword()
@@ -76,12 +77,21 @@ class Domains(Document):
 
 
 def es_search_ip(ip):
-    s = Search(using=es, index='w12scan', doc_type="ips").query("match", target=ip)
-    if s.count() == 1:
-        return s[0].to_dict()
+    _q = {
+
+        "query": {
+            "match": {
+                "target": ip
+            }
+        }
+
+    }
+    s = Search(using=es, index='w12scan', doc_type="ips").from_dict(_q)
+    if s.count() > 0:
+        return list(s)[0]
     return False
 
 
 if __name__ == '__main__':
-    # Ips.init()
+    Ips.init()
     Domains.init()

@@ -1,4 +1,5 @@
 {% extends 'frontend/base.html' %}
+{% load app_icon %}
 {% block title %} W12SCAN 网络资产发现引擎{% endblock %}
 {% block content %}
     <div class="row show-center">
@@ -75,7 +76,7 @@
                 </div>
 
                 <div class="words">
-                    <p class="text-muted">找到42,333条结果，用时1.0004秒</p>
+                    <p class="text-muted">找到{{ count }}条结果，用时{{ second }}秒</p>
                 </div>
 
 
@@ -84,39 +85,43 @@
 
                         <div class="list-item card border border-0">
                             <div class="card-body">
-                            {% if data.doc_type == "ips" %}
-                                <div class="card-body-left">
-                                    <h4 class="card-title"><a href="{% url 'ip' %}">{{ data.target }}</a></h4>
-                                    <p class="card-text">
-                                    {% for info in data.info_tags %}
-                                        <span class="badge badge-diy badge-pill">{{ info }}</span>
-                                    {% endfor %}
-                                    </p>
-                                    {% if data.location %}
-                                        <p class="text-muted"><span
-                                                class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
-                                            {{ data.location.region }}</p>
-                                    {% endif %}
-                                    <p class="text-muted"><i class="icon-clock"></i>{{ data.published_from }}</p>
-                                </div>
-                                <pre>{{ data.infos }}</pre>
-                            {% elif data.doc_type == "domains" %}
-                                <div class="card-body-left">
-                                    <h4 class="card-title"><a href="{% url 'ip' %}" class="domain-inline">{{ data.target }}</a></h4>
-                                    <p class="card-text">
-                                    {% for info in data.info_tags %}
-                                        <span class="badge badge-diy badge-pill">{{ info }}</span>
-                                    {% endfor %}
-                                    </p>
-                                    {% if data.location %}
-                                        <p class="text-muted"><span
-                                                class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
-                                            {{ data.location.region }}</p>
-                                    {% endif %}
-                                    <p class="text-muted"><i class="icon-clock"></i>{{ data.published_from }}</p>
-                                </div>
-                                <pre>{{ data.infos }}</pre>
-                            {% endif %}
+                                {% if data.doc_type == "ips" %}
+                                    <div class="card-body-left">
+                                        <h4 class="card-title"><a href="{% url 'ip' %}">{{ data.target }}</a></h4>
+                                        <p class="card-text">
+                                            {% for info in data.info_tags %}
+                                                <span class="badge badge-diy badge-pill">{{ info }}</span>
+                                            {% endfor %}
+                                        </p>
+                                        {% if data.location %}
+                                            <p class="text-muted"><span
+                                                    class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
+                                                {{ data.location.region }}</p>
+                                        {% endif %}
+                                        <p class="text-muted"><i class="icon-clock"></i>{{ data.published_from }}</p>
+                                    </div>
+                                    <pre>{{ data.infos }}</pre>
+                                {% elif data.doc_type == "domains" %}
+                                    <div class="card-body-left">
+                                        <h4 class="card-title"><a href="{% url 'ip' %}"
+                                                                  class="domain-inline">{{ data.target }}</a></h4>
+                                        <p class="card-text">
+                                            {% for app in data.app %}
+                                                {{ app|app_icon|safe }}
+                                            {% endfor %}
+                                        </p>
+                                        {% if data.location %}
+                                            <p class="text-muted"><span
+                                                    class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
+                                                {{ data.location.region }}</p>
+                                        {% endif %}
+                                        <p class="text-muted"><i class="icon-link"></i> {{ data.url }}<br />
+                                        <i class="icon-clock"></i> {{ data.published_from }}
+                                        </p>
+                                    </div>
+                                    <pre>{{ data.headers }}<br/><br/>{{ data.body }}
+                                </pre>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
@@ -125,12 +130,11 @@
 
                 <nav>
                     <ul class="pagination rounded">
-                        <li class="page-item"><a class="page-link" href="#"><i class="icon-arrow-left"></i></a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="icon-arrow-right"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}"><i class="icon-arrow-left"></i></a></li>
+                           {% for i in pagination.paginations %}
+                        <li class="page-item {% if pagination.current == i %}active{% endif %}"><a class="page-link" href="/?p={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.next }}"><i class="icon-arrow-right"></i></a></li>
                     </ul>
                 </nav>
             </div>
