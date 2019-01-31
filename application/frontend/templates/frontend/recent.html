@@ -82,6 +82,9 @@
                                             {% for info in data.info_tags %}
                                                 <span class="badge badge-diy badge-pill">{{ info }}</span>
                                             {% endfor %}
+                                        {% if data.bugs %}
+                                        <label class="badge badge-danger">存在漏洞</label>
+                                        {% endif %}
                                         </p>
                                         <p class="text-muted">
                                             {% if data.location %}
@@ -104,6 +107,9 @@
                                             {% for app in data.app %}
                                                 {{ app|app_icon|safe }}
                                             {% endfor %}
+                                        {% if data.bugs %}
+                                        <label class="badge badge-danger">存在漏洞</label>
+                                            {% endif %}
                                         </p>
                                         <p class="text-muted">
                                             {% if data.location %}

@@ -175,8 +175,23 @@ def count_port():
     return res["aggregations"]["infos"]["port"]["buckets"]
 
 
+def total_data():
+    ips = Search(using=es, index='w12scan', doc_type='ips')
+    domains = Search(using=es, index='w12scan', doc_type='domains')
+    return ips.count(), domains.count()
+
+
+def total_bug():
+    payload = {"query": {"exists": {"field": "bugs"}
+                         }, "size": 0
+               }
+    s = Search(using=es, index='w12scan').from_dict(payload)
+    res = s.execute().to_dict()
+    return res["hits"]["total"]
+
+
 if __name__ == '__main__':
     # Ips.init()
     # Domains.init()
-    d = count_app()
+    d = total_bug()
     print(d)

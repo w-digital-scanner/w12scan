@@ -45,6 +45,6 @@ if __name__ == '__main__':
     # for hit in s:
     #     d = hit.to_dict()
     #     print(d)
-    # save_domains()
-    # save_ip()
+    save_domains()
+    save_ip()
     pass

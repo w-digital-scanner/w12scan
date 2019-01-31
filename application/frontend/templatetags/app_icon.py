@@ -14,7 +14,7 @@ def app_icon(product):
         icon = WAPP_ICON[product]["icon"]
 
         path = "https://www.wappalyzer.com/images/icons/" + icon
-        return '''<img src="{}" class="img-ss mr-4" alt="profile" title="{}">'''.format(path,product)
+        return '''<img src="{}" class="img-ss" alt="profile" title="{}">'''.format(path,product)
 
     html = '''<span class="badge badge-diy badge-pill">{}</span>'''.format(product)
     return html

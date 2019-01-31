@@ -1,171 +1,260 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
-<div class="row">
-    <div class="col-12 grid-margin">
-        <div class="card card-statistics">
-            <div class="card-body p-0">
-                <div class="row">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="d-flex justify-content-between border-right card-statistics-item">
-                            <div>
-                                <h1>28893</h1>
-                                <p class="text-muted mb-0">域名数据</p>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card card-statistics">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="d-flex justify-content-between border-right card-statistics-item">
+                                <div>
+                                    <h1>{{ total.domains }}</h1>
+                                    <p class="text-muted mb-0">域名数据</p>
+                                </div>
+                                <i class="icon-layers text-primary icon-lg"></i>
                             </div>
-                            <i class="icon-layers text-primary icon-lg"></i>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="d-flex justify-content-between border-right card-statistics-item">
-                            <div>
-                                <h1>217</h1>
-                                <p class="text-muted mb-0">IP数据</p>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="d-flex justify-content-between border-right card-statistics-item">
+                                <div>
+                                    <h1>{{ total.ips }}</h1>
+                                    <p class="text-muted mb-0">IP数据</p>
+                                </div>
+                                <i class="icon-people text-primary icon-lg"></i>
                             </div>
-                            <i class="icon-people text-primary icon-lg"></i>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="d-flex justify-content-between border-right card-statistics-item">
-                            <div>
-                                <h1>6875</h1>
-                                <p class="text-muted mb-0">漏洞数量</p>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="d-flex justify-content-between border-right card-statistics-item">
+                                <div>
+                                    <h1>{{ total.bugs }}</h1>
+                                    <p class="text-muted mb-0">漏洞数量</p>
+                                </div>
+                                <i class="icon-pin text-primary icon-lg"></i>
                             </div>
-                            <i class="icon-pin text-primary icon-lg"></i>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="d-flex justify-content-between card-statistics-item">
-                            <div>
-                                <h1>45596</h1>
-                                <p class="text-muted mb-0">插件库</p>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="d-flex justify-content-between card-statistics-item">
+                                <div>
+                                    <h1>-</h1>
+                                    <p class="text-muted mb-0">插件库</p>
+                                </div>
+                                <i class="icon-refresh text-primary icon-lg"></i>
                             </div>
-                            <i class="icon-refresh text-primary icon-lg"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-3 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">任务量报告</h4>
-                <div class="w-75 mx-auto">
-                    <canvas id="earning-report" width="100" height="100"></canvas>
-                </div>
-                <div class="py-4 d-flex justify-content-center align-items-end">
-                    <h1 class="text-center text-md-left mb-0">1.2M</h1>
-                    <p class="text-muted mb-0 ml-2">Total</p>
-                </div>
-                <div id="earning-report-legend" class="earning-report-legend"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-9 grid-margin stretch-card">
-        <div class="card">
-            <div class="row h-100">
-                <div class="col-md-5 border-right">
-                    <div class="card-body">
-                        <h4 class="card-title">总况</h4>
-                        <table class="table table-borderless">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <h6>已完成任务队列</h6>
-                                    <p class="text-muted mb-0">相比上周增加/减少</p>
-                                </td>
-                                <td>
-                                    <h3 class="text-primary">
-                                        +2009
-                                    </h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>IP数据</h6>
-                                    <p class="text-muted mb-0">每月 历史数据 对比</p>
-                                </td>
-                                <td>
-                                    <h3 class="text-danger">
-                                        +91
-                                    </h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>域名数据</h6>
-                                    <p class="text-muted mb-0">每月 历史数据 对比</p>
-                                </td>
-                                <td>
-                                    <h3 class="text-success">
-                                        -200
-                                    </h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>Pending</h6>
-                                    <p class="text-muted mb-0">Pending Tasks</p>
-                                </td>
-                                <td>
-                                    <h3 class="text-warning">
-                                        +5152
-                                    </h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>漏洞数量</h6>
-                                    <p class="text-muted mb-0">5% increase</p>
-                                </td>
-                                <td>
-                                    <h3 class="text-primary">
-                                        +89
-                                    </h3>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+    <div class="row">
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">任务量报告</h4>
+                    <div class="w-75 mx-auto">
+                        <canvas id="earning-report" width="100" height="100"></canvas>
                     </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <h4 class="card-title">任务</h4>
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <td class="py-1">
-                                    <img src="https://via.placeholder.com/40x40" alt="profile"
-                                         class="img-sm rounded-circle">
-                                </td>
-                                <td>
-                                    XX系统资产发现
-                                </td>
-                                <td>
-                                    <label class="badge badge-success">Finished</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-1">
-                                    <img src="https://via.placeholder.com/40x40" alt="profile"
-                                         class="img-sm rounded-circle">
-                                </td>
-                                <td>
-                                    Tencent资产收集
-                                </td>
-                                <td>
-                                    <label class="badge badge-danger">Running</label>
-                                </td>
-                            </tr>
-
-                            </tbody>
-                        </table>
+                    <div class="py-4 d-flex justify-content-center align-items-end">
+                        <h1 class="text-center text-md-left mb-0">1.2M</h1>
+                        <p class="text-muted mb-0 ml-2">Total</p>
                     </div>
+                    <div id="earning-report-legend" class="earning-report-legend"></div>
                 </div>
             </div>
         </div>
+        <div class="col-md-9 grid-margin stretch-card">
+            <div class="card">
+                <div class="row h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/92x92" class="img-lg rounded-circle mb-2"
+                                 alt="profile image">
+                            <div class="ml-3">
+                                <h4>资产配置</h4>
+                                <p class="text-muted mb-0">Developer</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 card-text">
+                            在此处输入相关资产，然后你就能查询得到
+                        </p>
+                        <button class="btn btn-info btn-sm mt-3 mb-4">新建资产</button>
+                        <div class="border-top pt-3">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            资产名称
+                                        </th>
+                                        <th>
+                                            统计数量
+                                        </th>
+                                        <th>
+                                            描述
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            Herman Beck
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $ 77.99
+                                        </td>
+                                        <td>
+                                            May 15, 2015
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2
+                                        </td>
+                                        <td>
+                                            Messsy Adam
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                     style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $245.30
+                                        </td>
+                                        <td>
+                                            July 1, 2015
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3
+                                        </td>
+                                        <td>
+                                            John Richards
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                     style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $138.00
+                                        </td>
+                                        <td>
+                                            Apr 12, 2015
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4
+                                        </td>
+                                        <td>
+                                            Peter Meggik
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                     style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $ 77.99
+                                        </td>
+                                        <td>
+                                            May 15, 2015
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            5
+                                        </td>
+                                        <td>
+                                            Edward
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                     style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $ 160.25
+                                        </td>
+                                        <td>
+                                            May 03, 2015
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            6
+                                        </td>
+                                        <td>
+                                            John Doe
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 65%"
+                                                     aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $ 123.21
+                                        </td>
+                                        <td>
+                                            April 05, 2015
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            7
+                                        </td>
+                                        <td>
+                                            Henry Tom
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                     style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $ 150.00
+                                        </td>
+                                        <td>
+                                            June 16, 2015
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

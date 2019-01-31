@@ -11,7 +11,7 @@ from elasticsearch_dsl import Search
 
 from application.utils.util import datetime_string_format
 from config import ELASTICSEARCH_HOSTS
-from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port
+from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug
 from datetime import datetime
 
 
@@ -96,7 +96,14 @@ def index(request):
 
 
 def dashboard(request):
-    return render(request, "frontend/dashboard.html", )
+    count_ips, count_domains = total_data()
+    count_bugs = total_bug()
+    total = {
+        "ips": count_ips,
+        "domains": count_domains,
+        "bugs":count_bugs
+    }
+    return render(request, "frontend/dashboard.html", {"total": total})
 
 
 def ipdetail(request):

@@ -1,10 +1,13 @@
-from django.shortcuts import render
 from django.views.generic.base import View
-from django.http import response, JsonResponse, HttpRequest
+import json
 
-from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpRequest
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import View
+
 from config import AUTH_POST_KEY
+from pipeline.elastic import Ips, Domains
 
 
 # Create your views here.
@@ -23,19 +26,41 @@ class DemoListView(View):
 class AddIpActionView(View):
 
     def post(self, request: HttpRequest):
-        if request.GET.get("k", "") != AUTH_POST_KEY:
+        key = request.META.get("HTTP_W12SCAN", None)
+        if key != AUTH_POST_KEY:
             return JsonResponse({"status": "400", "msg": "Permission verification failed"})
         data = request.body.decode()
+        response = {}
+        try:
+            ip = json.loads(data)
+            dd = Ips(**ip)
+            dd.save()
+            response["status"] = 200
+            response["msg"] = "ok"
+        except Exception as e:
+            response["status"] = 400
+            response["msg"] = str(e)
 
-        return JsonResponse({"post": "test"})
+        return JsonResponse(response)
 
 
 @method_decorator(csrf_exempt, name="dispatch")
 class AddDomainActionView(View):
 
     def post(self, request: HttpRequest):
-        if request.GET.get("k", "") != AUTH_POST_KEY:
+        key = request.META.get("HTTP_AUTHORIZATION", None)
+        if key != AUTH_POST_KEY:
             return JsonResponse({"status": "400", "msg": "Permission verification failed"})
         data = request.body.decode()
+        response = {}
+        try:
+            ip = json.loads(data)
+            dd = Domains(**ip)
+            dd.save()
+            response["status"] = 200
+            response["msg"] = "ok"
+        except Exception as e:
+            response["status"] = 400
+            response["msg"] = str(e)
 
-        return JsonResponse({"post": "test"})
+        return JsonResponse(response)
