@@ -11,7 +11,7 @@ from elasticsearch_dsl import Search
 
 from application.utils.util import datetime_string_format
 from config import ELASTICSEARCH_HOSTS
-from pipeline.elastic import Ips, es_search_ip
+from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port
 from datetime import datetime
 
 
@@ -33,7 +33,7 @@ def index(request):
     }
     s = Search(using=es, index='w12scan').from_dict(_search)
     count = s.count()
-    end_time = (datetime.now() - start_time).total_seconds()
+
     # 分页逻辑
     max_page = math.ceil(count / 20)
     if page <= 5:
@@ -71,11 +71,28 @@ def index(request):
             if d.get("ip"):
                 ip = d.get("ip")
                 ip_info = es_search_ip(ip)
-                d["location"] = ip_info.location
+                if ip_info:
+                    d["location"] = ip_info.location
         datas.append(d)
 
+    # 左侧统计代码逻辑
+    statistics = {}
+    # 1.组件统计
+    apps = count_app()
+    countrys = count_country()
+    names = count_name()
+    ports = count_port()
+    statistics["apps"] = apps
+    statistics["countrys"] = countrys
+    statistics["names"] = names
+    statistics["ports"] = ports
+
+    # 总耗时间
+    end_time = (datetime.now() - start_time).total_seconds()
+
     return render(request, "frontend/recent.html",
-                  {"datas": datas, "count": count, "second": end_time, "pagination": pagination})
+                  {"datas": datas, "count": count, "second": end_time, "pagination": pagination,
+                   "statistics": statistics})
 
 
 def dashboard(request):

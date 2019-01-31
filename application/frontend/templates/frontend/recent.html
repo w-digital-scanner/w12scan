@@ -11,38 +11,30 @@
                 <div class="item">
                     <h3>&nbsp;&nbsp;国家</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">China <span
-                                class="badge badge-primary badge-pill float-right">179,720</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">American <span
-                                class="badge badge-primary badge-pill float-right">42,321</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">Japen <span
-                                class="badge badge-primary badge-pill float-right">33,449</span></a>
+                        {% for app in statistics.countrys %}
+                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                        {% endfor %}
                     </div>
                 </div>
 
                 <div class="item">
                     <h3>&nbsp;&nbsp;服务</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">HTTP <span
-                                class="badge badge-primary badge-pill float-right">1,991</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">SSH <span
-                                class="badge badge-primary badge-pill float-right">4,720</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">FTP <span
-                                class="badge badge-primary badge-pill float-right">23,720</span></a>
+                        {% for app in statistics.names %}
+                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                        {% endfor %}
                     </div>
                 </div>
 
                 <div class="item">
                     <h3>&nbsp;&nbsp;端口</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">80 <span
-                                class="badge badge-primary badge-pill float-right">1,991</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">8888 <span
-                                class="badge badge-primary badge-pill float-right">4,720</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">22 <span
-                                class="badge badge-primary badge-pill float-right">23,720</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">3389 <span
-                                class="badge badge-primary badge-pill float-right">23,720</span></a>
+                        {% for app in statistics.ports %}
+                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                        {% endfor %}
 
                     </div>
                 </div>
@@ -50,12 +42,10 @@
                 <div class="item">
                     <h3>&nbsp;&nbsp;组件</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">nginx <span
-                                class="badge badge-primary badge-pill float-right">1,991</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">OpenSSH <span
-                                class="badge badge-primary badge-pill float-right">4,720</span></a>
-                        <a href="#" class="list-group-item list-group-item-action">Apache httped <span
-                                class="badge badge-primary badge-pill float-right">23,720</span></a>
+                        {% for app in statistics.apps %}
+                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -66,7 +56,7 @@
                 <div class="find col-10">
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="search synax ip:127.0.0.1"
+                            <input type="text" class="form-control" placeholder="type some keywords"
                                    aria-label="Recipient's username">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-primary" type="button">Search</button>
@@ -93,12 +83,17 @@
                                                 <span class="badge badge-diy badge-pill">{{ info }}</span>
                                             {% endfor %}
                                         </p>
-                                        {% if data.location %}
-                                            <p class="text-muted"><span
-                                                    class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
-                                                {{ data.location.region }}</p>
-                                        {% endif %}
-                                        <p class="text-muted"><i class="icon-clock"></i>{{ data.published_from }}</p>
+                                        <p class="text-muted">
+                                            {% if data.location %}
+                                                <span
+                                                        class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span>
+                                                {{ data.location.country }}
+                                                {{ data.location.region }}&nbsp;
+                                            {% endif %}
+                                        <a class="zichan" href=""><l class="icon-cursor"></l> Bilibili</a>
+                                        </p>
+                                        <p class="text-muted"><span><i class="icon-clock"></i> {{ data.published_from }}</span>
+                                        </p>
                                     </div>
                                     <pre>{{ data.infos }}</pre>
                                 {% elif data.doc_type == "domains" %}
@@ -110,13 +105,17 @@
                                                 {{ app|app_icon|safe }}
                                             {% endfor %}
                                         </p>
-                                        {% if data.location %}
-                                            <p class="text-muted"><span
-                                                    class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span> {{ data.location.country }}
-                                                {{ data.location.region }}</p>
-                                        {% endif %}
-                                        <p class="text-muted"><i class="icon-link"></i> {{ data.url }}<br />
-                                        <i class="icon-clock"></i> {{ data.published_from }}
+                                        <p class="text-muted">
+                                            {% if data.location %}
+                                                <span
+                                                        class="flag-icon flag-icon-{{ data.location.country_id | lower }}"></span>
+                                                {{ data.location.country }}
+                                                {{ data.location.region }}&nbsp;
+                                            {% endif %}
+                                            <a class="zichan" href=""><l class="icon-cursor"></l> Bilibili</a>
+                                        </p>
+                                        <p class="text-muted"><span><i class="icon-link"></i> {{ data.url }}</span><br/>
+                                            <span><i class="icon-clock"></i> {{ data.published_from }}</span>
                                         </p>
                                     </div>
                                     <pre>{{ data.headers }}<br/><br/>{{ data.body }}
@@ -130,11 +129,15 @@
 
                 <nav>
                     <ul class="pagination rounded">
-                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}"><i class="icon-arrow-left"></i></a></li>
-                           {% for i in pagination.paginations %}
-                        <li class="page-item {% if pagination.current == i %}active{% endif %}"><a class="page-link" href="/?p={{ i }}">{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}"><i
+                                class="icon-arrow-left"></i></a></li>
+                        {% for i in pagination.paginations %}
+                            <li class="page-item {% if pagination.current == i %}active{% endif %}"><a class="page-link"
+                                                                                                       href="/?p={{ i }}">{{ i }}</a>
+                            </li>
                         {% endfor %}
-                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.next }}"><i class="icon-arrow-right"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.next }}"><i
+                                class="icon-arrow-right"></i></a></li>
                     </ul>
                 </nav>
             </div>

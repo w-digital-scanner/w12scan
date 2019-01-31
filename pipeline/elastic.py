@@ -92,6 +92,91 @@ def es_search_ip(ip):
     return False
 
 
+def count_app():
+    payload = {
+        "size": 0,
+        "aggs": {
+            "genres": {
+                "terms": {
+                    "field": "app.keyword",
+                    "size": 8
+                }
+            }
+        }
+    }
+    s = Search(using=es, index='w12scan', doc_type="domains").from_dict(payload)
+    res = s.execute().to_dict()
+    return res["aggregations"]["genres"]["buckets"]
+
+
+def count_country():
+    payload = {"size": 0,
+               "aggs": {
+                   "location": {
+                       "nested": {
+                           "path": "location"
+                       },
+                       "aggs": {
+                           "country": {
+                               "terms": {
+                                   "field": "location.country"
+                               }
+                           }
+                       }
+                   }
+               }
+               }
+    s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+    res = s.execute().to_dict()
+    return res["aggregations"]["location"]["country"]["buckets"]
+
+
+def count_name():
+    payload = {"size": 0,
+               "aggs": {
+                   "infos": {
+                       "nested": {
+                           "path": "infos"
+                       },
+                       "aggs": {
+                           "name": {
+                               "terms": {
+                                   "field": "infos.name"
+                               }
+                           }
+                       }
+                   }
+               }
+               }
+    s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+    res = s.execute().to_dict()
+    return res["aggregations"]["infos"]["name"]["buckets"]
+
+
+def count_port():
+    payload = {"size": 0,
+               "aggs": {
+                   "infos": {
+                       "nested": {
+                           "path": "infos"
+                       },
+                       "aggs": {
+                           "port": {
+                               "terms": {
+                                   "field": "infos.port"
+                               }
+                           }
+                       }
+                   }
+               }
+               }
+    s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+    res = s.execute().to_dict()
+    return res["aggregations"]["infos"]["port"]["buckets"]
+
+
 if __name__ == '__main__':
-    Ips.init()
-    Domains.init()
+    # Ips.init()
+    # Domains.init()
+    d = count_app()
+    print(d)
