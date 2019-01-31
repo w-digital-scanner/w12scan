@@ -77,7 +77,7 @@
                             <div class="card-body">
                                 {% if data.doc_type == "ips" %}
                                     <div class="card-body-left">
-                                        <h4 class="card-title"><a href="{% url 'ip' %}">{{ data.target }}</a></h4>
+                                        <h4 class="card-title"><a href="{% url 'detail' data.id %}">{{ data.target }}</a></h4>
                                         <p class="card-text">
                                             {% for info in data.info_tags %}
                                                 <span class="badge badge-diy badge-pill">{{ info }}</span>
@@ -101,7 +101,7 @@
                                     <pre>{{ data.infos }}</pre>
                                 {% elif data.doc_type == "domains" %}
                                     <div class="card-body-left">
-                                        <h4 class="card-title"><a href="{% url 'ip' %}"
+                                        <h4 class="card-title"><a href="{% url 'detail' data.id %}"
                                                                   class="domain-inline">{{ data.target }}</a></h4>
                                         <p class="card-text">
                                             {% for app in data.app %}

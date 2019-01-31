@@ -48,7 +48,7 @@ class AddIpActionView(View):
 class AddDomainActionView(View):
 
     def post(self, request: HttpRequest):
-        key = request.META.get("HTTP_AUTHORIZATION", None)
+        key = request.META.get("HTTP_W12SCAN", None)
         if key != AUTH_POST_KEY:
             return JsonResponse({"status": "400", "msg": "Permission verification failed"})
         data = request.body.decode()

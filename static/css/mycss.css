@@ -225,4 +225,6 @@
 }
 .show-list .zichan{
 }
-
+.fade.show, .fade.in {
+    opacity: inherit;
+}

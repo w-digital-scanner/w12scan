@@ -78,7 +78,8 @@
                         <p class="mt-4 card-text">
                             在此处输入相关资产，然后你就能查询得到
                         </p>
-                        <button class="btn btn-info btn-sm mt-3 mb-4">新建资产</button>
+                        <button class="btn btn-info btn-sm mt-3 mb-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@mdo">新建资产</button>
+
                         <div class="border-top pt-3">
                             <div class="row">
                                 <table class="table table-bordered">
@@ -141,113 +142,11 @@
                                             $245.30
                                         </td>
                                         <td>
-                                            July 1, 2015
+                                            <button type="button" class="btn btn-secondary btn-xm"><i class="icon-cloud-download"></i>Edit</button>
+                                            <button type="button" class="btn btn-light btn-xm"><i class="icon-refresh"></i>Delete</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            John Richards
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                     style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $138.00
-                                        </td>
-                                        <td>
-                                            Apr 12, 2015
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            Peter Meggik
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                     style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $ 77.99
-                                        </td>
-                                        <td>
-                                            May 15, 2015
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            Edward
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                     style="width: 35%" aria-valuenow="35" aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $ 160.25
-                                        </td>
-                                        <td>
-                                            May 03, 2015
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            John Doe
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 65%"
-                                                     aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $ 123.21
-                                        </td>
-                                        <td>
-                                            April 05, 2015
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            7
-                                        </td>
-                                        <td>
-                                            Henry Tom
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                     style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $ 150.00
-                                        </td>
-                                        <td>
-                                            June 16, 2015
-                                        </td>
-                                    </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -257,4 +156,42 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-4" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel-4">创建资产</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group">
+                              <label for="recipient-name" class="col-form-label">资产名称:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                              <div class="form-group">
+                              <label for="recipient-name" class="col-form-label">资产描述:</label>
+                              <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">域名:</label>
+                              <textarea class="form-control" id="message-text" rows="4"></textarea>
+                            </div>
+                              <div class="form-group">
+                              <label for="message-text" class="col-form-label">IP:</label>
+                              <textarea class="form-control" id="message-text" rows="5"></textarea>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-success">创建</button>
+                          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 {% endblock %}

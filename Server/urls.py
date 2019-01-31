@@ -21,8 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', frontend.index, name='recent'),
     url(r'^home/', frontend.dashboard, name='dashboard'),
-    url(r'^ip/', frontend.ipdetail, name='ip'),
-    url(r'^domain/', frontend.domain, name='domain'),
+    url(r'^detail/(.+)/$', frontend.ipdetail, name='detail'),
 
     url(r'^api/v1/', include("application.api.urls"))
 ]

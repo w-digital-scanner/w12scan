@@ -4,12 +4,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body ipdetail">
-                    <h3 class="card-title">IP detail [IP 详情]</h3>
+                    <h3 class="card-title">IP 具体详情</h3>
                     <p class="card-description">
                     <ul class="list-ticked">
-                        <li>IP address: 127.0.0.1</li>
-                        <li>Total ports:5</li>
-                        <li>History record:1</li>
+                        <li>IP address: {{ data.target }}</li>
+                        <li>Last record time: {{ data.published_from }}</li>
                     </ul>
                     </p>
 
@@ -39,26 +38,34 @@
                                                     <tbody>
                                                     <tr>
                                                         <td>IP地址</td>
-                                                        <td>127.0.0.1</td>
+                                                        <td>{{ data.target }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>国家</td>
-                                                        <td><i class="flag-icon flag-icon-us"></i> 美国</td>
+                                                        <td>
+                                                            <i class="flag-icon flag-icon-{{ data.location.country_id|lower }}"></i> {{ data.location.country }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>城市</td>
-                                                        <td>圣安东里奥</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>组织</td>
-                                                        <td>ip whois得到的</td>
+                                                        <td>{{ data.location.region }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>端口 / 服务</td>
-                                                        <td>
-                                                            <div class="badge badge-primary badge-pill">22/ssh</div>
+                                                        <td>{% for info in data.infos %}
+                                                            <div class="badge badge-primary badge-pill">{{ info.port }}/{{ info.name|default:"unknown" }}</div>
+                                                        {% endfor %}
                                                         </td>
                                                     </tr>
+                                                    {% if data.bugs %}
+                                                        <tr>
+                                                            <td>漏洞分布</td>
+                                                            <td>{% for k,v in data.bugs.items %}
+                                                                <div class="badge badge-primary badge-pill">{{ k }}:{{ v }}</div>
+                                                            {% endfor %}
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -72,11 +79,69 @@
                                                             <i class="icon-event"></i>
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">IP whois</h5>
-                                                            <small class="text-muted">28 mins ago</small>
+                                                            <h5 class="mb-0">第三方信息</h5>
                                                         </div>
-                                                        <p>Admin is a full featured, multipurpose, premium bootstrap
-                                                            admin template built with Bootstrap 4 Framework</p>
+
+                                                        <div class="new-accounts">
+                                                            <ul class="chats">
+                                                                <li class="chat-persons">
+                                                                    <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                                        <div class="user">
+                                                                            <p class="u-name">Certdb</p>
+                                                                            <p class="u-designation">Business
+                                                                                Development</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="chat-persons">
+                                                                    <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                                        <div class="user">
+                                                                            <p class="u-name">ThreatBook</p>
+                                                                            <p class="u-designation">SEO Expert</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="chat-persons">
+                                                                    <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                                        <div class="user">
+                                                                            <p class="u-name">FindsubDomains</p>
+                                                                            <p class="u-designation">UI/UX designer</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="chat-persons">
+                                                                    <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                                        <div class="user">
+                                                                            <p class="u-name">X-Force</p>
+                                                                            <p class="u-designation">UI/UX designer</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="chat-persons">
+                                                                    <a href="#">
+                                                                <span class="pro-pic"><img
+                                                                        src="https://via.placeholder.com/40x40"
+                                                                        alt="profile image"></span>
+                                                                        <div class="user">
+                                                                            <p class="u-name">DNSdumpster</p>
+                                                                            <p class="u-designation">UI/UX designer</p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                     <div class="stages border-left pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-danger">
@@ -84,18 +149,15 @@
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
                                                             <h5 class="mb-0">关联域名</h5>
-                                                            <small class="text-muted">45 mins ago</small>
                                                         </div>
-                                                        <p>one of the best admin panel templates. With this bootstrap
-                                                            admin template, you can quick start your project.</p>
-                                                        <div class="file-icon-wrapper">
-                                                            <div class="btn btn-outline-danger file-icon">
-                                                                <i class="icon-envelope"></i>
-                                                            </div>
-                                                            <div class="btn btn-outline-primary file-icon">
-                                                                <i class="icon-chart"></i>
-                                                            </div>
-                                                        </div>
+                                                        <p>通过该ip关联到的http服务</p>
+                                                        <ul class="list-ticked">
+                                                            {% for u in union %}
+                                                                <li>
+                                                                    <a href="{% url 'detail' u.id %}">{{ u.url }}</a>&nbsp;&nbsp;{{ u.title }}
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
                                                     </div>
                                                     <div class="stages pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-primary">
@@ -103,10 +165,32 @@
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
                                                             <h5 class="mb-0">开放服务</h5>
-                                                            <small class="text-muted">55 mins ago</small>
                                                         </div>
-                                                        <p>Admin dashboard works seamlessly on all major web browsers
-                                                            and devices.</p>
+
+                                                        <p>
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>端口</th>
+                                                                    <th>服务类型</th>
+                                                                    <th>服务名称</th>
+                                                                    <th>版本</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for info in data.infos %}
+                                                                    <tr>
+                                                                        <td>{{ info.port }}</td>
+                                                                        <td>{{ info.name }}</td>
+                                                                        <td>{{ info.product }}</td>
+                                                                        <td>{{ info.version }} {{ info.extrainfo }}</td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

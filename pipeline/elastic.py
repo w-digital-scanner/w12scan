@@ -6,10 +6,10 @@
 from datetime import datetime
 
 from elasticsearch import Elasticsearch
-
-from config import ELASTICSEARCH_HOSTS
 from elasticsearch_dsl import Date, Integer, Keyword, Text, Document, InnerDoc, Nested, Search
 from elasticsearch_dsl.connections import connections
+
+from config import ELASTICSEARCH_HOSTS
 
 connections.create_connection(hosts=ELASTICSEARCH_HOSTS)
 es = Elasticsearch(ELASTICSEARCH_HOSTS)
@@ -90,6 +90,25 @@ def es_search_ip(ip):
     if s.count() > 0:
         return list(s)[0]
     return False
+
+
+def es_search_ip_by_id(id):
+    _q = {
+
+        "query": {
+            "match": {
+                "_id": id
+            }
+        }
+
+    }
+    s = Search(using=es, index='w12scan').from_dict(_q)
+    dd = s.execute().to_dict().get("hits")
+    if dd:
+        dd = dd.get("hits")
+    else:
+        return False
+    return dd
 
 
 def count_app():
