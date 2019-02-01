@@ -159,7 +159,15 @@
 .ipdetail .profile-body {
     padding-top: 23px;
 }
-
+.ipdetail pre{
+    padding: 5px;
+    height: 320px;
+    width:90%;
+    overflow: auto;
+    border: 1px solid #e0e4e5;
+    line-height: 20px;
+    margin-top: 40px;
+}
 .show-list a {
     color: inherit;
 }

@@ -158,6 +158,24 @@
                                                                 </li>
                                                             {% endfor %}
                                                         </ul>
+                                                        {% if c_data %}
+                                                            <p>通过该ip关联到的C段IP</p>
+                                                        <ul class="list-ticked">
+                                                            {% for u in c_data %}
+
+                                                                <li>
+                                                                    <a href="{% url 'detail' u.id %}">{{ u.ip }}</a>
+                                                                    {% if u.data %}
+                                                                        <ul>
+                                                                        {% for i in u.data %}
+                                                                            <li><a href="{% url 'detail' i.id %}">{{ i.url }}</a>  {{ i.title }}</li>
+                                                                        {% endfor %}
+                                                                        </ul>
+                                                                    {% endif %}
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% endif %}
                                                     </div>
                                                     <div class="stages pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-primary">

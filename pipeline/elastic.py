@@ -111,6 +111,26 @@ def es_search_ip_by_id(id):
     return dd
 
 
+def es_search_domain_by_ip(ip):
+    payload = {
+        "query": {
+            "match": {
+                "ip": ip
+            }
+        }
+    }
+    s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
+    res = s.execute()
+    union_domains = []
+    for hit in res:
+        cid = hit.meta.id
+        d = hit.to_dict()
+        domain = d["url"]
+        title = d.get("title", "")
+        union_domains.append({"id": cid, "url": domain, "title": title})
+    return union_domains
+
+
 def count_app():
     payload = {
         "size": 0,

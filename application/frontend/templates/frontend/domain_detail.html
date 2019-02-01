@@ -1,4 +1,5 @@
 {% extends 'frontend/base.html' %}
+{% load app_icon %}
 {% block content %}
     <div class="row profile-page">
         <div class="col-12">
@@ -7,10 +8,8 @@
                     <h3 class="card-title">Domain 域名具体详情</h3>
                     <p class="card-description">
                     <ul class="list-ticked">
-                        <li>域名: baidu.com</li>
-                        <li>子域名: 291</li>
-                        <li>IP: 5</li>
-                        <li>History record:1</li>
+                        <li>域名: {{ data.url }}</li>
+                        <li>Last record time: {{ data.published_from }}</li>
                     </ul>
                     </p>
 
@@ -20,11 +19,6 @@
                                 <a class="nav-link active show" id="user-profile-info-tab" data-toggle="pill"
                                    href="#user-profile-info" role="tab" aria-controls="user-profile-info"
                                    aria-selected="true">Basic</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="domain-subdomain-info-tab" data-toggle="pill"
-                                   href="#domain-subdomain-info" role="tab" aria-controls="domain-subdomain-info"
-                                   aria-selected="false">Subdomain</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="user-profile-activity-tab" data-toggle="pill"
@@ -37,207 +31,125 @@
                                 <div class="tab-content tab-body" id="profile-log-switch">
                                     <div class="tab-pane fade show active pr-3" id="user-profile-info"
                                          role="tabpanel" aria-labelledby="user-profile-info-tab">
-                                        <table class="table table-borderless w-100 mt-4">
-                                            <tbody>
-                                            <tr>
-                                                <td><strong>Domain :</strong> a.baidu.com</td>
-                                                <td><strong>Website :</strong> https://staradmin.com:998</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Title :</strong> Hello world</td>
-                                                <td><strong>Pleform :</strong> Windows</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Languages :</strong> English, German,
-                                                    Spanish.
-                                                </td>
-                                                <td><strong>Technology :</strong> asp.net</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+
+                                        <pre>{{ data.headers }}<br/><br/>{{ data.body }}</pre>
                                         <div class="row mt-5 pb-4 border-bottom">
                                             <div class="col-12">
                                                 <div class="d-flex align-items-start pb-3 border-bottom">
                                                     <img src="https://via.placeholder.com/49x49" alt="brand logo">
                                                     <div class="wrapper pl-4">
-                                                        <p class="font-weight-bold mb-0">Whois</p>
-                                                        <small>邮箱:ssss@master.com</br>注册单位:Tencent</br>注册域名商:CSC
-                                                            CORPORATE DOMAINS, INC.
-                                                        </small>
+                                                        <ul class="list-ticked">
+                                                            <li>Ip: {% for ip in ip_data %}
+                                                                <a href="{% url 'detail' ip.id %}">{{ ip.ip }}</a>{% endfor %}
+                                                            </li>
+                                                            <li>Title: {{ data.title }}</li>
+                                                            <li>Status_code: {{ data.status_code }}</li>
+
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-start py-3 border-bottom">
-                                                    <img src="https://via.placeholder.com/49x49" alt="brand logo">
-                                                    <div class="wrapper pl-4">
-                                                        <p class="font-weight-bold mb-0">关联性域名</p>
-                                                        <small>tencent.com qq.com</small>
+                                                {% if data.bugs %}
+                                                    <div class="d-flex align-items-start py-3 border-bottom">
+                                                        <img src="https://via.placeholder.com/49x49" alt="brand logo">
+                                                        <div class="wrapper pl-4">
+                                                            <p class="font-weight-bold mb-0">漏洞详情</p>
+                                                            <ul class="list-ticked">
+                                                                {% for k,v in data.bugs.items %}
+                                                                    <li>{{ k }} : {{ v }}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                {% endif %}
                                                 <div class="d-flex align-items-start py-3">
                                                     <img src="https://via.placeholder.com/49x49" alt="brand logo">
                                                     <div class="wrapper pl-4">
                                                         <p class="font-weight-bold mb-0">使用技术</p>
-                                                        <small>some icons</small>
+                                                        <br>
+                                                        <small>
+                                                            <ul>
+                                                                {% for app in data.app %}
+                                                                    <li>
+                                                                        {{ app|app_icon|safe }} {{ app }}
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </small>
                                                     </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
-                                        <div class="row">
+
+                                    <div class="row">
                                             <div class="col-12 mt-5">
-                                                <h5 class="mb-5">关联性分析</h5>
+                                                <h5 class="mb-5">关联性</h5>
                                                 <div class="stage-wrapper pl-4">
                                                     <div class="stages border-left pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-success">
                                                             <i class="icon-event"></i>
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">IPs</h5>
-                                                            <small class="text-muted">28 mins ago</small>
+                                                            <h5 class="mb-0">子域名</h5>
                                                         </div>
-                                                        <p>
-                                                        <ul>
-                                                            <li>111.11.22.3</li>
-                                                            <li>111.11.22.4</li>
-                                                            <li>111.11.22.5</li>
-                                                            <li>111.11.22.6</li>
-                                                            <li>111.11.22.7</li>
-                                                            <li>111.11.22.8</li>
-                                                        </ul>
-                                                        </p>
+
+                                                        <div class="new-accounts">
+<div class="table-responsive"
+                                                     style="padding-right:32px;margin-top:20px;">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>
+                                                                Domain
+                                                            </th>
+                                                            <th>
+                                                                Title
+                                                            </th>
+                                                            <th>
+                                                                Hostname
+                                                            </th>
+                                                            <th>
+                                                                Technology
+                                                            </th>
+                                                            <th>
+                                                                Time
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for domain in sub_domain %}
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{% url 'detail' domain.id %}">{{ domain.url }}</a>
+                                                                </td>
+                                                                <td>
+                                                                    {{ domain.title|truncatewords:30 }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ domain.ip }}
+                                                                </td>
+                                                                <td>
+                                                                    {% for app in domain.app %}
+                                                                        {{ app|app_icon|safe }}
+                                                                    {% endfor %}
+                                                                </td>
+                                                                <td>
+                                                                    {{ domain.published_from }}
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="stages border-left pl-5 pb-4">
-                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-danger">
-                                                            <i class="icon-cloud-download"></i>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">Download Completed</h5>
-                                                            <small class="text-muted">45 mins ago</small>
-                                                        </div>
-                                                        <p>one of the best admin panel templates. With
-                                                            this bootstrap admin template, you can
-                                                            quick start your project.</p>
-                                                        <div class="file-icon-wrapper">
-                                                            <div class="btn btn-outline-danger file-icon">
-                                                                <i class="icon-envelope"></i>
-                                                            </div>
-                                                            <div class="btn btn-outline-primary file-icon">
-                                                                <i class="icon-chart"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="stages pl-5 pb-4">
-                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-primary">
-                                                            <i class="icon-checkbox-marked-circle-outline"></i>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">New Task Completed</h5>
-                                                            <small class="text-muted">55 mins ago</small>
-                                                        </div>
-                                                        <p>Admin dashboard works seamlessly on all
-                                                            major web browsers and devices.</p>
-                                                    </div>
+
+
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="domain-subdomain-info" role="tabpanel"
-                                         aria-labelledby="domain-subdomain-info-tab">
-
-                                        <div class="table-responsive" style="padding-right:32px;margin-top:20px;">
-                                            <table class="table table-bordered table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>
-                                                        Domain
-                                                    </th>
-                                                    <th>
-                                                        Title
-                                                    </th>
-                                                    <th>
-                                                        Hostname
-                                                    </th>
-                                                    <th>
-                                                        Technology
-                                                    </th>
-                                                    <th>
-                                                        Time
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">110.tencent.com</a>
-                                                    </td>
-                                                    <td>
-                                                        Tencent Admin Login
-                                                    </td>
-                                                    <td>
-                                                        1.1.1.1
-                                                    </td>
-                                                    <td>
-                                                        technology
-                                                    </td>
-                                                    <td>
-                                                        2 mintus ago
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">110.tencent.com</a>
-                                                    </td>
-                                                    <td>
-                                                        Tencent Admin Login
-                                                    </td>
-                                                    <td>
-                                                        1.1.1.1
-                                                    </td>
-                                                    <td>
-                                                        technology
-                                                    </td>
-                                                    <td>
-                                                        2 mintus ago
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">110.tencent.com</a>
-                                                    </td>
-                                                    <td>
-                                                        Tencent Admin Login
-                                                    </td>
-                                                    <td>
-                                                        1.1.1.1
-                                                    </td>
-                                                    <td>
-                                                        technology
-                                                    </td>
-                                                    <td>
-                                                        2 mintus ago
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">110.tencent.com</a>
-                                                    </td>
-                                                    <td>
-                                                        Tencent Admin Login
-                                                    </td>
-                                                    <td>
-                                                        1.1.1.1
-                                                    </td>
-                                                    <td>
-                                                        technology
-                                                    </td>
-                                                    <td>
-                                                        2 mintus ago
-                                                    </td>
-                                                </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
 
                                     </div>
                                     <div class="tab-pane fade" id="user-profile-activity" role="tabpanel"
@@ -423,5 +335,5 @@
 {% endblock %}
 
 {% block extrascript %}
-    <script src="/js/form-addons.js"></script>
+    <script src="/static/js/form-addons.js"></script>
 {% endblock %}

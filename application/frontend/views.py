@@ -8,11 +8,12 @@ from django.shortcuts import render
 import json
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
+from tld import get_fld
 
 from application.utils.util import datetime_string_format
 from config import ELASTICSEARCH_HOSTS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
-    es_search_ip_by_id, es
+    es_search_ip_by_id, es, es_search_domain_by_ip
 from datetime import datetime
 from django.http import Http404
 
@@ -110,7 +111,7 @@ def dashboard(request):
     return render(request, "frontend/dashboard.html", {"total": total})
 
 
-def ipdetail(request, id):
+def detail(request, id):
     data = es_search_ip_by_id(id)
     if not data:
         raise Http404
@@ -121,24 +122,67 @@ def ipdetail(request, id):
     if doc_type == "ips":
         target = data["target"]
         # 关联出域名
+        union_domains = es_search_domain_by_ip(target)
+
+        # 关联C段ip
+        c_data = []
+        temp_ips = target.split(".")
+        if len(temp_ips) == 4:
+            del temp_ips[-1]
+            query_ip = '.'.join(temp_ips) + ".*"
+            payload = {"query": {
+                "wildcard": {"target": query_ip}
+            }
+            }
+            s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+            res = s.execute()
+            for hit in res:
+                cid = hit.meta.id
+                d = hit.to_dict()
+                if d["target"] != target:
+                    # C段ip的上的域名
+                    sub_data = []
+                    sub_domain = es_search_domain_by_ip(d["target"])
+                    for sub in sub_domain:
+                        dd = {}
+                        dd.update(sub)
+                        sub_data.append(dd)
+                    c_data.append({"id": cid, "ip": d["target"], "data": sub_data})
+
+        return render(request, "frontend/ip_detail.html", {"data": data, "union": union_domains, "c_data": c_data})
+    elif doc_type == "domains":
+        ip = data["ip"]
+        target = data["url"]
         payload = {
             "query": {
                 "match": {
-                    "ip": target
+                    "target": ip
                 }
             }
         }
-        s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
-        res = s.execute()
-        union_domains = []
-        for hit in res:
-            cid = hit.meta.id
-            d = hit.to_dict()
-            domain = d["url"]
-            title = d.get("title", "")
-            union_domains.append({"id": cid, "url": domain, "title": title})
-        return render(request, "frontend/ip_detail.html", {"data": data, "union": union_domains})
-    elif doc_type == "domains":
-        print(data)
+        s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+        ip_data = []
+        for hit in s:
+            ip_data.append({"id": hit.meta.id, "ip": hit.to_dict()["target"]})
 
-        return render(request, "frontend/domain.html", {"data": data})
+        # subdomain 获取
+        try:
+            sub_domain = get_fld(target, fix_protocol=True)
+        except:
+            sub_domain = None
+        sub_domain_data = []
+        if sub_domain:
+            payload = {"query": {
+                "wildcard": {"url": "*." + sub_domain}
+            }
+            }
+            s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
+            for hit in s:
+                dd = {}
+                dd.update(hit.to_dict())
+                dd["id"] = hit.meta.id
+                dd["published_from"] = datetime_string_format(dd["published_from"])
+                sub_domain_data.append(dd)
+
+        return render(request, "frontend/domain_detail.html",
+                      {"data": data, "ip_data": ip_data, "sub_domain": sub_domain_data})
