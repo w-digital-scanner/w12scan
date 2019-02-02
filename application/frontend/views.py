@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 # Create your views here.
+import ipaddress
 import math
 
 from django.shortcuts import render
@@ -10,7 +11,8 @@ from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 from tld import get_fld
 
-from application.utils.util import datetime_string_format
+from application.api.models import properly
+from application.utils.util import datetime_string_format, third_info
 from config import ELASTICSEARCH_HOSTS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
     es_search_ip_by_id, es, es_search_domain_by_ip
@@ -108,7 +110,9 @@ def dashboard(request):
         "domains": count_domains,
         "bugs": count_bugs
     }
-    return render(request, "frontend/dashboard.html", {"total": total})
+    # 资产相关
+    data = properly.objects.order_by("-id").all()
+    return render(request, "frontend/dashboard.html", {"total": total, "zc_data": data})
 
 
 def detail(request, id):
@@ -149,7 +153,8 @@ def detail(request, id):
                         sub_data.append(dd)
                     c_data.append({"id": cid, "ip": d["target"], "data": sub_data})
 
-        return render(request, "frontend/ip_detail.html", {"data": data, "union": union_domains, "c_data": c_data})
+        return render(request, "frontend/ip_detail.html",
+                      {"data": data, "union": union_domains, "c_data": c_data, "third_infomation": third_info(target)})
     elif doc_type == "domains":
         ip = data["ip"]
         target = data["url"]
@@ -175,6 +180,7 @@ def detail(request, id):
             payload = {"query": {
                 "wildcard": {"url": "*." + sub_domain}
             }
+                , "size": 1000
             }
             s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
             for hit in s:
@@ -185,4 +191,108 @@ def detail(request, id):
                 sub_domain_data.append(dd)
 
         return render(request, "frontend/domain_detail.html",
-                      {"data": data, "ip_data": ip_data, "sub_domain": sub_domain_data})
+                      {"data": data, "ip_data": ip_data, "sub_domain": sub_domain_data,
+                       "third_infomation": third_info(ip)})
+
+
+def zc_detail(request, id):
+    try:
+        m = properly.objects.get(id=id)
+    except:
+        m = None
+    if m is None:
+        raise Http404
+    # 处理域名资产
+    show_data = {}
+    domains = m.domains.splitlines()
+    show_data['domains'] = domains
+
+    payload = {"query": {
+        "bool": {
+            "should": [
+
+            ]
+        }
+    }, "size": 1000
+    }
+    temp_list = []
+    for temp in domains:
+        if "*" not in temp and not temp.startswith("http"):
+            temp = "http*" + temp
+        temp_list.append({
+            "wildcard": {
+                "url": temp
+            }
+        })
+    payload["query"]["bool"]["should"] = temp_list
+    domains_data = []
+    if temp_list:
+        s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
+        apps = set()
+        for hit in s:
+            dd = {}
+            dd.update(hit.to_dict())
+            dd["id"] = hit.meta.id
+            if dd.get("app"):
+                apps |= set(dd.get("app"))
+            domains_data.append(dd)
+    # 从域名中分离出ip加入到ip资产
+    temp_ips = set()
+    for domain in domains_data:
+        ip = domain.get("ip")
+        if ip:
+            temp_ips.add(ip)
+    # 处理IP资产
+    ips = m.ips.splitlines()
+    show_data["ips"] = ips
+    temp_ips |= set(ips)
+    temp_list = []
+    for temp in temp_ips:
+        _ip = temp
+        if "*" in _ip:
+            temp_list.append({
+                "wildcard": {
+                    "target": _ip
+                }
+            })
+        elif "/" in _ip:
+            try:
+                net = ipaddress.ip_network(_ip)
+            except Exception as e:
+                print(e)
+                net = None
+            if net:
+                for i in net:
+                    if i not in temp_ips:
+                        temp_list.append({
+                            "term": {
+                                "target": str(i)
+                            }
+                        })
+        else:
+            temp_list.append({
+                "term": {
+                    "target": _ip
+                }
+            })
+
+    payload = {"query": {
+        "bool": {
+            "should": [
+
+            ]
+        }
+    }, "size": 1000
+    }
+    payload["query"]["bool"]["should"] = temp_list
+    ips_data = []
+    if temp_list:
+        s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+        for hit in s:
+            dd = {}
+            dd.update(hit.to_dict())
+            dd["id"] = hit.meta.id
+            ips_data.append(dd)
+
+    return render(request, "frontend/zc-detail.html",
+                  {"model": m, "domains": domains_data, "show_data": show_data, "apps": apps, "ips": ips_data})

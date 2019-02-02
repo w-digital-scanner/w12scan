@@ -9,6 +9,7 @@
                     <p class="card-description">
                     <ul class="list-ticked">
                         <li>域名: {{ data.url }}</li>
+                        <li>子域名个数: {{ sub_domain|length }}</li>
                         <li>Last record time: {{ data.published_from }}</li>
                     </ul>
                     </p>
@@ -32,7 +33,6 @@
                                     <div class="tab-pane fade show active pr-3" id="user-profile-info"
                                          role="tabpanel" aria-labelledby="user-profile-info-tab">
 
-                                        <pre>{{ data.headers }}<br/><br/>{{ data.body }}</pre>
                                         <div class="row mt-5 pb-4 border-bottom">
                                             <div class="col-12">
                                                 <div class="d-flex align-items-start pb-3 border-bottom">
@@ -77,12 +77,13 @@
                                                         </small>
                                                     </div>
                                                 </div>
+                                                <pre>{{ data.headers }}<br/><br/>{{ data.body }}</pre>
 
 
                                             </div>
                                         </div>
 
-                                    <div class="row">
+                                        <div class="row">
                                             <div class="col-12 mt-5">
                                                 <h5 class="mb-5">关联性</h5>
                                                 <div class="stage-wrapper pl-4">
@@ -95,54 +96,54 @@
                                                         </div>
 
                                                         <div class="new-accounts">
-<div class="table-responsive"
-                                                     style="padding-right:32px;margin-top:20px;">
-                                                    <table class="table table-bordered">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>
-                                                                Domain
-                                                            </th>
-                                                            <th>
-                                                                Title
-                                                            </th>
-                                                            <th>
-                                                                Hostname
-                                                            </th>
-                                                            <th>
-                                                                Technology
-                                                            </th>
-                                                            <th>
-                                                                Time
-                                                            </th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        {% for domain in sub_domain %}
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="{% url 'detail' domain.id %}">{{ domain.url }}</a>
-                                                                </td>
-                                                                <td>
-                                                                    {{ domain.title|truncatewords:30 }}
-                                                                </td>
-                                                                <td>
-                                                                    {{ domain.ip }}
-                                                                </td>
-                                                                <td>
-                                                                    {% for app in domain.app %}
-                                                                        {{ app|app_icon|safe }}
+                                                            <div class="table-responsive"
+                                                                 style="padding-right:32px;margin-top:20px;">
+                                                                <table class="table table-bordered">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            Domain
+                                                                        </th>
+                                                                        <th>
+                                                                            Title
+                                                                        </th>
+                                                                        <th>
+                                                                            Hostname
+                                                                        </th>
+                                                                        <th>
+                                                                            Technology
+                                                                        </th>
+                                                                        <th>
+                                                                            Time
+                                                                        </th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    {% for domain in sub_domain %}
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="{% url 'detail' domain.id %}">{{ domain.url }}</a>
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ domain.title|truncatewords:30 }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ domain.ip }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {% for app in domain.app %}
+                                                                                    {{ app|app_icon|safe }}
+                                                                                {% endfor %}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ domain.published_from }}
+                                                                            </td>
+                                                                        </tr>
                                                                     {% endfor %}
-                                                                </td>
-                                                                <td>
-                                                                    {{ domain.published_from }}
-                                                                </td>
-                                                            </tr>
-                                                        {% endfor %}
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -266,65 +267,7 @@
                             </div>
                             <div class="col-md-3">
                                 <h5 class="my-4">Third information</h5>
-                                <div class="new-accounts">
-                                    <ul class="chats">
-                                        <li class="chat-persons">
-                                            <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                <div class="user">
-                                                    <p class="u-name">Certdb</p>
-                                                    <p class="u-designation">Business Development</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="chat-persons">
-                                            <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                <div class="user">
-                                                    <p class="u-name">ThreatBook</p>
-                                                    <p class="u-designation">SEO Expert</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="chat-persons">
-                                            <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                <div class="user">
-                                                    <p class="u-name">FindsubDomains</p>
-                                                    <p class="u-designation">UI/UX designer</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="chat-persons">
-                                            <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                <div class="user">
-                                                    <p class="u-name">X-Force</p>
-                                                    <p class="u-designation">UI/UX designer</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="chat-persons">
-                                            <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                <div class="user">
-                                                    <p class="u-name">DNSdumpster</p>
-                                                    <p class="u-designation">UI/UX designer</p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                {{ third_infomation|safe }}
                             </div>
                         </div>
                     </div>

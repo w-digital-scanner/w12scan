@@ -122,6 +122,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
+
 # some interface
 with open(os.path.join(BASE_DIR, "application", "frontend", "data", "wappalyzer.json")) as f:
     WAPP_ICON = json.load(f)["apps"]

@@ -78,11 +78,13 @@
                         <p class="mt-4 card-text">
                             在此处输入相关资产，然后你就能查询得到
                         </p>
-                        <button class="btn btn-info btn-sm mt-3 mb-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@mdo">新建资产</button>
+                        <button class="btn btn-info btn-sm mt-3 mb-4" data-toggle="modal" data-target="#exampleModal-4"
+                                data-whatever="@mdo">新建资产
+                        </button>
 
                         <div class="border-top pt-3">
                             <div class="row">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered zc-table">
                                     <thead>
                                     <tr>
                                         <th>
@@ -92,7 +94,7 @@
                                             资产名称
                                         </th>
                                         <th>
-                                            统计数量
+                                            添加时间
                                         </th>
                                         <th>
                                             描述
@@ -103,49 +105,32 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            Herman Beck
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                     style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $ 77.99
-                                        </td>
-                                        <td>
-                                            May 15, 2015
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            Messsy Adam
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                     style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            $245.30
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-secondary btn-xm"><i class="icon-cloud-download"></i>Edit</button>
-                                            <button type="button" class="btn btn-light btn-xm"><i class="icon-refresh"></i>Delete</button>
-                                        </td>
-                                    </tr>
+                                    {% for data in zc_data %}
+                                        <tr>
+                                            <td>
+                                                {{ data.id }}
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'zc-detail' data.id %}">{{ data.name }}</a>
+
+                                            </td>
+                                            <td>
+                                                {{ data.add_time }}
+                                            </td>
+                                            <td>
+                                                {{ data.descript }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-secondary btn-xm zc-view"
+                                                        data-id="{{ data.id }}"><i class="icon-cloud-download"></i>View
+                                                </button>
+                                                <button type="button" class="btn btn-light btn-xm zc-delete"
+                                                        data-id="{{ data.id }}"><i class="icon-refresh"></i>Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
 
                                     </tbody>
                                 </table>
@@ -158,40 +143,83 @@
     </div>
 
 
-    <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-4" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel-4">创建资产</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+    <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-4"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel-4">创建资产</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">资产名称:</label>
+                            <input type="text" class="form-control" id="recipient-name">
                         </div>
-                        <div class="modal-body">
-                          <form>
-                            <div class="form-group">
-                              <label for="recipient-name" class="col-form-label">资产名称:</label>
-                              <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                              <div class="form-group">
-                              <label for="recipient-name" class="col-form-label">资产描述:</label>
-                              <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                              <label for="message-text" class="col-form-label">域名:</label>
-                              <textarea class="form-control" id="message-text" rows="4"></textarea>
-                            </div>
-                              <div class="form-group">
-                              <label for="message-text" class="col-form-label">IP:</label>
-                              <textarea class="form-control" id="message-text" rows="5"></textarea>
-                            </div>
-                          </form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">资产描述:</label>
+                            <input type="text" class="form-control" id="recipient-desc">
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-success">创建</button>
-                          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">域名:</label>
+                            <textarea class="form-control" id="domain-text" rows="4"></textarea>
                         </div>
-                      </div>
-                    </div>
-                  </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">IP:</label>
+                            <textarea class="form-control" id="ip-text" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success zc-create">创建</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="zc-update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-4"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel-4">查看资产</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">资产名称:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">资产描述:</label>
+                            <input type="text" class="form-control" id="recipient-desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">域名:</label>
+                            <textarea class="form-control" id="domain-text" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">IP:</label>
+                            <textarea class="form-control" id="ip-text" rows="5"></textarea>
+                            <input type="hidden" id="zc-id" value=""/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success zc-update">更新</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extrascript %}
+    <script src="/static/js/my.js"></script>
 {% endblock %}

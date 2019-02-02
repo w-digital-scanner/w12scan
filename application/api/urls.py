@@ -20,5 +20,8 @@ urlpatterns = [
         regex=r'^ip$',
         view=views.AddIpActionView.as_view(),
     ),
-
+    url(
+        regex=r'^zichan$',
+        view=views.Proper.as_view()
+    )
 ]

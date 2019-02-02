@@ -18,10 +18,11 @@ from django.contrib import admin
 from application.frontend import views as frontend
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
     url(r'^$', frontend.index, name='recent'),
     url(r'^home/', frontend.dashboard, name='dashboard'),
     url(r'^detail/(.+)/$', frontend.detail, name='detail'),
+    url(r'^zc-detail/(\d+)/$', frontend.zc_detail, name='zc-detail'),
 
     url(r'^api/v1/', include("application.api.urls"))
 ]

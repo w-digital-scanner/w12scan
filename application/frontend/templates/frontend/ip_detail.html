@@ -82,66 +82,7 @@
                                                             <h5 class="mb-0">第三方信息</h5>
                                                         </div>
 
-                                                        <div class="new-accounts">
-                                                            <ul class="chats">
-                                                                <li class="chat-persons">
-                                                                    <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                                        <div class="user">
-                                                                            <p class="u-name">Certdb</p>
-                                                                            <p class="u-designation">Business
-                                                                                Development</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="chat-persons">
-                                                                    <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                                        <div class="user">
-                                                                            <p class="u-name">ThreatBook</p>
-                                                                            <p class="u-designation">SEO Expert</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="chat-persons">
-                                                                    <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                                        <div class="user">
-                                                                            <p class="u-name">FindsubDomains</p>
-                                                                            <p class="u-designation">UI/UX designer</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="chat-persons">
-                                                                    <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                                        <div class="user">
-                                                                            <p class="u-name">X-Force</p>
-                                                                            <p class="u-designation">UI/UX designer</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="chat-persons">
-                                                                    <a href="#">
-                                                                <span class="pro-pic"><img
-                                                                        src="https://via.placeholder.com/40x40"
-                                                                        alt="profile image"></span>
-                                                                        <div class="user">
-                                                                            <p class="u-name">DNSdumpster</p>
-                                                                            <p class="u-designation">UI/UX designer</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        {{ third_infomation|safe }}
                                                     </div>
                                                     <div class="stages border-left pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-danger">
@@ -160,21 +101,23 @@
                                                         </ul>
                                                         {% if c_data %}
                                                             <p>通过该ip关联到的C段IP</p>
-                                                        <ul class="list-ticked">
-                                                            {% for u in c_data %}
+                                                            <ul class="list-ticked">
+                                                                {% for u in c_data %}
 
-                                                                <li>
-                                                                    <a href="{% url 'detail' u.id %}">{{ u.ip }}</a>
-                                                                    {% if u.data %}
-                                                                        <ul>
-                                                                        {% for i in u.data %}
-                                                                            <li><a href="{% url 'detail' i.id %}">{{ i.url }}</a>  {{ i.title }}</li>
-                                                                        {% endfor %}
-                                                                        </ul>
-                                                                    {% endif %}
-                                                                </li>
-                                                            {% endfor %}
-                                                        </ul>
+                                                                    <li>
+                                                                        <a href="{% url 'detail' u.id %}">{{ u.ip }}</a>
+                                                                        {% if u.data %}
+                                                                            <ul>
+                                                                                {% for i in u.data %}
+                                                                                    <li>
+                                                                                        <a href="{% url 'detail' i.id %}">{{ i.url }}</a> {{ i.title }}
+                                                                                    </li>
+                                                                                {% endfor %}
+                                                                            </ul>
+                                                                        {% endif %}
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
                                                         {% endif %}
                                                     </div>
                                                     <div class="stages pl-5 pb-4">
