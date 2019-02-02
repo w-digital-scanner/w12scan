@@ -145,7 +145,11 @@ def count_app():
     }
     s = Search(using=es, index='w12scan', doc_type="domains").from_dict(payload)
     res = s.execute().to_dict()
-    return res["aggregations"]["genres"]["buckets"]
+    try:
+        r = res["aggregations"]["genres"]["buckets"]
+    except KeyError:
+        r = None
+    return r
 
 
 def count_country():
@@ -167,7 +171,11 @@ def count_country():
                }
     s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
     res = s.execute().to_dict()
-    return res["aggregations"]["location"]["country"]["buckets"]
+    try:
+        r = res["aggregations"]["location"]["country"]["buckets"]
+    except KeyError:
+        r = None
+    return r
 
 
 def count_name():
@@ -189,7 +197,11 @@ def count_name():
                }
     s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
     res = s.execute().to_dict()
-    return res["aggregations"]["infos"]["name"]["buckets"]
+    try:
+        r = res["aggregations"]["infos"]["name"]["buckets"]
+    except KeyError:
+        r = None
+    return r
 
 
 def count_port():
@@ -211,7 +223,11 @@ def count_port():
                }
     s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
     res = s.execute().to_dict()
-    return res["aggregations"]["infos"]["port"]["buckets"]
+    try:
+        r = res["aggregations"]["infos"]["port"]["buckets"]
+    except KeyError:
+        r = None
+    return r
 
 
 def total_data():
@@ -230,7 +246,5 @@ def total_bug():
 
 
 if __name__ == '__main__':
-    # Ips.init()
-    # Domains.init()
-    d = total_bug()
-    print(d)
+    Ips.init()
+    Domains.init()
