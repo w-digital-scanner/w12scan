@@ -1,0 +1,28 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+    <div class="row profile-page">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body container">
+                    <h4 class="card-title">搜索语法</h4>
+                    <p class="card-description">w12scan提供强大的搜索语法，通过组合查询能够得到想要的一切信息。</p>
+                    <ul>
+                        <li>title=“abc” # 从标题中搜索</li>
+                        <li>header=“abc” # 从http头搜索</li>
+                        <li>body=“123” # 从body搜索</li>
+                        <li>url = “*.baidu.com” # 搜索baidu.com的子域名，<code>*</code>号是通配符</li>
+                        <li>ip = ‘1.1.1.1’ # 搜索IP，支持CIDR<code>'192.168.1.0/24'</code>和通配符搜索<code>'192.168.1.*'</code>
+                        </li>
+                        <li>port = ‘80’ # 搜索端口</li>
+                        <li>app = ’nginx’ # 搜索组件</li>
+                        <li>country = ‘cn’ # 搜索国家</li>
+                        <li>service = ‘mysql’ # 搜索服务</li>
+                    </ul>
+                    <p class="card-description">
+                        需要注意的是，等于号后面的内容需要用单引号或双引号包裹，这些查询命令可以多个组合在一起，用空格分割开。如果你查询的语句中包含有单引号或者双引号，你需要用反斜杠 <code>\</code>
+                        来转义它们。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

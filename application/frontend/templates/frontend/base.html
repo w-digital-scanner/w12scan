@@ -1,108 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>{% block title %}W12SCAN 网络资产发现引擎{% endblock %}</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="/static/vendors/iconfonts/simple-line-icon/css/simple-line-icons.css">
-  <link rel="stylesheet" href="/static/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
-  <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.addons.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="/static/css/style.css">
-  <link rel="stylesheet" href="/static/css/mycss.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="/static/images/favicon.png" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}W12SCAN 网络资产发现引擎{% endblock %}</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/static/vendors/iconfonts/simple-line-icon/css/simple-line-icons.css">
+    <link rel="stylesheet" href="/static/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.addons.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/mycss.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="/static/images/favicon.png"/>
 </head>
 
 <body>
-  <div class="container-scroller">
+<div class="container-scroller">
     <!-- partial:../../partials/_horizontal-navbar.html -->
     <nav class="navbar horizontal-layout col-lg-12 col-12 p-0">
-      <div class="nav-top flex-grow-1">
-        <div class="container d-flex flex-row h-100 align-items-center">
-          <div class="text-center navbar-brand-wrapper d-flex align-items-center">
-              <div class="site-logo">
-                  <div class="logo"><div><span class="left-yellow"></span><span class="right-green"></span></div><div><span class="full-green"></span></div><div><span class="left-green"></span><span class="right-red"></span></div></div>
-              </div>
-              <div class="logo-title">
-                  W12SCAN
-              </div>
+        <div class="nav-top flex-grow-1">
+            <div class="container d-flex flex-row h-100 align-items-center">
+                <div class="text-center navbar-brand-wrapper d-flex align-items-center">
+                    <div class="site-logo">
+                        <div class="logo">
+                            <div><span class="left-yellow"></span><span class="right-green"></span></div>
+                            <div><span class="full-green"></span></div>
+                            <div><span class="left-green"></span><span class="right-red"></span></div>
+                        </div>
+                    </div>
+                    <div class="logo-title">
+                        W12SCAN
+                    </div>
 
-          </div>
-          <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between flex-grow-1">
+                </div>
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between flex-grow-1">
 
-            <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
+                    <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
 
-            </ul>
-            <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
-              <span class="icon-menu text-dark"></span>
-            </button>
-          </div>
+                    </ul>
+                    <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="icon-menu text-dark"></span>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="nav-bottom">
-        <div class="container">
-          <ul class="nav page-navigation">
-            <li class="nav-item">
-              <a href="{% url 'recent' %}" class="nav-link"><i class="link-icon icon-screen-desktop"></i><span class="menu-title">Recent</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'dashboard' %}" class="nav-link"><i class="link-icon icon-disc"></i><span class="menu-title">Dashboard</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link"><i class="link-icon icon-calculator"></i><span class="menu-title">About</span><i class="menu-arrow"></i></a>
-              <div class="submenu">
-                <ul class="submenu-item">
-                  <li class="nav-item"><a class="nav-link" href="https://x.hacking8.com/" target="_blank">Blog</a></li>
-                  <li class="nav-item"><a class="nav-link" href="https://github.com/boy-hack/" target="_blank">Github</a></li>
+        <div class="nav-bottom">
+            <div class="container">
+                <ul class="nav page-navigation">
+                    <li class="nav-item">
+                        <a href="{% url 'recent' %}" class="nav-link"><i class="link-icon icon-screen-desktop"></i><span
+                                class="menu-title">Recent</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'dashboard' %}" class="nav-link"><i class="link-icon icon-disc"></i><span
+                                class="menu-title">Dashboard</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="link-icon icon-calculator"></i><span class="menu-title">About</span><i
+                                class="menu-arrow"></i></a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">搜索语法</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="https://github.com/boy-hack/w12scan"
+                                                        target="_blank">Github</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
-              </div>
-            </li>
-          </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <div class="main-panel">
-        <div class="content-wrapper">
-            {% block content %}<div>这里是默认内容，所有继承自这个模板的，如果不覆盖就显示这里的默认内容。</div>{% endblock %}
+        <div class="main-panel">
+            <div class="content-wrapper">
+                {% block content %}
+                    <div>这里是默认内容，所有继承自这个模板的，如果不覆盖就显示这里的默认内容。</div>{% endblock %}
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <footer class="footer">
+                <div class="w-100 clearfix">
+                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018 <a
+                            href="https://github.com/boy-hack/w12scan" target="_blank">w12scan</a>. All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">w8ay-crafted & made with <i
+                            class="icon-heart text-danger"></i></span>
+                </div>
+            </footer>
+            <!-- partial -->
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-          <div class="w-100 clearfix">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018 <a href="https://github.com/boy-hack/w12scan" target="_blank">w12scan</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">w8ay-crafted & made with <i class="icon-heart text-danger"></i></span>
-          </div>
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
+        <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
 
-  </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="/static/vendors/js/vendor.bundle.base.js"></script>
-  <script src="/static/vendors/js/vendor.bundle.addons.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="/static/js/template.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  {% block extrascript %}{% endblock %}
-  <!-- End custom js for this page-->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="/static/vendors/js/vendor.bundle.base.js"></script>
+<script src="/static/vendors/js/vendor.bundle.addons.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script src="/static/js/template.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+{% block extrascript %}{% endblock %}
+<!-- End custom js for this page-->
 </body>
 
 </html>

@@ -44,8 +44,13 @@
                                                     <img src="https://via.placeholder.com/49x49" alt="brand logo">
                                                     <div class="wrapper pl-4">
                                                         <ul class="list-ticked">
-                                                            <li>Ip: {% for ip in ip_data %}
+                                                            <li>Ip:
+                                                                {% if ip_data %}
+                                                                {% for ip in ip_data %}
                                                                 <a href="{% url 'detail' ip.id %}">{{ ip.ip }}</a>{% endfor %}
+                                                                {% else %}
+                                                                    <span>{{ data.ip }}</span>
+                                                                {% endif %}
                                                             </li>
                                                             <li>Title: {{ data.title }}</li>
                                                             <li>Status_code: {{ data.status_code }}</li>

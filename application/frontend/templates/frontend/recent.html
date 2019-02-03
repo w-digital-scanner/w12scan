@@ -23,7 +23,7 @@
                     <div class="list-group">
                         {% for app in statistics.names %}
                             <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
-                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                                    class="badge badge-danger badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="list-group">
                         {% for app in statistics.ports %}
                             <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
-                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                                    class="badge badge-info badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
 
                     </div>
@@ -44,7 +44,7 @@
                     <div class="list-group">
                         {% for app in statistics.apps %}
                             <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
-                                    class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
+                                    class="badge badge-warning badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                                                 href="{% url 'detail' data.id %}">{{ data.target }}</a></h4>
                                         <p class="card-text">
                                             {% for info in data.info_tags %}
-                                                <span class="badge badge-diy badge-pill">{{ info }}</span>
+                                                <div class="badge badge-outline-info">{{ info }}</div>
                                             {% endfor %}
                                             {% if data.bugs %}
                                                 <label class="badge badge-danger">存在漏洞</label>

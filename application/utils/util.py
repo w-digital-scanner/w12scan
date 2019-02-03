@@ -147,6 +147,10 @@ def k2e_search(keyword, page=1):
     service = ‘mysql’ 搜索服务
     '''
 
+    # 转义
+    keyword = keyword.replace("\\'", "{zwf_yin}", )
+    keyword = keyword.replace("\\\"", "{zwf_shuang}")
+
     feild = {
         "title": "title",
         "header": "headers",
@@ -182,6 +186,10 @@ def k2e_search(keyword, page=1):
     for item in m:
         key = item[1]
         value = item[2]
+
+        value = value.replace("{zwf_yin}", "'")
+        value = value.replace("{zwf_shuang}", '"')
+
         if isinstance(feild[key], list):
             keys = feild[key]
             for i in keys:
@@ -196,7 +204,7 @@ def k2e_search(keyword, page=1):
                     "path": "location",
                     "query": {
                         "match": {
-                            "location.country_id": value
+                            "location.country_id": value.upper()
                         }
                     }
                 }
@@ -238,7 +246,7 @@ def k2e_search(keyword, page=1):
         "sort": {"published_from": {"order": "desc"}}
     }
     payload["query"]["bool"]["must"] = must_list
-    print(json.dumps(payload))
+    # print(json.dumps(payload))
     return payload
 
 

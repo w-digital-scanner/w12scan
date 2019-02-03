@@ -305,3 +305,7 @@ def zc_detail(request, id):
 
     return render(request, "frontend/zc-detail.html",
                   {"model": m, "domains": domains_data, "show_data": show_data, "apps": apps, "ips": ips_data})
+
+
+def faq(request):
+    return render(request, "frontend/faq.html")
