@@ -11,6 +11,11 @@
                         <li>域名: {{ data.url }}</li>
                         <li>子域名个数: {{ sub_domain|length }}</li>
                         <li>Last record time: {{ data.published_from }}</li>
+                        {% if data.proper %}
+                            <li>资产归属: <a
+                                    href="{% url 'zc-detail' data.proper.1 %}">{{ data.proper.0 }}</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     </p>
 

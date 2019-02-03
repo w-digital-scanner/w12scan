@@ -56,11 +56,18 @@
                 <div class="find col-10">
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="type some keywords"
-                                   aria-label="Recipient's username">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="button">Search</button>
-                            </div>
+                            <form action="" method="get" style="width:100%;">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control"
+                                               placeholder="title = '302' && url = '*.qq.com'"
+                                               aria-label="Recipient's username" name="q">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-primary" type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -77,14 +84,15 @@
                             <div class="card-body">
                                 {% if data.doc_type == "ips" %}
                                     <div class="card-body-left">
-                                        <h4 class="card-title"><a href="{% url 'detail' data.id %}">{{ data.target }}</a></h4>
+                                        <h4 class="card-title"><a
+                                                href="{% url 'detail' data.id %}">{{ data.target }}</a></h4>
                                         <p class="card-text">
                                             {% for info in data.info_tags %}
                                                 <span class="badge badge-diy badge-pill">{{ info }}</span>
                                             {% endfor %}
-                                        {% if data.bugs %}
-                                        <label class="badge badge-danger">存在漏洞</label>
-                                        {% endif %}
+                                            {% if data.bugs %}
+                                                <label class="badge badge-danger">存在漏洞</label>
+                                            {% endif %}
                                         </p>
                                         <p class="text-muted">
                                             {% if data.location %}
@@ -93,7 +101,11 @@
                                                 {{ data.location.country }}
                                                 {{ data.location.region }}&nbsp;
                                             {% endif %}
-                                        <a class="zichan" href=""><l class="icon-cursor"></l> Bilibili</a>
+                                            {% if data.proper %}
+                                                <span class="zichan">
+                                                    <l class="icon-cursor"></l>
+                                                    {{ data.proper.0 }}</span>
+                                            {% endif %}
                                         </p>
                                         <p class="text-muted"><span><i class="icon-clock"></i> {{ data.published_from }}</span>
                                         </p>
@@ -107,8 +119,8 @@
                                             {% for app in data.app %}
                                                 {{ app|app_icon|safe }}
                                             {% endfor %}
-                                        {% if data.bugs %}
-                                        <label class="badge badge-danger">存在漏洞</label>
+                                            {% if data.bugs %}
+                                                <label class="badge badge-danger">存在漏洞</label>
                                             {% endif %}
                                         </p>
                                         <p class="text-muted">
@@ -118,7 +130,11 @@
                                                 {{ data.location.country }}
                                                 {{ data.location.region }}&nbsp;
                                             {% endif %}
-                                            <a class="zichan" href=""><l class="icon-cursor"></l> Bilibili</a>
+                                            {% if data.proper %}
+                                                <span class="zichan">
+                                                    <l class="icon-cursor"></l>
+                                                    {{ data.proper.0 }}</span>
+                                            {% endif %}
                                         </p>
                                         <p class="text-muted"><span><i class="icon-link"></i> {{ data.url }}</span><br/>
                                             <span><i class="icon-clock"></i> {{ data.published_from }}</span>
@@ -133,7 +149,7 @@
 
                 </div>
 
-                <nav>
+                <nav style="margin:40px ;">
                     <ul class="pagination rounded">
                         <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}"><i
                                 class="icon-arrow-left"></i></a></li>

@@ -12,7 +12,7 @@ from elasticsearch_dsl import Search
 from tld import get_fld
 
 from application.api.models import properly
-from application.utils.util import datetime_string_format, third_info
+from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search
 from config import ELASTICSEARCH_HOSTS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
     es_search_ip_by_id, es, es_search_domain_by_ip
@@ -22,6 +22,7 @@ from django.http import Http404
 
 def index(request):
     page = request.GET.get("p", "1")
+    s = request.GET.get("q", None)
     try:
         page = int(page)
     except:
@@ -31,22 +32,25 @@ def index(request):
 
     es = Elasticsearch(ELASTICSEARCH_HOSTS)
     start_time = datetime.now()
-    _search = {
-        "from": (page - 1) * 20,
-        "size": 20,
-        "sort": {"published_from": {"order": "desc"}}
-    }
+    if s is None:
+        _search = {
+            "from": (page - 1) * 20,
+            "size": 20,
+            "sort": {"published_from": {"order": "desc"}}
+        }
+    else:
+        _search = k2e_search(s, page)
     s = Search(using=es, index='w12scan').from_dict(_search)
     count = s.count()
 
     # 分页逻辑
     max_page = math.ceil(count / 20)
     if page <= 5:
-        paginations = range(1, 6)
+        paginations = range(1, 10)
     elif page + 5 > max_page:
-        paginations = range(max_page - 5, max_page)
+        paginations = range(max_page - 5, max_page + 5)
     else:
-        paginations = range(page - 2, page + 2)
+        paginations = range(page - 5, page + 5)
     pagination = {
         "max_page": str(max_page),
         "current": page,
@@ -68,6 +72,8 @@ def index(request):
                 for info in d["infos"]:
                     d["info_tags"].append("{}/{}".format(info["port"], info.get("name", "unknown")))
                 d["infos"] = json.dumps(d["infos"], indent=2)
+            # 资产关联
+            d["proper"] = is_proper(d["target"], "ip")
         elif doc_type == "domains":
             d.update(hit.to_dict())
             d["target"] = d.get("title") or d.get("url")
@@ -76,6 +82,7 @@ def index(request):
                 ip_info = es_search_ip(ip)
                 if ip_info:
                     d["location"] = ip_info.location
+            d["proper"] = is_proper(d["url"], "domain")
 
         d["doc_type"] = doc_type
         d["id"] = id
@@ -125,6 +132,7 @@ def detail(request, id):
     data["published_from"] = datetime_string_format(data["published_from"])
     if doc_type == "ips":
         target = data["target"]
+        data["proper"] = is_proper(target, "ip")
         # 关联出域名
         union_domains = es_search_domain_by_ip(target)
 
@@ -158,6 +166,7 @@ def detail(request, id):
     elif doc_type == "domains":
         ip = data["ip"]
         target = data["url"]
+        data["proper"] = is_proper(target, "domain")
         payload = {
             "query": {
                 "match": {
