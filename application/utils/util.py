@@ -90,6 +90,7 @@ def third_info(ip):
 
 def is_proper(arg, arg_type='ip'):
     m = properly.objects.all()
+    r = []
     for tem in m:
         name = tem.name
         id = tem.id
@@ -113,21 +114,25 @@ def is_proper(arg, arg_type='ip'):
                         net = None
 
                     if ipaddress.ip_address(arg) in net:
-                        return name, id
+                        r.append((name, id))
+                        continue
                 else:
                     if arg in _ip:
-                        return name, id
+                        r.append((name, id))
+                        continue
 
         elif arg_type == "domain":
             for _d in domains:
                 if "*" in _d:
                     tmp_d = _d.replace("*", "")
                     if tmp_d in arg:
-                        return name, id
+                        r.append((name, id))
+                        continue
                 else:
                     if _d in arg:
-                        return name, id
-    return None
+                        r.append((name, id))
+                        continue
+    return r
 
 
 def k2e_search(keyword, page=1):
@@ -181,7 +186,7 @@ def k2e_search(keyword, page=1):
             "size": 20,
             "sort": {"published_from": {"order": "desc"}}
         }
-        return payload
+        return payload, None
     must_list = []
     for item in m:
         key = item[1]
@@ -247,7 +252,7 @@ def k2e_search(keyword, page=1):
     }
     payload["query"]["bool"]["must"] = must_list
     # print(json.dumps(payload))
-    return payload
+    return payload, m
 
 
 if __name__ == '__main__':

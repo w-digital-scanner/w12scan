@@ -48,18 +48,27 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3 grid-margin stretch-card">
+        <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">任务量报告</h4>
-                    <div class="w-75 mx-auto">
-                        <canvas id="earning-report" width="100" height="100"></canvas>
-                    </div>
-                    <div class="py-4 d-flex justify-content-center align-items-end">
-                        <h1 class="text-center text-md-left mb-0">1.2M</h1>
-                        <p class="text-muted mb-0 ml-2">Total</p>
-                    </div>
-                    <div id="earning-report-legend" class="earning-report-legend"></div>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">服务类型</h4>
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">说明</h4>
+                    123321 1234567
                 </div>
             </div>
         </div>
@@ -68,7 +77,7 @@
                 <div class="row h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <img src="https://via.placeholder.com/92x92" class="img-lg rounded-circle mb-2"
+                            <img src="/static/images/92x92.jpg" class="img-md rounded-circle mb-2"
                                  alt="profile image">
                             <div class="ml-3">
                                 <h4>资产配置</h4>
@@ -219,6 +228,13 @@
             </div>
         </div>
     </div>
+    <script>
+        var chart_labels = {{ data_chart.labels | safe}};
+        var chart_data = {{ data_chart.data }};
+
+        var bar_labels = {{ data_bar.labels |safe }};
+        var bar_data = {{ data_bar.data }};
+    </script>
 {% endblock %}
 {% block extrascript %}
     <script src="/static/js/my.js"></script>

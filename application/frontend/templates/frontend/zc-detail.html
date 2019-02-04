@@ -77,7 +77,14 @@
 
                                                 </p>
                                             </div>
+
                                         </div>
+                                    <br />
+                                        <div class="col-12">
+                                            <h4 class="card-title">服务统计</h4>
+                                            <canvas id="pieChart"></canvas>
+                                        </div>
+
                                     </div>
                                     <div class="tab-pane fade" id="user-profile-activity" role="tabpanel"
                                          aria-labelledby="user-profile-activity-tab">
@@ -177,7 +184,12 @@
             </div>
         </div>
     </div>
+    <script>
+        var pie_labels = {{ data_pie.labels | safe}};
+        var pip_data = {{ data_pie.data }};
+    </script>
 {% endblock %}
 {% block extrascript %}
     <script src="/static/js/form-addons.js"></script>
+    <script src="/static/js/my.js"></script>
 {% endblock %}

@@ -12,8 +12,11 @@
                         <li>子域名个数: {{ sub_domain|length }}</li>
                         <li>Last record time: {{ data.published_from }}</li>
                         {% if data.proper %}
-                            <li>资产归属: <a
-                                    href="{% url 'zc-detail' data.proper.1 %}">{{ data.proper.0 }}</a>
+                            <li>资产归属:
+                                {% for pp in data.proper %}
+                                    <a
+                                            href="{% url 'zc-detail' pp.1 %}">{{ pp.0 }}</a>&nbsp;
+                                {% endfor %}
                             </li>
                         {% endif %}
                     </ul>
@@ -46,8 +49,9 @@
                                                         <ul class="list-ticked">
                                                             <li>Ip:
                                                                 {% if ip_data %}
-                                                                {% for ip in ip_data %}
-                                                                <a href="{% url 'detail' ip.id %}">{{ ip.ip }}</a>{% endfor %}
+                                                                    {% for ip in ip_data %}
+                                                                        <a href="{% url 'detail' ip.id %}">{{ ip.ip }}</a>
+                                                                    {% endfor %}
                                                                 {% else %}
                                                                     <span>{{ data.ip }}</span>
                                                                 {% endif %}

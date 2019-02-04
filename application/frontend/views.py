@@ -22,7 +22,7 @@ from django.http import Http404
 
 def index(request):
     page = request.GET.get("p", "1")
-    s = request.GET.get("q", None)
+    q = request.GET.get("q", None)
     try:
         page = int(page)
     except:
@@ -32,14 +32,15 @@ def index(request):
 
     es = Elasticsearch(ELASTICSEARCH_HOSTS)
     start_time = datetime.now()
-    if s is None:
+    keywords = None
+    if q is None:
         _search = {
             "from": (page - 1) * 20,
             "size": 20,
             "sort": {"published_from": {"order": "desc"}}
         }
     else:
-        _search = k2e_search(s, page)
+        _search, keywords = k2e_search(q, page)
     s = Search(using=es, index='w12scan').from_dict(_search)
     count = s.count()
 
@@ -51,13 +52,22 @@ def index(request):
         paginations = range(max_page - 5, max_page + 5)
     else:
         paginations = range(page - 5, page + 5)
+    temp_pagin = []
+    for i in paginations:
+        if i <= max_page:
+            temp_pagin.append(i)
+    paginations = temp_pagin
+
     pagination = {
         "max_page": str(max_page),
         "current": page,
         "pre": str(page - 1) if page - 1 > 0 else "1",
         "next": str(page + 1) if page + 1 <= max_page else str(max_page),
-        "paginations": paginations
+        "paginations": paginations,
+        "keyword": ""
     }
+    if q is not None:
+        pagination["keyword"] = "&q=" + q
     # 分页完
 
     datas = []
@@ -83,7 +93,6 @@ def index(request):
                 if ip_info:
                     d["location"] = ip_info.location
             d["proper"] = is_proper(d["url"], "domain")
-
         d["doc_type"] = doc_type
         d["id"] = id
         d["published_from"] = datetime_string_format(d["published_from"])
@@ -106,7 +115,7 @@ def index(request):
 
     return render(request, "frontend/recent.html",
                   {"datas": datas, "count": count, "second": end_time, "pagination": pagination,
-                   "statistics": statistics})
+                   "statistics": statistics, "keyword": keywords})
 
 
 def dashboard(request):
@@ -119,7 +128,44 @@ def dashboard(request):
     }
     # 资产相关
     data = properly.objects.order_by("-id").all()
-    return render(request, "frontend/dashboard.html", {"total": total, "zc_data": data})
+
+    # 图表统计
+    payload = {"size": 0,
+               "aggs": {
+                   "sales": {
+                       "date_histogram": {
+                           "field": "published_from",
+                           "interval": "day",
+                           "format": "yyyy-MM-dd"
+                       }
+                   }
+               }
+               }
+    s = Search(using=es, index='w12scan').from_dict(payload)
+    res = s.execute().to_dict()
+    try:
+        charts = res["aggregations"]["sales"]["buckets"]
+    except KeyError:
+        charts = []
+    data_chart = {
+        "labels": [],
+        "data": []
+    }
+    for item in charts:
+        data_chart["labels"].append(item["key_as_string"])
+        data_chart["data"].append(item["doc_count"])
+
+    # Bar chart
+    names = count_name()
+    data_bar = {
+        "labels": [],
+        "data": []
+    }
+    for item in names:
+        data_bar["labels"].append(item["key"])
+        data_bar["data"].append(item["doc_count"])
+    return render(request, "frontend/dashboard.html",
+                  {"total": total, "zc_data": data, "data_chart": data_chart, "data_bar": data_bar})
 
 
 def detail(request, id):
@@ -235,9 +281,9 @@ def zc_detail(request, id):
         })
     payload["query"]["bool"]["should"] = temp_list
     domains_data = []
+    apps = set()
     if temp_list:
         s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
-        apps = set()
         for hit in s:
             dd = {}
             dd.update(hit.to_dict())
@@ -295,6 +341,9 @@ def zc_detail(request, id):
     }
     payload["query"]["bool"]["should"] = temp_list
     ips_data = []
+    # ip service name statices
+    statics_services = {}
+
     if temp_list:
         s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
         for hit in s:
@@ -302,9 +351,24 @@ def zc_detail(request, id):
             dd.update(hit.to_dict())
             dd["id"] = hit.meta.id
             ips_data.append(dd)
+            # 统计
+            if dd.get("infos"):
+                for item in dd.get("infos"):
+                    name = item.get("name", None)
+                    if not name:
+                        continue
+                    if name not in statics_services:
+                        statics_services[name] = 0
+                    statics_services[name] += 1
+
+    data_pie = {
+        "labels": list(statics_services.keys()),
+        "data": list(statics_services.values())
+    }
 
     return render(request, "frontend/zc-detail.html",
-                  {"model": m, "domains": domains_data, "show_data": show_data, "apps": apps, "ips": ips_data})
+                  {"model": m, "domains": domains_data, "show_data": show_data, "apps": apps, "ips": ips_data,
+                   "data_pie": data_pie})
 
 
 def faq(request):

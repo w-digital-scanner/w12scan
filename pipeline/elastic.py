@@ -162,7 +162,7 @@ def count_country():
                        "aggs": {
                            "country": {
                                "terms": {
-                                   "field": "location.country"
+                                   "field": "location.country_id"
                                }
                            }
                        }

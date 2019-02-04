@@ -95,7 +95,7 @@ class Proper(View):
     # 创建
     def post(self, request):
         name = request.POST.get("name")
-        desc = request.POST.get("desc")
+        desc = request.POST.get("desc", "这家伙很懒，描述都不想写")
         ips = request.POST.get("ips")
         domains = request.POST.get("domains")
         properly.objects.create(name=name, descript=desc, ips=ips, domains=domains)

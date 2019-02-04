@@ -6,7 +6,7 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
 这里是web端的开源程序，client端在[https://github.com/boy-hack/w12scan-client](https://github.com/boy-hack/w12scan-client)
 
 一个视频了解W12SCAN
-[![w12scan](https://x.hacking8.com/content/uploadfile/201901/12f01548748510.png)](https://x.hacking8.com/content/uploadfile/201902/aa4b1549107977.mp4)
+[![w12scan](https://x.hacking8.com/content/uploadfile/201901/12f01548748510.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-2.mp4)
 
 
 ## 设计思想

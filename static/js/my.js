@@ -1,4 +1,16 @@
 $(document).ready(function () {
+    $(".show-left a").click(function () {
+        var keyword = $(this).attr("data-search");
+        console.log(keyword);
+        var form_search = $('#recent-search');
+        var current = form_search.val();
+        if (current === "") {
+            form_search.val(keyword)
+        } else {
+            form_search.val(current + " " + keyword);
+        }
+    })
+
     $(".zc-create").click(function () {
         var name = $("#exampleModal-4 #recipient-name").val();
         var desc = $("#exampleModal-4 #recipient-desc").val();
@@ -76,7 +88,7 @@ $(document).ready(function () {
         var aj = $.ajax({
             url: '/api/v1/zichan?id=' + _id,// 跳转到 action
             dataType: "json",
-            type:"delete",
+            type: "delete",
             success: function (data) {
                 console.log(data)
                 window.location.reload()
@@ -91,7 +103,7 @@ $(document).ready(function () {
         var ips = $("#zc-update-modal #ip-text").val();
         var id = $("#zc-update-modal #zc-id").val();
         var data = {
-            id:id,
+            id: id,
             name: name,
             desc: desc,
             ips: ips,
@@ -115,5 +127,136 @@ $(document).ready(function () {
         });
 
     });
+
+    var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend: {
+            display: true
+        },
+        elements: {
+            point: {
+                radius: 0
+            }
+        }
+
+    };
+
+    if ($("#lineChart").length) {
+        console.log(chart_labels, chart_data);
+        var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+        var data = {
+            labels: chart_labels,
+            datasets: [{
+                label: '# 任务量',
+                data: chart_data,
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        var lineChart = new Chart(lineChartCanvas, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    }
+
+    if ($("#barChart").length) {
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var data = {
+            labels: bar_labels,
+            datasets: [{
+                label: '# 数量',
+                data: bar_data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+
+
+    }
+
+    if ($("#pieChart").length) {
+        var doughnutPieData = {
+            datasets: [{
+                data: pip_data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: pie_labels
+        };
+        var doughnutPieOptions = {
+            responsive: true,
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: doughnutPieData,
+            options: doughnutPieOptions
+        });
+    }
+
 
 });

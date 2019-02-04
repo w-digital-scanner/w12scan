@@ -10,8 +10,11 @@
                         <li>IP address: {{ data.target }}</li>
                         <li>Last record time: {{ data.published_from }}</li>
                         {% if data.proper %}
-                            <li>资产归属: <a
-                                    href="{% url 'zc-detail' data.proper.1 %}">{{ data.proper.0 }}</a>
+                            <li>资产归属:
+                                {% for pp in data.proper %}
+                                    <a
+                                            href="{% url 'zc-detail' pp.1 %}">{{ pp.0 }}</a>&nbsp;
+                                {% endfor %}
                             </li>
                         {% endif %}
                     </ul>

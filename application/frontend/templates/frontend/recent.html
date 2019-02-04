@@ -12,7 +12,8 @@
                     <h3>&nbsp;&nbsp;国家</h3>
                     <div class="list-group">
                         {% for app in statistics.countrys %}
-                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                            <a href="#" class="list-group-item list-group-item-action"
+                               data-search="country='{{ app.key }}'">{{ app.key }} <span
                                     class="badge badge-primary badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
                     </div>
@@ -22,7 +23,8 @@
                     <h3>&nbsp;&nbsp;服务</h3>
                     <div class="list-group">
                         {% for app in statistics.names %}
-                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                            <a href="#" class="list-group-item list-group-item-action"
+                               data-search="service='{{ app.key }}'">{{ app.key }} <span
                                     class="badge badge-danger badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
                     </div>
@@ -32,7 +34,8 @@
                     <h3>&nbsp;&nbsp;端口</h3>
                     <div class="list-group">
                         {% for app in statistics.ports %}
-                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                            <a href="#" class="list-group-item list-group-item-action"
+                               data-search="port='{{ app.key }}'">{{ app.key }} <span
                                     class="badge badge-info badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
 
@@ -43,7 +46,8 @@
                     <h3>&nbsp;&nbsp;组件</h3>
                     <div class="list-group">
                         {% for app in statistics.apps %}
-                            <a href="#" class="list-group-item list-group-item-action">{{ app.key }} <span
+                            <a href="#" class="list-group-item list-group-item-action"
+                               data-search="app='{{ app.key }}'">{{ app.key }} <span
                                     class="badge badge-warning badge-pill float-right">{{ app.doc_count }}</span></a>
                         {% endfor %}
                     </div>
@@ -61,7 +65,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control"
                                                placeholder="title = '302' && url = '*.qq.com'"
-                                               aria-label="Recipient's username" name="q">
+                                               aria-label="Recipient's username" name="q" id="recent-search">
                                         <div class="input-group-append">
                                             <button class="btn btn-sm btn-primary" type="submit">Search</button>
                                         </div>
@@ -73,6 +77,11 @@
                 </div>
 
                 <div class="words">
+                    <p>
+                        {% for item in keyword %}
+                            <div class="badge badge-primary">{{ item.1 }}="{{ item.2 }}"</div>
+                        {% endfor %}
+                    </p>
                     <p class="text-muted">找到{{ count }}条结果，用时{{ second }}秒</p>
                 </div>
 
@@ -90,9 +99,9 @@
                                             {% for info in data.info_tags %}
                                                 <div class="badge badge-outline-info">{{ info }}</div>
                                             {% endfor %}
-                                            {% if data.bugs %}
-                                                <label class="badge badge-danger">存在漏洞</label>
-                                            {% endif %}
+                                        {% if data.bugs %}
+                                            <label class="badge badge-danger">存在漏洞</label>
+                                        {% endif %}
                                         </p>
                                         <p class="text-muted">
                                             {% if data.location %}
@@ -101,11 +110,11 @@
                                                 {{ data.location.country }}
                                                 {{ data.location.region }}&nbsp;
                                             {% endif %}
-                                            {% if data.proper %}
+                                            {% for pp in data.proper %}
                                                 <span class="zichan">
                                                     <l class="icon-cursor"></l>
-                                                    {{ data.proper.0 }}</span>
-                                            {% endif %}
+                                                    {{ pp.0 }}</span>
+                                            {% endfor %}
                                         </p>
                                         <p class="text-muted"><span><i class="icon-clock"></i> {{ data.published_from }}</span>
                                         </p>
@@ -132,8 +141,10 @@
                                             {% endif %}
                                             {% if data.proper %}
                                                 <span class="zichan">
+                                                {% for pp in data.proper %}
                                                     <l class="icon-cursor"></l>
-                                                    {{ data.proper.0 }}</span>
+                                                    {{ pp.0 }}</span>
+                                                {% endfor %}
                                             {% endif %}
                                         </p>
                                         <p class="text-muted"><span><i class="icon-link"></i> {{ data.url }}</span><br/>
@@ -151,18 +162,21 @@
 
                 <nav style="margin:40px ;">
                     <ul class="pagination rounded">
-                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}"><i
+                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}{{ pagination.keyword }}"><i
                                 class="icon-arrow-left"></i></a></li>
                         {% for i in pagination.paginations %}
                             <li class="page-item {% if pagination.current == i %}active{% endif %}"><a class="page-link"
-                                                                                                       href="/?p={{ i }}">{{ i }}</a>
+                                                                                                       href="/?p={{ i }}{{ pagination.keyword }}">{{ i }}</a>
                             </li>
                         {% endfor %}
-                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.next }}"><i
+                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.next }}{{ pagination.keyword }}"><i
                                 class="icon-arrow-right"></i></a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block extrascript %}
+    <script src="/static/js/my.js"></script>
 {% endblock %}
