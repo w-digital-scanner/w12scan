@@ -165,7 +165,8 @@ def k2e_search(keyword, page=1):
         "port": "infos.port",
         "app": "app.keyword",
         "country": "location.country_id",
-        "service": "infos.name"
+        "service": "infos.name",
+        "bug": "bugs"
     }
     special_feild = {
         ""
@@ -230,6 +231,14 @@ def k2e_search(keyword, page=1):
                 must_list.append({
                     "wildcard": {
                         "url": value
+                    }
+                })
+            elif key == "bug":
+                if value:
+                    value = "." + value
+                must_list.append({
+                    "exists": {
+                        "field": "bugs" + value
                     }
                 })
             else:

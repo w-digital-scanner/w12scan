@@ -65,7 +65,8 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control"
                                                placeholder="title = '302' && url = '*.qq.com'"
-                                               aria-label="Recipient's username" name="q" id="recent-search">
+                                               aria-label="Recipient's username" name="q" id="recent-search"
+                                               value="{% for item in keyword %}{{ item.1 }}='{{ item.2 }}'  {% endfor %}">
                                         <div class="input-group-append">
                                             <button class="btn btn-sm btn-primary" type="submit">Search</button>
                                         </div>
@@ -162,14 +163,17 @@
 
                 <nav style="margin:40px ;">
                     <ul class="pagination rounded">
-                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.pre }}{{ pagination.keyword }}"><i
+                        <li class="page-item"><a class="page-link"
+                                                 href="/?p={{ pagination.pre }}{{ pagination.keyword }}"><i
                                 class="icon-arrow-left"></i></a></li>
                         {% for i in pagination.paginations %}
                             <li class="page-item {% if pagination.current == i %}active{% endif %}"><a class="page-link"
-                                                                                                       href="/?p={{ i }}{{ pagination.keyword }}">{{ i }}</a>
+                                                                                                       href="/?p=
+                                                                                                               {{ i }}{{ pagination.keyword }}">{{ i }}</a>
                             </li>
                         {% endfor %}
-                        <li class="page-item"><a class="page-link" href="/?p={{ pagination.next }}{{ pagination.keyword }}"><i
+                        <li class="page-item"><a class="page-link"
+                                                 href="/?p={{ pagination.next }}{{ pagination.keyword }}"><i
                                 class="icon-arrow-right"></i></a></li>
                     </ul>
                 </nav>

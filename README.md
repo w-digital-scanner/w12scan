@@ -33,6 +33,7 @@ w12scan网络资产发现引擎，该引擎基于python3 + django + elasticsearc
         - app = ’nginx’ # 搜索组件
         - country = ‘cn’ # 搜索国家
         - service = ‘mysql’ # 搜索服务
+        - bug = 'xx' # 搜索存在的某个漏洞
 
 * 自定义资产配置
     * 通过自定义某公司相关域名或ip资产，w12scan会自动帮你找到对应的资产目标，当你浏览该目标时，有醒目的标识提醒你该目标的归属。
