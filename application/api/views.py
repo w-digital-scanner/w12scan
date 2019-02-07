@@ -177,6 +177,6 @@ class Scan(View):
                 success += 1
         res = {
             "status": 200,
-            "msg": "all:{0} success:{1}".format(all, success)
+            "msg": "All:{0} Success:{1}".format(all, success)
         }
         return JsonResponse(res)

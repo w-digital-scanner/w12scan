@@ -168,8 +168,7 @@
                                 class="icon-arrow-left"></i></a></li>
                         {% for i in pagination.paginations %}
                             <li class="page-item {% if pagination.current == i %}active{% endif %}"><a class="page-link"
-                                                                                                       href="/?p=
-                                                                                                               {{ i }}{{ pagination.keyword }}">{{ i }}</a>
+                                                                                                       href="/?p={{ i }}{{ pagination.keyword }}">{{ i }}</a>
                             </li>
                         {% endfor %}
                         <li class="page-item"><a class="page-link"

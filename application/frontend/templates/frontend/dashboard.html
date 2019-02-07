@@ -67,8 +67,16 @@
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">说明</h4>
-                    123321 1234567
+                    <h4 class="card-title">任务</h4>
+                    <button class="btn btn-primary btn-sm mt-3 mb-4" data-toggle="modal" data-target="#task-modal"
+                            data-whatever="@mdo">新建任务
+                    </button>
+                    <blockquote class="blockquote blockquote-primary">
+                        <p><code>POST /api/v1/scan</code></p><p>body内容为url或ip，每行一个</p>
+                        <p><code>GET /api/v1/scan?t=[url|ip]</code></p>
+
+                        <footer class="blockquote-footer">扫描API</footer>
+                    </blockquote>
                 </div>
             </div>
         </div>
@@ -223,6 +231,31 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success zc-update">更新</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="task-modal" tabindex="-1" role="dialog" aria-labelledby="task-modal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel-4">添加任务</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" id="content-modal" rows="12" placeholder="支持多条任务，一行一个，ip或域名，ip支持CIDR表达"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success task-create">创建</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -11,6 +11,35 @@ $(document).ready(function () {
         }
     })
 
+    $(".task-create").click(function () {
+        var content = $("#task-modal #content-modal").val();
+        $.ajax({
+            url: '/api/v1/scan',// 跳转到 action
+            data: content,
+            type: 'post',
+            success: function (data) {
+                console.log(data)
+                $('#task-modal').modal('hide');
+                if(data.status == 200){
+                    swal({
+                        title: '添加成功!',
+                        text: data.msg,
+                        icon: 'success',
+                        button: {
+                            text: "Continue",
+                            value: true,
+                            visible: true,
+                            className: "btn btn-primary"
+                        }
+                    })
+                }
+            },
+            error: function () {
+                alert("异常！");
+            }
+        })
+    });
+
     $(".zc-create").click(function () {
         var name = $("#exampleModal-4 #recipient-name").val();
         var desc = $("#exampleModal-4 #recipient-desc").val();
