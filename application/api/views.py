@@ -7,11 +7,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
 from application.api.models import properly
+from application.utils.util import format_convert
 from config import AUTH_POST_KEY
 from pipeline.elastic import Ips, Domains
 
-
 # Create your views here.
+from pipeline.redis import redis_verify
+
+
 @method_decorator(csrf_exempt, name="dispatch")
 class DemoListView(View):
 
@@ -140,4 +143,40 @@ class Proper(View):
         else:
             res["status"] = 400
             res["msg"] = "id don't exist"
+        return JsonResponse(res)
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class Scan(View):
+
+    # 获得信息
+    def get(self, request):
+        res = {}
+        target = request.GET.get("t", None)
+        res["status"] = 400
+        res["msg"] = "Target has existed database.({})".format(target)
+        if target:
+            target = format_convert(target)
+            b = redis_verify(target)
+            if b:
+                res["status"] = 200
+                res["msg"] = "ok"
+        return JsonResponse(res)
+
+    def post(self, request):
+        data = request.body.decode().splitlines()
+        all = 0
+        success = 0
+        for temp in data:
+            if not temp:
+                continue
+            all += 1
+            target = format_convert(temp)
+            b = redis_verify(target)
+            if b:
+                success += 1
+        res = {
+            "status": 200,
+            "msg": "all:{0} success:{1}".format(all, success)
+        }
         return JsonResponse(res)

@@ -13,7 +13,7 @@ from tld import get_fld
 
 from application.api.models import properly
 from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search
-from config import ELASTICSEARCH_HOSTS
+from config import ELASTICSEARCH_HOSTS, STATIC_TASKS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
     es_search_ip_by_id, es, es_search_domain_by_ip
 from datetime import datetime
@@ -135,7 +135,7 @@ def dashboard(request):
                    "sales": {
                        "date_histogram": {
                            "field": "published_from",
-                           "interval": "day",
+                           "interval": STATIC_TASKS,
                            "format": "yyyy-MM-dd"
                        }
                    }

@@ -6,7 +6,6 @@
 from . import views
 from django.conf.urls import url
 
-
 urlpatterns = [
     url(
         regex=r'^test$',
@@ -23,5 +22,10 @@ urlpatterns = [
     url(
         regex=r'^zichan$',
         view=views.Proper.as_view()
+    ),
+    url(
+        regex=r'^scan$',
+        view=views.Scan.as_view()
     )
+
 ]
