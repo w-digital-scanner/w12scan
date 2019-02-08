@@ -7,7 +7,6 @@ geoip2==2.9.0
 HackRequests==0.3.4
 idna==2.8
 maxminddb==1.4.1
-mysqlclient==1.3.14
 python-dateutil==2.7.5
 python-nmap==0.6.1
 pytz==2018.7
