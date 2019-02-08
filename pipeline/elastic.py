@@ -3,12 +3,18 @@
 # @Time    : 2019/1/28 6:14 PM
 # @Author  : w8ay
 # @File    : elastic.py
+import os
+import sys
 from datetime import datetime
 
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Date, Integer, Keyword, Text, Document, InnerDoc, Nested, Search
 from elasticsearch_dsl.connections import connections
 
+try:
+    import config
+except ModuleNotFoundError:
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from config import ELASTICSEARCH_HOSTS
 
 connections.create_connection(hosts=ELASTICSEARCH_HOSTS)

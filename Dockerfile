@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER w8ay@qq.com
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN set -x \
@@ -16,6 +16,7 @@ CMD ["python3","manage.py","makemigrations"]
 CMD ["python3","manage.py","migrate"]
 
 CMD ["rm","-f","/var/cache/apk/*"]
+CMD ["python3","pipeline/elastic.py"]
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
 EXPOSE 8000
