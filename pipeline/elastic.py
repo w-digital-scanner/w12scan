@@ -221,7 +221,7 @@ def count_port():
                        "aggs": {
                            "port": {
                                "terms": {
-                                   "field": "infos.port"
+                                   "field": "infos.port.keyword"
                                }
                            }
                        }
