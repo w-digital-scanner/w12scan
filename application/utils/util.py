@@ -270,7 +270,8 @@ def format_convert(arg: str):
         else:
             return "http://" + arg.split("/")[0]
     else:
-        return parse.urlparse(arg)[1]
+        p = parse.urlparse(arg)
+        return "{0}://{1}".format(p[0], p[1])
 
 
 if __name__ == '__main__':

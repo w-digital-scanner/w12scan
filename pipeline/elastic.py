@@ -5,6 +5,7 @@
 # @File    : elastic.py
 import os
 import sys
+import time
 from datetime import datetime
 
 from elasticsearch import Elasticsearch
@@ -252,5 +253,11 @@ def total_bug():
 
 
 if __name__ == '__main__':
-    Ips.init()
-    Domains.init()
+    while 1:
+        try:
+            Ips.init()
+            Domains.init()
+            break
+        except:
+            time.sleep(1)
+            continue

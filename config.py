@@ -14,7 +14,7 @@ ELASTICSEARCH_HOSTS = ['127.0.0.1:9200']
 # Reids服务器
 REDIS_HOST = '127.0.0.1:6379'
 
-if RUNMODEL == "docker":
+if RUNMODEL == "docker" or RUNMODEL == "pro":
     ELASTICSEARCH_HOSTS = [os.environ.get("ELASTICSEARCH_HOSTS")]
     REDIS_HOST = os.environ.get("REDIS_HOST")
 
