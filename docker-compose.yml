@@ -27,6 +27,8 @@ services:
       - "6379"
   elasticsearch:
     image: elasticsearch
+    ports:
+      - "9200:9200"
     restart: always
     expose:
       - "9200"
