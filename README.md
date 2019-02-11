@@ -12,7 +12,7 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
 ## 设计思想
 基于python3 + django + elasticsearch + redis(去重+web与client通信中间件)，使用WEB API添加扫描目标，扫描完成后会在WEB端展示。
 
-
+![w12scan](doc/w12scan.jpg)
 
 ## 特点
 
@@ -53,7 +53,6 @@ cd w12scan
 docker-compose up -d
 ```
 等待一段时间后访问`http://127.0.0.1:8000`
-### 基于docker多节点部署
-在docker-compose.yml 中复制多个client服务声明即可
 ## 法律
 本程序主要用于收集网络数据用于分析研究，所发出的请求包不会对网络造成破坏。在使用该程序之前请遵守当地相关法律进行。
+
