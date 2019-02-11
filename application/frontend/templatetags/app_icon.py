@@ -14,7 +14,7 @@ def app_icon(product):
     if product in WAPP_ICON:
         icon = WAPP_ICON[product]["icon"]
 
-        path = "https://www.wappalyzer.com/images/icons/" + icon
+        path = "/static/images/icons/" + icon
         return '''<img src="{}" class="img-ss" alt="{}" title="{}">'''.format(path, product, product)
 
     html = '''<span class="badge badge-diy badge-pill">{}</span>'''.format(product)
