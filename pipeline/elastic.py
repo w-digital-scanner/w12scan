@@ -8,6 +8,7 @@ import sys
 import time
 from datetime import datetime
 
+import requests
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Date, Integer, Keyword, Text, Document, InnerDoc, Nested, Search
 from elasticsearch_dsl.connections import connections
@@ -254,6 +255,12 @@ def total_bug():
 
 if __name__ == '__main__':
     while 1:
+        try:
+            r = requests.get("http://" + ELASTICSEARCH_HOSTS[0])
+            if r.status_code != 200:
+                continue
+        except:
+            continue
         try:
             Ips.init()
             Domains.init()
