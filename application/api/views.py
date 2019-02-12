@@ -145,7 +145,7 @@ class Proper(View):
                 if net is None:
                     res = {
                         "status": 400,
-                        "msg": "CIDR格式错误 [{}]".format(temp)
+                        "msg": "CIDR格式错误: [{0}]".format(temp)
                     }
                     return JsonResponse(res)
 
