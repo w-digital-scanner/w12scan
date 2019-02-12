@@ -1,3 +1,5 @@
+import ipaddress
+
 from django.views.generic.base import View
 import json
 
@@ -100,8 +102,24 @@ class Proper(View):
         name = request.POST.get("name")
         desc = request.POST.get("desc", "这家伙很懒，描述都不想写")
         ips = request.POST.get("ips")
+        tem_ips = ips.splitlines()
+        # check ip
+        for temp in tem_ips:
+            if "/" in temp:
+                try:
+                    net = ipaddress.ip_network(temp)
+                except:
+                    net = None
+                if net is None:
+                    res = {
+                        "status": 400,
+                        "msg": "CIDR格式错误 [{}]".format(temp)
+                    }
+                    return JsonResponse(res)
+
         domains = request.POST.get("domains")
         properly.objects.create(name=name, descript=desc, ips=ips, domains=domains)
+
         res = {
             "status": 200,
             "msg": "ok"
@@ -115,6 +133,22 @@ class Proper(View):
         name = data.get("name")
         desc = data.get("desc")
         ips = data.get("ips")
+
+        tem_ips = ips.splitlines()
+        # check ip
+        for temp in tem_ips:
+            if "/" in temp:
+                try:
+                    net = ipaddress.ip_network(temp)
+                except:
+                    net = None
+                if net is None:
+                    res = {
+                        "status": 400,
+                        "msg": "CIDR格式错误 [{}]".format(temp)
+                    }
+                    return JsonResponse(res)
+
         domains = data.get("domains")
         m = properly.objects.get(id=id)
         m.name = name

@@ -94,7 +94,7 @@ def is_proper(arg, arg_type='ip'):
                         net = ipaddress.ip_network(_ip)
 
                     except:
-                        net = None
+                        net = []
 
                     if ipaddress.ip_address(arg) in net:
                         r.append((name, id))
