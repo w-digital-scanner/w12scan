@@ -6,6 +6,7 @@
 import ipaddress
 import json
 import re
+import time
 from urllib import parse
 
 from application.api.models import properly
@@ -272,6 +273,27 @@ def format_convert(arg: str):
     else:
         p = parse.urlparse(arg)
         return "{0}://{1}".format(p[0], p[1])
+
+
+def smartDate(datatmp: float):
+    sec = int(time.time() - datatmp)
+    hover = int(sec / 3600)
+    op = ''
+    if hover == 0:
+        min = int(sec / 60)
+        if min == 0:
+            op = "{}秒前".format(sec)
+        else:
+            op = "{}分钟前".format(min)
+    else:
+        op = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(datatmp))
+    return op
+
+
+def lstrsub(s: str, sub: str):
+    if s[:len(sub)] == sub:
+        return s[len(sub):]
+    return s
 
 
 if __name__ == '__main__':

@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 # Create your views here.
 import ipaddress
 import math
+import time
 
 from django.shortcuts import render
 import json
@@ -12,12 +13,14 @@ from elasticsearch_dsl import Search
 from tld import get_fld
 
 from application.api.models import properly
-from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search
+from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search, smartDate, lstrsub
 from config import ELASTICSEARCH_HOSTS, STATIC_TASKS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
     es_search_ip_by_id, es, es_search_domain_by_ip
 from datetime import datetime
 from django.http import Http404
+
+from pipeline.redis import redis_con
 
 
 def index(request):
@@ -164,8 +167,25 @@ def dashboard(request):
     for item in names:
         data_bar["labels"].append(item["key"])
         data_bar["data"].append(item["doc_count"])
+
+    # node monitor
+    nodenames = redis_con.keys("w12_node_*")
+    nodes = []
+    for nodename in nodenames:
+        dd = redis_con.hgetall(nodename)
+        tem_dict = {}
+        tem_dict["nodename"] = lstrsub(nodename, "w12_node_")
+        tem_dict["last_time"] = dd.get("last_time", 0)
+        tem_dict["running"] = dd.get("running", "error")
+        tem_dict["finished"] = dd.get("finished", "error")
+        tem_dict["status"] = "Running"
+        if time.time() - float(tem_dict["last_time"]) > 60 * 5:
+            tem_dict["status"] = "Pending"
+        tem_dict["time"] = smartDate(float(tem_dict["last_time"]))
+        nodes.append(tem_dict)
+
     return render(request, "frontend/dashboard.html",
-                  {"total": total, "zc_data": data, "data_chart": data_chart, "data_bar": data_bar})
+                  {"total": total, "zc_data": data, "data_chart": data_chart, "data_bar": data_bar, "nodes": nodes})
 
 
 def detail(request, id):

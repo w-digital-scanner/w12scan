@@ -26,6 +26,10 @@ urlpatterns = [
     url(
         regex=r'^scan$',
         view=views.Scan.as_view()
+    ),
+    url(
+        regex=r'^node$',
+        view=views.NodeListView.as_view()
     )
 
 ]

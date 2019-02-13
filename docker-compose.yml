@@ -18,6 +18,7 @@ services:
       RUNMODEL: docker
       WEB_INTERFACE: http://web:8000
       REDIS_HOST: redis:6379
+      NODE_NAME: "zhouxingxing"
     depends_on:
       - web
   redis:

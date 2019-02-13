@@ -11,6 +11,36 @@ $(document).ready(function () {
         }
     })
 
+    function getNodeLog() {
+        $.ajax({
+            url: '/api/v1/node?name=' + nodename,// 跳转到 action
+            type: 'get',
+            success: function (data) {
+                $("#node-modal #shell-mode").val(data.msg);
+            },
+            error: function () {
+                alert("异常！");
+            }
+        })
+    }
+
+    var dingshi, nodename;
+
+    $(".running-node .btn-logs").click(function () {
+        nodename = $(this).attr("data-target");
+        console.log(nodename);
+        getNodeLog();
+        $('#node-modal').modal('show');
+    })
+
+    $('#node-modal').on('show.bs.modal', function (e) {
+        dingshi = setInterval(getNodeLog, 2000);
+    })
+
+    $('#node-modal').on('hidden.bs.modal', function (e) {
+        window.clearInterval(dingshi);
+    })
+
     $(".task-create").click(function () {
         var content = $("#task-modal #content-modal").val();
         $.ajax({
@@ -20,7 +50,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data)
                 $('#task-modal').modal('hide');
-                if(data.status == 200){
+                if (data.status == 200) {
                     swal({
                         title: '添加成功!',
                         text: data.msg,

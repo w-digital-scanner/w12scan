@@ -14,7 +14,7 @@ from config import AUTH_POST_KEY
 from pipeline.elastic import Ips, Domains
 
 # Create your views here.
-from pipeline.redis import redis_verify
+from pipeline.redis import redis_verify, redis_con
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -213,4 +213,29 @@ class Scan(View):
             "status": 200,
             "msg": "All:{0} Success:{1}".format(all, success)
         }
+        return JsonResponse(res)
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class NodeListView(View):
+
+    def get(self, request):
+        res = {}
+        target = request.GET.get("name", None)
+        res["status"] = 400
+        res["msg"] = "error"
+        if target is None:
+            return JsonResponse(res)
+        nodenames = "w12_log_{0}".format(target)
+
+        llen = redis_con.llen(nodenames)
+        res["status"] = 200
+        if not llen:
+            res["msg"] = ""
+            return JsonResponse(res)
+        ret = ''
+        for i in range(llen - 1, 0 - 1, -1):
+            tem = redis_con.lindex(nodenames, i)
+            ret += tem + "\n"
+        res["msg"] = ret
         return JsonResponse(res)
