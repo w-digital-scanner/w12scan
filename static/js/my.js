@@ -76,7 +76,7 @@ $(document).ready(function () {
                     // window.location.reload();
                 } else {
                     swal({
-                        title: '再试一次?',
+                        title: '添加失败',
                         text: data.msg,
                         button: {
                             text: "OK",
