@@ -325,7 +325,14 @@ def zc_detail(request, id):
 
             ]
         }
-    }, "size": 1000
+    }, "collapse": {
+        "field": "url"
+    },
+        "sort": {
+            "published_from": {"order": "desc"}
+        },
+        "from": 0,
+        "size": 10000
     }
     temp_list = []
     for temp in domains:
@@ -345,6 +352,8 @@ def zc_detail(request, id):
             dd = {}
             dd.update(hit.to_dict())
             dd["id"] = hit.meta.id
+            if isinstance(dd["url"], list):
+                dd["url"] = dd["url"][0]
             if dd.get("app"):
                 apps |= set(dd.get("app"))
             domains_data.append(dd)
@@ -394,7 +403,14 @@ def zc_detail(request, id):
 
             ]
         }
-    }, "size": 1000
+    }, "collapse": {
+        "field": "target"
+    },
+        "sort": {
+            "published_from": {"order": "desc"}
+        },
+        "from": 0,
+        "size": 10000
     }
     payload["query"]["bool"]["should"] = temp_list
     ips_data = []
@@ -407,6 +423,8 @@ def zc_detail(request, id):
             dd = {}
             dd.update(hit.to_dict())
             dd["id"] = hit.meta.id
+            if isinstance(dd["target"], list):
+                dd["target"] = dd["target"][0]
             ips_data.append(dd)
             # 统计
             if dd.get("infos"):
