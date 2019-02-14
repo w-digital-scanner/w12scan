@@ -103,7 +103,7 @@
                                                         <ul class="list-ticked">
                                                             {% for u in union %}
                                                                 <li>
-                                                                    <a href="{% url 'detail' u.id %}">{{ u.url }}</a>&nbsp;&nbsp;{{ u.title }}
+                                                                    <a href="{% url 'detail' u.id %}">{{ u.url }}</a>  {{ u.title }}
                                                                 </li>
                                                             {% endfor %}
                                                         </ul>
@@ -113,7 +113,7 @@
                                                                 {% for u in c_data %}
 
                                                                     <li>
-                                                                        <a href="{% url 'detail' u.id %}">{{ u.ip }}</a>
+                                                                        <a href="{% url 'detail' u.id %}">{{ u.ip }}</a>&nbsp;&nbsp;&nbsp;{{ u.extrainfo }}
                                                                         {% if u.data %}
                                                                             <ul>
                                                                                 {% for i in u.data %}

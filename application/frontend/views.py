@@ -8,7 +8,7 @@ import time
 
 from django.shortcuts import render
 import json
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, helpers
 from elasticsearch_dsl import Search
 from tld import get_fld
 
@@ -92,7 +92,7 @@ def index(request):
             d["target"] = d.get("title") or d.get("url")
             if d.get("ip"):
                 ip = d.get("ip")
-                ip_info = es_search_ip(ip)
+                ip_info = es_search_ip(ip, True)
                 if ip_info:
                     d["location"] = ip_info.location
             d["proper"] = is_proper(d["url"], "domain")
@@ -200,7 +200,7 @@ def detail(request, id):
         target = data["target"]
         data["proper"] = is_proper(target, "ip")
         # 关联出域名
-        union_domains = es_search_domain_by_ip(target)
+        union_domains = es_search_domain_by_ip(target, True)
 
         # 关联C段ip
         c_data = []
@@ -208,24 +208,46 @@ def detail(request, id):
         if len(temp_ips) == 4:
             del temp_ips[-1]
             query_ip = '.'.join(temp_ips) + ".*"
-            payload = {"query": {
-                "wildcard": {"target": query_ip}
+            payload = {
+                "query": {
+                    "wildcard": {"target": query_ip}
+                },
+                "collapse": {
+                    "field": "target"
+                },
+                "sort": {
+                    "published_from": {"order": "desc"}
+                },
+                "from": 0,
+                "size": 10000
             }
-            }
+
             s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
             res = s.execute()
             for hit in res:
                 cid = hit.meta.id
                 d = hit.to_dict()
                 if d["target"] != target:
+                    if isinstance(d["target"], list):
+                        d["target"] = d["target"][0]
                     # C段ip的上的域名
                     sub_data = []
-                    sub_domain = es_search_domain_by_ip(d["target"])
+                    sub_domain = es_search_domain_by_ip(d["target"], True)
                     for sub in sub_domain:
                         dd = {}
                         dd.update(sub)
                         sub_data.append(dd)
-                    c_data.append({"id": cid, "ip": d["target"], "data": sub_data})
+                    extrainfo = ""
+                    for k in d.get("infos", []):
+                        extrainfo += "{}".format(k.get("port", ""))
+                        if k.get("name"):
+                            extrainfo += "/{} ".format(k["name"])
+
+                    c_data.append({"id": cid, "ip": d["target"], "data": sub_data, "extrainfo": extrainfo})
+
+            # c_data 排序
+
+            c_data.sort(key=lambda a: int(a.get("ip", 0).split(".")[3]))
 
         return render(request, "frontend/ip_detail.html",
                       {"data": data, "union": union_domains, "c_data": c_data, "third_infomation": third_info(target)})
@@ -238,6 +260,12 @@ def detail(request, id):
                 "match": {
                     "target": ip
                 }
+            },
+            "collapse": {
+                "field": "target"
+            },
+            "sort": {
+                "published_from": {"order": "desc"}
             }
         }
         s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
@@ -255,12 +283,21 @@ def detail(request, id):
             payload = {"query": {
                 "wildcard": {"url": "*." + sub_domain}
             }
-                , "size": 1000
+                , "collapse": {
+                    "field": "url"
+                },
+                "sort": {
+                    "published_from": {"order": "desc"}
+                },
+                "from": 0,
+                "size": 10000
             }
             s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
             for hit in s:
                 dd = {}
                 dd.update(hit.to_dict())
+                if isinstance(dd["url"], list):
+                    dd["url"] = dd["url"][0]
                 dd["id"] = hit.meta.id
                 dd["published_from"] = datetime_string_format(dd["published_from"])
                 sub_domain_data.append(dd)

@@ -84,7 +84,7 @@ class Domains(Document):
         return super().save(**kwargs)
 
 
-def es_search_ip(ip):
+def es_search_ip(ip, deduplicat=False):
     _q = {
 
         "query": {
@@ -94,6 +94,13 @@ def es_search_ip(ip):
         }
 
     }
+    if deduplicat:
+        _q["collapse"] = {
+            "field": "target"
+        }
+        _q["sort"] = {
+            "published_from": {"order": "desc"}
+        }
     s = Search(using=es, index='w12scan', doc_type="ips").from_dict(_q)
     if s.count() > 0:
         return list(s)[0]
@@ -119,7 +126,7 @@ def es_search_ip_by_id(id):
     return dd
 
 
-def es_search_domain_by_ip(ip):
+def es_search_domain_by_ip(ip, deduplicat=False):
     payload = {
         "query": {
             "match": {
@@ -127,6 +134,13 @@ def es_search_domain_by_ip(ip):
             }
         }
     }
+    if deduplicat:
+        payload["collapse"] = {
+            "field": "url"
+        }
+        payload["sort"] = {
+            "published_from": {"order": "desc"}
+        }
     s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
     res = s.execute()
     union_domains = []
@@ -134,6 +148,8 @@ def es_search_domain_by_ip(ip):
         cid = hit.meta.id
         d = hit.to_dict()
         domain = d["url"]
+        if isinstance(domain, list):
+            domain = domain[0]
         title = d.get("title", "")
         union_domains.append({"id": cid, "url": domain, "title": title})
     return union_domains
