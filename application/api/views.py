@@ -239,3 +239,19 @@ class NodeListView(View):
             ret += tem + "\n"
         res["msg"] = ret
         return JsonResponse(res)
+
+    def delete(self, request):
+        res = {
+            "status": 200,
+            "msg": "ok"
+        }
+        target = request.GET.get("name", None)
+        if target is None:
+            res["msg"] = "error"
+            res["status"] = 200
+            return JsonResponse(res)
+        node1 = "w12_node_{}".format(target)
+        node2 = "w12_log_{}".format(target)
+        redis_con.delete(node1)
+        redis_con.delete(node2)
+        return JsonResponse(res)

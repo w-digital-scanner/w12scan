@@ -108,7 +108,7 @@
                                         <button type="button" class="btn btn-light btn-sm btn-logs" data-target="{{ node.nodename }}"><i class="icon-info"></i>Logs
                                         </button>
                                         {% if node.status == "Pending" %}
-                                        <button type="button" class="btn btn-light btn-sm"><i class="icon-ban"></i>
+                                        <button type="button" class="btn btn-light btn-sm btn-delete" data-target="{{ node.nodename }}"><i class="icon-ban"></i>
                                             Delete
                                         </button>
                                         {% endif %}

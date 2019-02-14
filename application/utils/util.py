@@ -34,27 +34,27 @@ def third_info(ip):
     items = {
         "Threakbook": {
             "src": "https://x.threatbook.cn/nodev4/domain/" + ip,
-            "img": "https://x.threatbook.cn/nodev4/img/favicon.ico@2c7a1cdc",
+            "img": "/static/images/third-icon/threatbook.ico",
             "desc": "微步在线威胁情报社区"
         },
         "Certdb": {
             "src": "https://certdb.com/search?q=" + ip,
-            "img": "https://certdb.com/ficon/apple-touch-icon.png",
+            "img": "/static/images/third-icon/cert-db.png",
             "desc": "SSL certificates search engine"
         },
         "Findsubdomains": {
             "src": "https://findsubdomains.com/subdomains-of/" + ip,
-            "img": "https://findsubdomains.com/ficon/apple-touch-icon.png",
+            "img": "/static/images/third-icon/apple-touch-icon.png",
             "desc": "Find subdomains for security assessment penetration test."
         },
         "Dnsdumper": {
             "src": "https://dnsdumpster.com/",
-            "img": "https://dnsdumpster.com/static/favicon.ico",
+            "img": "/static/images/third-icon/dnsdumper.ico",
             "desc": "dns recon and research, find and lookup dns records"
         },
         "Censys": {
             "src": "https://censys.io/ipv4?q=" + ip,
-            "img": "https://censys.io/static/img/censys-logo.png",
+            "img": "/static/images/third-icon/censys-logo.png",
             "desc": "Censys helps organizations, individuals, and researchers find and monitor every server on the Internet to reduce exposure and improve security."
         }
     }

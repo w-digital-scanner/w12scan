@@ -33,6 +33,30 @@ $(document).ready(function () {
         $('#node-modal').modal('show');
     })
 
+    $(".running-node .btn-delete").click(function () {
+        nodename = $(this).attr("data-target");
+        $.ajax({
+            url: '/api/v1/node?name=' + nodename,
+            type: "get",
+            success: function (data) {
+                swal({
+                    title: '删除成功!',
+                    text: data.msg,
+                    icon: 'success',
+                    button: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary"
+                    }
+                })
+            },
+            error: function () {
+                alert("error");
+            }
+        })
+    })
+
     $('#node-modal').on('show.bs.modal', function (e) {
         dingshi = setInterval(getNodeLog, 2000);
     })
