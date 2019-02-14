@@ -186,7 +186,8 @@ def count_country():
                        "aggs": {
                            "country": {
                                "terms": {
-                                   "field": "location.country_id"
+                                   "field": "location.country_id",
+                                   "size": 8
                                }
                            }
                        }
@@ -202,7 +203,7 @@ def count_country():
     return r
 
 
-def count_name():
+def count_name(size=10):
     payload = {"size": 0,
                "aggs": {
                    "infos": {
@@ -212,7 +213,8 @@ def count_name():
                        "aggs": {
                            "name": {
                                "terms": {
-                                   "field": "infos.name"
+                                   "field": "infos.name",
+                                   "size": size
                                }
                            }
                        }
@@ -228,7 +230,7 @@ def count_name():
     return r
 
 
-def count_port():
+def count_port(size=10):
     payload = {"size": 0,
                "aggs": {
                    "infos": {
@@ -238,7 +240,8 @@ def count_port():
                        "aggs": {
                            "port": {
                                "terms": {
-                                   "field": "infos.port"
+                                   "field": "infos.port",
+                                   "size": size
                                }
                            }
                        }

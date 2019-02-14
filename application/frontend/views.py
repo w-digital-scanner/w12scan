@@ -159,7 +159,7 @@ def dashboard(request):
         data_chart["data"].append(item["doc_count"])
 
     # Bar chart
-    names = count_name()
+    names = count_name(6)
     data_bar = {
         "labels": [],
         "data": []
@@ -261,16 +261,15 @@ def detail(request, id):
                     "target": ip
                 }
             },
-            "collapse": {
-                "field": "target"
-            },
+
             "sort": {
                 "published_from": {"order": "desc"}
             }
         }
         s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
         ip_data = []
-        for hit in s:
+        hit = list(s)[0]
+        if hit:
             ip_data.append({"id": hit.meta.id, "ip": hit.to_dict()["target"]})
 
         # subdomain 获取
