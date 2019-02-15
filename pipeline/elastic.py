@@ -17,10 +17,10 @@ try:
     import config
 except ModuleNotFoundError:
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-from config import ELASTICSEARCH_HOSTS
+from config import ELASTICSEARCH_HOSTS, ELASTICSEARCH_AUTH
 
-connections.create_connection(hosts=ELASTICSEARCH_HOSTS, http_auth=config.ELASTICSEARCH_AUTH)
-es = Elasticsearch(ELASTICSEARCH_HOSTS, http_auth=config.ELASTICSEARCH_AUTH)
+connections.create_connection(hosts=ELASTICSEARCH_HOSTS, http_auth=ELASTICSEARCH_AUTH)
+es = Elasticsearch(ELASTICSEARCH_HOSTS, http_auth=ELASTICSEARCH_AUTH)
 
 
 class Location(InnerDoc):
