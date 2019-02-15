@@ -1,5 +1,9 @@
 FROM alpine:edge
 MAINTAINER w8ay@qq.com
+ENV LC_ALL C.UTF-8
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN set -x \
     && apk update \
