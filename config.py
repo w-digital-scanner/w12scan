@@ -11,6 +11,9 @@ AUTH_POST_KEY = "hello-w12scan!"
 
 # Elasticsearch 集群
 ELASTICSEARCH_HOSTS = ['127.0.0.1:9200']
+# Elasticsearch 验证密码
+ELASTICSEARCH_AUTH = None
+
 # Reids服务器
 REDIS_HOST = '127.0.0.1:6379'
 
