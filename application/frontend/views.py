@@ -45,7 +45,7 @@ def index(request):
     else:
         _search, keywords = k2e_search(q, page)
     s = Search(using=es, index='w12scan').from_dict(_search)
-    count = s.count()
+    count = s.execute().hits.total
 
     # 分页逻辑
     max_page = math.ceil(count / 20)
@@ -272,20 +272,22 @@ def detail(request, id):
                     "target": ip
                 }
             },
-
             "sort": {
                 "published_from": {"order": "desc"}
             }
         }
+
+        hit = es_search_ip(ip, deduplicat=True)
+
         historys = es_search_domain_by_url(target)
         for h in historys:
             h["published_from"] = datetime_string_format(h["published_from"])
 
-        s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
-        ip_data = []
-        hit = list(s)[0]
+        # s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
+        ip_data = {}
         if hit:
-            ip_data.append({"id": hit.meta.id, "ip": hit.to_dict()["target"]})
+            ip_data["id"] = hit.meta.id
+            ip_data["ip"] = list(hit.target)[0]
 
         # subdomain 获取
         try:

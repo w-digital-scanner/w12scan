@@ -49,9 +49,7 @@
                                                         <ul class="list-ticked">
                                                             <li>Ip:
                                                                 {% if ip_data %}
-                                                                    {% for ip in ip_data %}
-                                                                        <a href="{% url 'detail' ip.id %}">{{ ip.ip }}</a>
-                                                                    {% endfor %}
+                                                                        <a href="{% url 'detail' ip_data.id %}">{{ ip_data.ip }}</a>
                                                                 {% else %}
                                                                     <span>{{ data.ip }}</span>
                                                                 {% endif %}
