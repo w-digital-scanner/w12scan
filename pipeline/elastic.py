@@ -91,6 +91,9 @@ def es_search_ip(ip, deduplicat=False):
             "match": {
                 "target": ip
             }
+        },
+        "sort": {
+            "published_from": {"order": "desc"}
         }
 
     }
@@ -98,12 +101,12 @@ def es_search_ip(ip, deduplicat=False):
         _q["collapse"] = {
             "field": "target"
         }
-        _q["sort"] = {
-            "published_from": {"order": "desc"}
-        }
     s = Search(using=es, index='w12scan', doc_type="ips").from_dict(_q)
     if s.count() > 0:
-        return list(s)[0]
+        if deduplicat:
+            return list(s)[0]
+        else:
+            return list(s)
     return False
 
 
@@ -124,6 +127,23 @@ def es_search_ip_by_id(id):
     else:
         return False
     return dd
+
+
+def es_search_domain_by_url(target):
+    payload = {
+        "query": {
+            "match": {
+                "url": target
+            }
+        },
+        "sort": {
+            "published_from": {
+                "order": "desc"
+            }
+        }
+    }
+    s = Search(using=es, index='w12scan', doc_type='domains').from_dict(payload)
+    return list(s)
 
 
 def es_search_domain_by_ip(ip, deduplicat=False):

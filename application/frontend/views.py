@@ -16,7 +16,7 @@ from application.api.models import properly
 from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search, smartDate, lstrsub
 from config import ELASTICSEARCH_HOSTS, STATIC_TASKS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
-    es_search_ip_by_id, es, es_search_domain_by_ip
+    es_search_ip_by_id, es, es_search_domain_by_ip, es_search_domain_by_url
 from datetime import datetime
 from django.http import Http404
 
@@ -189,6 +189,12 @@ def dashboard(request):
 
 
 def detail(request, id):
+    '''
+    ip domain 详情
+    :param request:
+    :param id:
+    :return:
+    '''
     data = es_search_ip_by_id(id)
     if not data:
         raise Http404
@@ -201,6 +207,10 @@ def detail(request, id):
         data["proper"] = is_proper(target, "ip")
         # 关联出域名
         union_domains = es_search_domain_by_ip(target, True)
+        # 历史ip
+        historys = es_search_ip(target)
+        for h in historys:
+            h["published_from"] = datetime_string_format(h["published_from"])
 
         # 关联C段ip
         c_data = []
@@ -250,7 +260,8 @@ def detail(request, id):
             c_data.sort(key=lambda a: int(a.get("ip", 0).split(".")[3]))
 
         return render(request, "frontend/ip_detail.html",
-                      {"data": data, "union": union_domains, "c_data": c_data, "third_infomation": third_info(target)})
+                      {"data": data, "union": union_domains, "c_data": c_data, "third_infomation": third_info(target),
+                       "historys": historys})
     elif doc_type == "domains":
         ip = data["ip"]
         target = data["url"]
@@ -266,6 +277,10 @@ def detail(request, id):
                 "published_from": {"order": "desc"}
             }
         }
+        historys = es_search_domain_by_url(target)
+        for h in historys:
+            h["published_from"] = datetime_string_format(h["published_from"])
+
         s = Search(using=es, index='w12scan', doc_type='ips').from_dict(payload)
         ip_data = []
         hit = list(s)[0]
@@ -303,7 +318,7 @@ def detail(request, id):
 
         return render(request, "frontend/domain_detail.html",
                       {"data": data, "ip_data": ip_data, "sub_domain": sub_domain_data,
-                       "third_infomation": third_info(ip)})
+                       "third_infomation": third_info(ip), "historys": historys})
 
 
 def zc_detail(request, id):

@@ -103,7 +103,7 @@
                                                         <ul class="list-ticked">
                                                             {% for u in union %}
                                                                 <li>
-                                                                    <a href="{% url 'detail' u.id %}">{{ u.url }}</a>  {{ u.title }}
+                                                                    <a href="{% url 'detail' u.id %}">{{ u.url }}</a> {{ u.title }}
                                                                 </li>
                                                             {% endfor %}
                                                         </ul>
@@ -169,96 +169,24 @@
                                          aria-labelledby="user-profile-activity-tab">
                                         <div class="horizontal-timeline">
                                             <section class="time-frame">
-                                                <h4 class="section-time-frame">Today</h4>
-                                                <div class="event">
-                                                    <p class="event-text">We’re big on real names around here, so people
-                                                        know who’s who</p>
-                                                    <div class="event-alert">You have added task #26 Successfully to the
-                                                        project “Agile CRM”
+                                                <h4 class="section-time-frame">History</h4>
+                                                {% for h in historys %}
+                                                    <div class="event">
+                                                        <p class="event-text"><a
+                                                                href="{% url 'detail' h.meta.id %}">{{ h.target }}</a>
+                                                        </p>
+                                                        <div class="event-alert">
+                                                            <i class="flag-icon flag-icon-{{ data.location.country_id|lower }}"></i> {{ data.location.country }}
+                                                            {{ data.location.region }}
+                                                            <br>
+                                                            Open ports:
+                                                            {% for info in data.infos %}
+                                                                <span>{{ info.port }}/{{ info.name|default:"unknown" }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <div class="event-info">{{ h.published_from }}</div>
                                                     </div>
-                                                    <div class="event-info">New Dashboard Design - 9:24 PM</div>
-                                                </div>
-                                                <div class="event">
-                                                    <p class="event-text">Admin is a full featured, multipurpose,
-                                                        premium bootstrap admin template built with Bootstrap 4
-                                                        Framework</p>
-                                                    <div class="tumbnail-views">
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                    </div>
-                                                    <div class="event-info">New Dashboard Design - 9:24 PM</div>
-                                                </div>
-                                                <div class="event">
-                                                    <p class="event-text">It is a fully responsive bootstrap admin
-                                                        template / bootstrap admin dashboard</p>
-                                                    <div class="event-alert">You have added task #26 Successfully to the
-                                                        project “Agile CRM”
-                                                    </div>
-                                                    <div class="event-info">New Dashboard Design - 9:24 PM</div>
-                                                </div>
-                                            </section>
-                                            <section class="time-frame">
-                                                <h4 class="section-time-frame">Yesterday</h4>
-                                                <div class="event">
-                                                    <p class="event-text">Night fill together itself. Midst. Beginning.
-                                                        Behold living god had.</p>
-                                                    <div class="event-alert">You have added task #26 Successfully to the
-                                                        project “Agile CRM”
-                                                    </div>
-                                                    <div class="event-info">New Dashboard Design - 11:24 PM</div>
-                                                </div>
-                                                <div class="event">
-                                                    <p class="event-text">Why waste time starting from scratch; try out
-                                                        our admin dashboard template</p>
-                                                    <div class="event-info">New Dashboard Design - 11:30 PM</div>
-                                                </div>
-                                            </section>
-                                            <section class="time-frame">
-                                                <h4 class="section-time-frame">30 March</h4>
-                                                <div class="event">
-                                                    <p class="event-text">Gerald Vaughn changed the status to QA on
-                                                        MA-86 - Retargeting Ads</p>
-                                                    <div class="tumbnail-views">
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                        <div class="thumbnail"><img
-                                                                src="https://via.placeholder.com/99x88" alt="thumbnail">
-                                                        </div>
-                                                    </div>
-                                                    <div class="event-alert">You have added task #26 Successfully to the
-                                                        project “Agile CRM”
-                                                    </div>
-                                                    <div class="event-info">New Dashboard Design - 11:45 PM</div>
-                                                </div>
+                                                {% endfor %}
                                             </section>
                                         </div>
                                     </div>
