@@ -249,9 +249,7 @@ def detail(request, id):
                         sub_data.append(dd)
                     extrainfo = ""
                     for k in d.get("infos", []):
-                        extrainfo += "{}".format(k.get("port", ""))
-                        if k.get("name"):
-                            extrainfo += "/{} ".format(k["name"])
+                        extrainfo += "{0}/{1} ".format(k.get("port", ""), k.get("name", "unknown"))
 
                     c_data.append({"id": cid, "ip": d["target"], "data": sub_data, "extrainfo": extrainfo})
 
