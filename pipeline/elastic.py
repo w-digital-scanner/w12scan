@@ -295,10 +295,12 @@ def total_bug():
 if __name__ == '__main__':
     while 1:
         try:
-            r = requests.get("http://" + ELASTICSEARCH_HOSTS[0])
+            r = requests.get("http://" + ELASTICSEARCH_HOSTS[0], auth=ELASTICSEARCH_AUTH)
             if r.status_code != 200:
                 continue
         except:
+            print("retrying...")
+            time.sleep(2)
             continue
         try:
             Ips.init()
