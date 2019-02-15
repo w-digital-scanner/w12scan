@@ -103,3 +103,4 @@ venv.bak/
 .mypy_cache/
 .idea/
 .DS_Store
+w12scan.db
