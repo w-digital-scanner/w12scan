@@ -176,6 +176,7 @@ def dashboard(request):
         tem_dict = {}
         tem_dict["nodename"] = lstrsub(nodename, "w12_node_")
         tem_dict["last_time"] = dd.get("last_time", 0)
+        tem_dict["tasks"] = dd.get("tasks", "error")
         tem_dict["running"] = dd.get("running", "error")
         tem_dict["finished"] = dd.get("finished", "error")
         tem_dict["status"] = "Running"

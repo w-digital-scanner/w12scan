@@ -79,6 +79,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Node name</th>
+                                <th>All tasks</th>
                                 <th>In progress</th>
                                 <th>Completed</th>
                                 <th>Last time</th>
@@ -89,8 +90,11 @@
                             <tbody>
                             {% for node in nodes %}
                                 <tr>
-                                    <td># {{forloop.counter}}</td>
+                                    <td># {{ forloop.counter }}</td>
                                     <td>{{ node.nodename }}</td>
+                                    <td>
+                                        <div class="badge badge-info badge-pill">{{ node.tasks }}</div>
+                                    </td>
                                     <td>
                                         <div class="badge badge-primary badge-pill">{{ node.running }}</div>
                                     </td>
@@ -105,12 +109,14 @@
                                     {% endif %}
 
                                     <td>
-                                        <button type="button" class="btn btn-light btn-sm btn-logs" data-target="{{ node.nodename }}"><i class="icon-info"></i>Logs
+                                        <button type="button" class="btn btn-light btn-sm btn-logs"
+                                                data-target="{{ node.nodename }}"><i class="icon-info"></i>Logs
                                         </button>
                                         {% if node.status == "Pending" %}
-                                        <button type="button" class="btn btn-light btn-sm btn-delete" data-target="{{ node.nodename }}"><i class="icon-ban"></i>
-                                            Delete
-                                        </button>
+                                            <button type="button" class="btn btn-light btn-sm btn-delete"
+                                                    data-target="{{ node.nodename }}"><i class="icon-ban"></i>
+                                                Delete
+                                            </button>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -186,7 +192,7 @@
                                     {% for data in zc_data %}
                                         <tr>
                                             <td>
-                                                {{forloop.counter}}
+                                                {{ forloop.counter }}
                                             </td>
                                             <td>
                                                 <a href="{% url 'zc-detail' data.id %}">{{ data.name }}</a>
