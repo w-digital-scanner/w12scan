@@ -18,11 +18,11 @@ services:
       RUNMODEL: docker
       WEB_INTERFACE: http://web:8000
       REDIS_HOST: redis:6379
-      NODE_NAME: "zhouxingxing"
+      NODE_NAME: "w12scan_w8ay"
     depends_on:
       - web
   redis:
-    image: redis:alpine
+    image: redis:5.0.3-stretch
     restart: always
     expose:
       - "6379"
