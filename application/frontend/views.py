@@ -264,17 +264,13 @@ def detail(request, id):
         ip = data["ip"]
         target = data["url"]
         data["proper"] = is_proper(target, "domain")
-        payload = {
-            "query": {
-                "match": {
-                    "target": ip
-                }
-            },
-            "sort": {
-                "published_from": {"order": "desc"}
-            }
-        }
 
+        # 展现信息
+        field = ["title", "status_code", "X-Powered-By", "Server"]
+        uldata = []
+        for f in field:
+            if f in data:
+                uldata.append((f, data[f]))
         hit = es_search_ip(ip, deduplicat=True)
 
         historys = es_search_domain_by_url(target)
@@ -318,7 +314,7 @@ def detail(request, id):
 
         return render(request, "frontend/domain_detail.html",
                       {"data": data, "ip_data": ip_data, "sub_domain": sub_domain_data,
-                       "third_infomation": third_info(ip), "historys": historys})
+                       "third_infomation": third_info(ip), "historys": historys, "uldata": uldata})
 
 
 def zc_detail(request, id):

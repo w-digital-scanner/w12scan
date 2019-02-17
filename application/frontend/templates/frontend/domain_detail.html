@@ -37,32 +37,31 @@
                         </ul>
                         <div class="row">
                             <div class="col-md-9">
-                                <div class="tab-content tab-body" id="profile-log-switch">
+                                <div class="tab-content" id="profile-log-switch">
                                     <div class="tab-pane fade show active pr-3" id="user-profile-info"
                                          role="tabpanel" aria-labelledby="user-profile-info-tab">
 
                                         <div class="row mt-5 pb-4 border-bottom">
                                             <div class="col-12">
                                                 <div class="d-flex align-items-start pb-3 border-bottom">
-                                                    <img src="https://via.placeholder.com/49x49" alt="brand logo">
-                                                    <div class="wrapper pl-4">
+                                                    <div class="wrapper pl-4 col-12">
                                                         <ul class="list-ticked">
                                                             <li>Ip:
                                                                 {% if ip_data %}
-                                                                        <a href="{% url 'detail' ip_data.id %}">{{ ip_data.ip }}</a>
+                                                                    <a href="{% url 'detail' ip_data.id %}">{{ ip_data.ip }}</a>
                                                                 {% else %}
                                                                     <span>{{ data.ip }}</span>
                                                                 {% endif %}
                                                             </li>
-                                                            <li>Title: {{ data.title }}</li>
-                                                            <li>Status_code: {{ data.status_code }}</li>
+                                                            {% for u in uldata %}
+                                                                <li>{{ u.0 }}: {{ u.1 }}</li>
+                                                            {% endfor %}
 
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 {% if data.bugs %}
                                                     <div class="d-flex align-items-start py-3 border-bottom">
-                                                        <img src="https://via.placeholder.com/49x49" alt="brand logo">
                                                         <div class="wrapper pl-4">
                                                             <p class="font-weight-bold mb-0">漏洞详情</p>
                                                             <ul class="list-ticked">
@@ -73,22 +72,23 @@
                                                         </div>
                                                     </div>
                                                 {% endif %}
-                                                <div class="d-flex align-items-start py-3">
-                                                    <img src="https://via.placeholder.com/49x49" alt="brand logo">
-                                                    <div class="wrapper pl-4">
-                                                        <p class="font-weight-bold mb-0">使用技术</p>
-                                                        <br>
-                                                        <small>
-                                                            <ul>
-                                                                {% for app in data.app %}
-                                                                    <li>
-                                                                        {{ app|app_icon|safe }} {{ app }}
-                                                                    </li>
-                                                                {% endfor %}
-                                                            </ul>
-                                                        </small>
+                                                {% if data.app %}
+                                                    <div class="d-flex align-items-start py-3">
+                                                        <div class="wrapper pl-4">
+                                                            <p class="font-weight-bold mb-0">使用技术</p>
+                                                            <br>
+                                                            <small>
+                                                                <ul>
+                                                                    {% for app in data.app %}
+                                                                        <li>
+                                                                            {{ app|app_icon|safe }} {{ app }}
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </small>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                {% endif %}
                                                 <pre>{{ data.headers }}<br/><br/>{{ data.body }}</pre>
 
 
