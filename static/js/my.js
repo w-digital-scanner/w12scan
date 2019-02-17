@@ -37,7 +37,7 @@ $(document).ready(function () {
         nodename = $(this).attr("data-target");
         $.ajax({
             url: '/api/v1/node?name=' + nodename,
-            type: "get",
+            type: "delete",
             success: function (data) {
                 swal({
                     title: '删除成功!',
