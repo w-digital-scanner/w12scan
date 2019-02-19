@@ -155,6 +155,9 @@ def dashboard(request):
         "data": []
     }
     for item in charts:
+        count = item["doc_count"]
+        if count == 0:
+            continue
         data_chart["labels"].append(item["key_as_string"])
         data_chart["data"].append(item["doc_count"])
 
