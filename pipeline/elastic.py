@@ -292,6 +292,15 @@ def total_bug():
     return res["hits"]["total"]
 
 
+def get_bug_count(doc_type, key):
+    payload = {'query': {'bool': {'must': [{'exists': {'field': 'bugs.{0}'.format(key)}}]}}, 'from': 0, 'size': 20,
+               'sort': {'published_from': {'order': 'desc'}}}
+    s = Search(using=es, index='w12scan', doc_type=doc_type).from_dict(payload)
+    res = s.count()
+
+    return res
+
+
 if __name__ == '__main__':
     while 1:
         try:

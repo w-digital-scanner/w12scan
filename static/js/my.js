@@ -230,6 +230,14 @@ $(document).ready(function () {
 
     };
 
+    var doughnutPieOptions = {
+        responsive: true,
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    };
+
     if ($("#lineChart").length) {
         console.log(chart_labels, chart_data);
         var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
@@ -326,17 +334,45 @@ $(document).ready(function () {
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: pie_labels
         };
-        var doughnutPieOptions = {
-            responsive: true,
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            }
-        };
+
         var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
         var pieChart = new Chart(pieChartCanvas, {
             type: 'pie',
             data: doughnutPieData,
+            options: doughnutPieOptions
+        });
+    }
+
+    if ($("#doughnutChart").length) {
+        var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+        var doughnutPieData2 = {
+            datasets: [{
+                data: doughnut_data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: doughnut_labels
+        };
+
+        var doughnutChart = new Chart(doughnutChartCanvas, {
+            type: 'doughnut',
+            data: doughnutPieData2,
             options: doughnutPieOptions
         });
     }

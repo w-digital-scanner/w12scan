@@ -16,7 +16,7 @@ from application.api.models import properly
 from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search, smartDate, lstrsub
 from config import ELASTICSEARCH_HOSTS, STATIC_TASKS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
-    es_search_ip_by_id, es, es_search_domain_by_ip, es_search_domain_by_url
+    es_search_ip_by_id, es, es_search_domain_by_ip, es_search_domain_by_url, get_bug_count
 from datetime import datetime
 from django.http import Http404
 
@@ -188,8 +188,23 @@ def dashboard(request):
         tem_dict["time"] = smartDate(float(tem_dict["last_time"]))
         nodes.append(tem_dict)
 
+    # bug[domain]漏洞图表展示
+    dd = es.indices.get_mapping(index='w12scan', doc_type='domains')
+    data_bugs = {
+        "labels": [],
+        "data": []
+    }
+    dd = dd["w12scan"]["mappings"]["domains"]["properties"]
+    if "bugs" in dd:
+        bug_type = dd["bugs"]["properties"].keys()
+        for bug_name in bug_type:
+            count = get_bug_count('domains', bug_name)
+            data_bugs["labels"].append(bug_name)
+            data_bugs["data"].append(count)
+
     return render(request, "frontend/dashboard.html",
-                  {"total": total, "zc_data": data, "data_chart": data_chart, "data_bar": data_bar, "nodes": nodes})
+                  {"total": total, "zc_data": data, "data_chart": data_chart, "data_bar": data_bar, "nodes": nodes,
+                   "data_bugs": data_bugs})
 
 
 def detail(request, id):

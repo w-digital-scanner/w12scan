@@ -64,8 +64,17 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">漏洞统计</h4>
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
+
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -82,7 +91,7 @@
                                 <th>扫描队列</th>
                                 <th>正在扫描</th>
                                 <th>已完成</th>
-                                <th>节点最后通信时间</th>
+                                <th>时间</th>
                                 <th>状态</th>
                                 <th>选项</th>
                             </tr>
@@ -355,6 +364,11 @@
 
         var bar_labels = {{ data_bar.labels |safe }};
         var bar_data = {{ data_bar.data }};
+
+        var doughnut_labels =
+        {{ data_bugs.labels |safe }}
+        var doughnut_data =
+        {{ data_bugs.data }}
     </script>
 {% endblock %}
 {% block extrascript %}
