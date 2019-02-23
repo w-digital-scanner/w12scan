@@ -97,69 +97,44 @@
 
                                         <div class="row">
                                             <div class="col-12 mt-5">
-                                                <h5 class="mb-5">关联性</h5>
-                                                <div class="stage-wrapper pl-4">
-                                                    <div class="stages border-left pl-5 pb-4">
-                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-success">
-                                                            <i class="icon-event"></i>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">子域名</h5>
-                                                        </div>
+                                                <h5 class="mb-1">子域名</h5>
+                                                <div class="new-accounts">
+                                                    <div class="table-responsive"
+                                                         style="padding-right:32px;margin-top:20px;">
+                                                        <ul>
+                                                            {% for domain in sub_domain %}
+                                                                <li>
+                                                                    <a href="{% url 'detail' domain.id %}">{{ domain.url }}</a>
+                                                                    <ul>
+                                                                    {% if domain.title %}
+                                                                        <li>
+                                                                            title:{{ domain.title|truncatewords:30 }}
+                                                                        </li>
+                                                                    {% endif %}
+                                                                    {% if domain.ip %}
+                                                                        <li>
+                                                                            ip:{{ domain.ip }}
+                                                                        </li>
+                                                                    {% endif %}
+                                                                    {% if domain.app %}
+                                                                        <li>
+                                                                            {% for app in domain.app %}
+                                                                                {{ app|app_icon|safe }}
+                                                                            {% endfor %}
+                                                                        </li>
+                                                                    {% endif %}
+                                                                    {% if domain.bugs %}
+                                                                        <li>
+                                                                            <label class="badge badge-danger">存在威胁</label>
+                                                                        </li>
+                                                                    {% endif %}
+                                                                    </ul>
+                                                                </li>
 
-                                                        <div class="new-accounts">
-                                                            <div class="table-responsive"
-                                                                 style="padding-right:32px;margin-top:20px;">
-                                                                <table class="table table-bordered">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                            Domain
-                                                                        </th>
-                                                                        <th>
-                                                                            Title
-                                                                        </th>
-                                                                        <th>
-                                                                            Hostname
-                                                                        </th>
-                                                                        <th>
-                                                                            Technology
-                                                                        </th>
-                                                                        <th>
-                                                                            Time
-                                                                        </th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    {% for domain in sub_domain %}
-                                                                        <tr>
-                                                                            <td>
-                                                                                <a href="{% url 'detail' domain.id %}">{{ domain.url }}</a>
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ domain.title|truncatewords:30 }}
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ domain.ip }}
-                                                                            </td>
-                                                                            <td>
-                                                                                {% for app in domain.app %}
-                                                                                    {{ app|app_icon|safe }}
-                                                                                {% endfor %}
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ domain.published_from }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    {% endfor %}
+                                                            {% endfor %}
+                                                        </ul>
 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>

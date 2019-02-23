@@ -68,7 +68,12 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">漏洞统计</h4>
-                    <canvas id="doughnutChart"></canvas>
+{#                    <canvas id="doughnutChart"></canvas>#}
+                    <div class="bug-statics">
+                        {% for i in data_bugs %}
+                            <div class="badge badge-{{ i.cls }}"><a href="/?q=bug%3D%22{{ i.label }}%22">{{ i.label }}:{{ i.count }}</a></div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,10 +370,10 @@
         var bar_labels = {{ data_bar.labels |safe }};
         var bar_data = {{ data_bar.data }};
 
-        var doughnut_labels =
-        {{ data_bugs.labels |safe }}
-        var doughnut_data =
-        {{ data_bugs.data }}
+        {#var doughnut_labels =#}
+        {#{{ data_bugs.labels |safe }}#}
+        {#var doughnut_data =#}
+        {#{{ data_bugs.data }}#}
     </script>
 {% endblock %}
 {% block extrascript %}

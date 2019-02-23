@@ -190,17 +190,20 @@ def dashboard(request):
 
     # bug[domain]漏洞图表展示
     dd = es.indices.get_mapping(index='w12scan', doc_type='domains')
-    data_bugs = {
-        "labels": [],
-        "data": []
-    }
     dd = dd["w12scan"]["mappings"]["domains"]["properties"]
+    data_bugs = []
     if "bugs" in dd:
         bug_type = dd["bugs"]["properties"].keys()
+        index = 0
         for bug_name in bug_type:
+            index += 1
             count = get_bug_count('domains', bug_name)
-            data_bugs["labels"].append(bug_name)
-            data_bugs["data"].append(count)
+            dd = {}
+            _cls = ["primary", "info", "danger", "success", "warning"]
+            dd["label"] = bug_name
+            dd["count"] = count
+            dd["cls"] = _cls[index % 5]
+            data_bugs.append(dd)
 
     return render(request, "frontend/dashboard.html",
                   {"total": total, "zc_data": data, "data_chart": data_chart, "data_bar": data_bar, "nodes": nodes,

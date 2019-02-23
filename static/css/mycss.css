@@ -236,3 +236,13 @@
 .fade.show, .fade.in {
     opacity: inherit;
 }
+.bug-statics .badge{
+    margin-bottom: 11px;
+    margin-right: 5px;
+}
+.bug-statics .badge a{
+    color:inherit;
+}
+.bug-statics .badge a:hover {
+    color:inherit;
+}
