@@ -105,12 +105,9 @@
                                                             {% for domain in sub_domain %}
                                                                 <li>
                                                                     <a href="{% url 'detail' domain.id %}">{{ domain.url }}</a>
-                                                                    <ul>
-                                                                    {% if domain.title %}
-                                                                        <li>
-                                                                            title:{{ domain.title|truncatewords:30 }}
-                                                                        </li>
-                                                                    {% endif %}
+                                                                    &nbsp;&nbsp;&nbsp;{% if domain.title %}{{ domain.title|truncatewords:30 }}{% endif %}
+                                                                <ul>
+
                                                                     {% if domain.ip %}
                                                                         <li>
                                                                             ip:{{ domain.ip }}
@@ -128,7 +125,7 @@
                                                                             <label class="badge badge-danger">存在威胁</label>
                                                                         </li>
                                                                     {% endif %}
-                                                                    </ul>
+                                                                </ul>
                                                                 </li>
 
                                                             {% endfor %}
