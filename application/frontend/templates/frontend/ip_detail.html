@@ -95,6 +95,40 @@
                                                     <div class="stages border-left pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-danger">
                                                             <i class="icon-cloud-download"></i>
+
+                                                        </div>
+                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
+                                                            <h5 class="mb-0">开放服务</h5>
+                                                        </div>
+
+                                                        <p>
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>端口</th>
+                                                                    <th>服务类型</th>
+                                                                    <th>服务名称</th>
+                                                                    <th>版本</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for info in data.infos %}
+                                                                    <tr>
+                                                                        <td>{{ info.port }}</td>
+                                                                        <td>{{ info.name }}</td>
+                                                                        <td>{{ info.product }}</td>
+                                                                        <td>{{ info.version }} {{ info.extrainfo }}</td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="stages pl-5 pb-4">
+                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-primary">
+                                                            <i class="icon-checkbox-marked-circle-outline"></i>
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
                                                             <h5 class="mb-0">关联域名</h5>
@@ -128,39 +162,7 @@
                                                             </ul>
                                                         {% endif %}
                                                     </div>
-                                                    <div class="stages pl-5 pb-4">
-                                                        <div class="btn btn-icons btn-rounded stage-badge btn-inverse-primary">
-                                                            <i class="icon-checkbox-marked-circle-outline"></i>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">开放服务</h5>
-                                                        </div>
 
-                                                        <p>
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>端口</th>
-                                                                    <th>服务类型</th>
-                                                                    <th>服务名称</th>
-                                                                    <th>版本</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                {% for info in data.infos %}
-                                                                    <tr>
-                                                                        <td>{{ info.port }}</td>
-                                                                        <td>{{ info.name }}</td>
-                                                                        <td>{{ info.product }}</td>
-                                                                        <td>{{ info.version }} {{ info.extrainfo }}</td>
-                                                                    </tr>
-                                                                {% endfor %}
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        </p>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
