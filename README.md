@@ -1,12 +1,12 @@
 # w12scan
-w12scan是一款网络资产搜索发现引擎，用于大规模搜索企业相关资产，也可当做小型Zoomeye使用。w12scan也是我的毕业设计。
+w12scan是一款网络资产发现引擎，通过WEB接口下发任务，w12scan会自动将相关的资产聚合在一起方便分析使用。w12scan也是我的毕业设计。
 
 w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相关资产数据）。
 
 这里是web端的开源程序，client端在[https://github.com/boy-hack/w12scan-client](https://github.com/boy-hack/w12scan-client)
 
 一个视频了解W12SCAN
-[![w12scan](https://x.hacking8.com/content/uploadfile/201902/b4a31550053809.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview.mp4)
+[![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-2.mp4)
 
 
 ## 设计思想
@@ -29,11 +29,14 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
         - country = ‘cn’ # 搜索国家
         - service = ‘mysql’ # 搜索服务
         - bug = 'xx' # 搜索存在的某个漏洞
-
 * 自定义资产配置
     * 通过自定义某公司相关域名或ip资产，w12scan会自动帮你找到对应的资产目标，当你浏览该目标时，有醒目的标识提醒你该目标的归属。
 * 自动关联
     * 进入目标详情，若目标为ip，则会自动关联该ip上的所有域名和该c段上的所有域名。若目标为域名，则自动关联旁站，c段和子域名。
+* 多节点管理
+    * WEB端会每隔几分钟检测一次节点的运行状况，你可以看到节点扫描的数量以及节点扫描日志。
+* 任务restful
+    * 提供添加任务的接口，你可以在WEB端添加或者在任何软件中集成该接口。
 
 ### 扫描端(Client)端
 * 及时的poc验证
@@ -46,7 +49,7 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
     * 在程序架构设计就考虑到了这一点，扫描端只接受任务，最后的结果只和WEB端进行交互，所以在分布式上十分容易，直接在另一台机器上运行扫描端即可。能基于docker进行分布式，也能很方便集成celery服务。
 
 ## 安装
-基于docker一键安装
+基于docker一键部署按照
 ```bash
 git clone https://github.com/boy-hack/w12scan
 cd w12scan
