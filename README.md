@@ -6,7 +6,7 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
 这里是web端的开源程序，client端在[https://github.com/boy-hack/w12scan-client](https://github.com/boy-hack/w12scan-client)
 
 一个视频了解W12SCAN
-[![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-2.mp4)
+[![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-3.mp4)
 
 
 ## 设计思想
@@ -49,7 +49,7 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
     * 在程序架构设计就考虑到了这一点，扫描端只接受任务，最后的结果只和WEB端进行交互，所以在分布式上十分容易，直接在另一台机器上运行扫描端即可。能基于docker进行分布式，也能很方便集成celery服务。
 
 ## 安装
-基于docker一键部署按照
+基于docker一键部署
 ```bash
 git clone https://github.com/boy-hack/w12scan
 cd w12scan
