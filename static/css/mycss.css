@@ -246,3 +246,7 @@
 .bug-statics .badge a:hover {
     color:inherit;
 }
+.words .words-close{
+    cursor:pointer;
+    margin-left: 1px;
+}

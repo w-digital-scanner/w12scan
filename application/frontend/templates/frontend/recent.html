@@ -80,7 +80,7 @@
                 <div class="words">
                     <p>
                         {% for item in keyword %}
-                            <div class="badge badge-primary">{{ item.1 }}="{{ item.2 }}"</div>
+                            <div class="badge badge-primary">{{ item.1 }}="{{ item.2 }}" <i class="icon-close words-close"></i></div>
                         {% endfor %}
                     </p>
                     <p class="text-muted">找到{{ count }}条结果，用时{{ second }}秒</p>

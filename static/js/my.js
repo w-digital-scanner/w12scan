@@ -11,6 +11,14 @@ $(document).ready(function () {
         }
     })
 
+    $(".words .words-close").click(function () {
+        var parent = $(this).parent();
+        var keyword = parent.text();
+        var search_keyword = $("#recent-search").val().replace(/'/g,'"');
+        var build = search_keyword.replace(keyword, "");
+        location.href = "/?q=" + build
+    })
+
     function getNodeLog() {
         $.ajax({
             url: '/api/v1/node?name=' + nodename,// 跳转到 action
