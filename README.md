@@ -7,7 +7,6 @@ Here is a web source program,but the scanning end is at [w12scan-client](https:/
 
 [![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-3.mp4)
 
-
 ## Thinking
 Based on python3 + django + elasticsearch + redis and Use the web restful api to add scan targets.
 
@@ -57,5 +56,8 @@ docker-compose up -d
 Wait a while to visit `http://127.0.0.1:8000`
 ### Some Issue
 1. Because relying on the elasticsearch service, please ensure that the memory is larger than 8G.
+## Legal
+This program is mainly used to collect network data for analysis and research. Please follow the relevant local laws before using this program.
+
 
 
