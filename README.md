@@ -8,7 +8,7 @@ Here is a web source program,but the scanning end is at [w12scan-client](https:/
 [![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-3.mp4)
 
 ## Thinking
-Based on python3 + django + elasticsearch + redis and Use the web restful api to add scan targets.
+Based on python3 + django + elasticsearch + redis and use the web restful api to add scan targets.
 
 ![w12scan](doc/w12scan.jpg)
 
@@ -37,7 +37,7 @@ Based on python3 + django + elasticsearch + redis and Use the web restful api to
     * Provides an interface to add tasks, you can add it on the WEB side or integrate it in any software.
 
 ### Scanning end
-* poc
+* Poc
     * Call the latest poc script online via [airbug](https://github.com/boy-hack/airbug)
 * Built-in scan script
     * Common vulnerability verification service built into the scanner.
