@@ -44,7 +44,7 @@ Based on python3 + django + elasticsearch + redis and use the web restful api to
 * Scanning
     * Use masscan，nmap，wappalyzer，w11scan
 * Easy to distribute
-    * This is taken into account in the design of the program architecture. It is very easy to distribute and run the scan terminal directly on another machine. It also can be distributed based on docker, celery service.
+    * This is taken into account in the design of the program architecture. It is very easy to distribute and run the scan terminal directly on another machine. It also can be distributed based on docker, celery service.[Deployment](./doc/deployment.md)
 
 ## Installation
 Quickly build an environment with docker

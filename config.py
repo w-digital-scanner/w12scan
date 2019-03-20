@@ -9,10 +9,12 @@ RUNMODEL = os.environ.get("RUNMODEL") or 'dev'
 # Client端与Server端通信的口令
 AUTH_POST_KEY = "hello-w12scan!"
 
-# Elasticsearch 集群
+# Elasticsearch 服务器,测试用,实际部署依据环境变量传入
 ELASTICSEARCH_HOSTS = ['127.0.0.1:9200']
+
 # Elasticsearch 验证密码
 ELASTICSEARCH_AUTH = None
+# 带有密码时修改 ELASTICSEARCH_AUTH = ('elastic','password')
 
 # Reids服务器
 REDIS_HOST = '127.0.0.1:6379'
