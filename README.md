@@ -53,6 +53,7 @@ git clone https://github.com/boy-hack/w12scan
 cd w12scan
 docker-compose up -d
 ```
+For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
 Wait a while to visit `http://127.0.0.1:8000`
 ### Some Issue
 1. Because relying on the elasticsearch service, please ensure that the memory is larger than 8G.

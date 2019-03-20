@@ -55,6 +55,7 @@ git clone https://github.com/boy-hack/w12scan
 cd w12scan
 docker-compose up -d
 ```
+在Windows上安装，需要注意一点 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
 等待一段时间后访问`http://127.0.0.1:8000`
 ### 部署相关问题
 1. 因为依赖elasticsearch服务，内存一定要大于4G，8G最好，否则elasticsearch启动不了。
