@@ -46,7 +46,7 @@ w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相�
 * 扫描与识别
     * 端口扫描使用masscan，端口识别使用nmap，web应用识别调用wappalyzer和精简版的w11scan（指纹识别）
 * 容易的分布式
-    * 在程序架构设计就考虑到了这一点，扫描端只接受任务，最后的结果只和WEB端进行交互，所以在分布式上十分容易，直接在另一台机器上运行扫描端即可。能基于docker进行分布式，也能很方便集成celery服务。[部署方案](./doc/deployment.md)
+    * 在程序架构设计就考虑到了这一点，扫描端只接受任务，最后的结果只和WEB端进行交互，所以在分布式上十分容易，直接在另一台机器上运行扫描端即可。能基于docker进行分布式，也能很方便集成celery服务。
 
 ## 安装
 基于docker一键部署
@@ -55,10 +55,14 @@ git clone https://github.com/boy-hack/w12scan
 cd w12scan
 docker-compose up -d
 ```
-在Windows上安装，需要注意一点 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
 等待一段时间后访问`http://127.0.0.1:8000`
-### 部署相关问题
+
+### 相关问题
 1. 因为依赖elasticsearch服务，内存一定要大于4G，8G最好，否则elasticsearch启动不了。
+2. 在Windows上安装，需要注意`.sh`文件格式问题 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
+3. Q:如何分布式部署？A:[部署方案](./doc/DEPLOYMENT.md)
+4. Q:启动后搜索数为0？A:需要添加扫描目标
+5. 不要边扫描边搜索，elastisearch在插入数据时会作分析，分词等等操作（此时效率不高），如果在此时搜索可能会返回503，建议扫描完毕后在进行搜索。(后期会使用数据迁移解决)
+
 ## 法律
 本程序主要用于收集网络数据用于分析研究。在使用该程序之前请遵守当地相关法律进行。
-

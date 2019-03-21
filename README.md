@@ -44,7 +44,7 @@ Based on python3 + django + elasticsearch + redis and use the web restful api to
 * Scanning
     * Use masscan，nmap，wappalyzer，w11scan
 * Easy to distribute
-    * This is taken into account in the design of the program architecture. It is very easy to distribute and run the scan terminal directly on another machine. It also can be distributed based on docker, celery service.[Deployment](./doc/deployment.md)
+    * This is taken into account in the design of the program architecture. It is very easy to distribute and run the scan terminal directly on another machine. It also can be distributed based on docker, celery service.
 
 ## Installation
 Quickly build an environment with docker
@@ -53,12 +53,10 @@ git clone https://github.com/boy-hack/w12scan
 cd w12scan
 docker-compose up -d
 ```
-For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
 Wait a while to visit `http://127.0.0.1:8000`
 ### Some Issue
 1. Because relying on the elasticsearch service, please ensure that the memory is larger than 8G.
+2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
+3. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT.md)
 ## Legal
 This program is mainly used to collect network data for analysis and research. Please follow the relevant local laws before using this program.
-
-
-
