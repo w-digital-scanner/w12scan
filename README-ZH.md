@@ -60,7 +60,7 @@ docker-compose up -d
 ### 相关问题
 1. 因为依赖elasticsearch服务，内存一定要大于4G，8G最好，否则elasticsearch启动不了。
 2. 在Windows上安装，需要注意`.sh`文件格式问题 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
-3. Q:如何分布式部署？A:[部署方案](./doc/DEPLOYMENT.md)
+3. Q:如何分布式部署？A:[部署方案](./doc/DEPLOYMENT1.md)
 4. Q:启动后搜索数为0？A:需要添加扫描目标
 5. 不要边扫描边搜索，elastisearch在插入数据时会作分析，分词等等操作（此时效率不高），如果在此时搜索可能会返回503，建议扫描完毕后在进行搜索。(后期会使用数据迁移解决)
 
