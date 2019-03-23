@@ -11,11 +11,14 @@ register = template.Library()
 
 @register.filter
 def app_icon(product):
+    html = '''<span class="badge badge-diy badge-pill">{}</span>'''.format(
+        product)
     if product in WAPP_ICON:
-        icon = WAPP_ICON[product]["icon"]
-
-        path = "/static/images/icons/" + icon
-        return '''<img src="{}" class="img-ss" alt="{}" title="{}">'''.format(path, product, product)
-
-    html = '''<span class="badge badge-diy badge-pill">{}</span>'''.format(product)
+        try:
+            icon = WAPP_ICON[product]["icon"]
+            path = "/static/images/icons/" + icon
+            html = '''<img src="{}" class="img-ss" alt="{}" title="{}">'''.format(
+                path, product, product)
+        except KeyError:
+            pass
     return html
