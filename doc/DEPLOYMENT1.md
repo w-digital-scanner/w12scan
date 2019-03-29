@@ -81,8 +81,6 @@ services:
 
 便启动了三台节点。
 
-## 多机部署方案
+## Docker 多机部署方案
+w12scan依赖四种服务，web,client,redis,elasticsearch。redis在其中扮演着消息队列的角色，所有的任务分配都由redis分发，所以，redis需要部署到可以访问到的地方(最好外网)，其他服务web,client,elasticsearch内外网均可(web与elasticsearch能够互ping即可)。
 
-w12scan依赖四种服务，web,client,redis,elasticsearch.
-
-待续...

@@ -5,11 +5,12 @@
 # @File    : redis.py
 import redis  # 导入redis模块，通过python操作redis 也可以直接在redis主机的服务端操作缓存数据库
 
-from config import REDIS_HOST
+from config import REDIS_HOST, REDIS_PASSWORD
 
 host, port = REDIS_HOST.split(":")
 pool = redis.ConnectionPool(host=host, port=port,
-                            decode_responses=True)  # host是redis主机，需要redis服务端和客户端都起着 redis默认端口是6379
+                            decode_responses=True,
+                            password=REDIS_PASSWORD)  # host是redis主机，需要redis服务端和客户端都起着 redis默认端口是6379
 redis_con = redis.Redis(connection_pool=pool)
 
 
