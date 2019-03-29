@@ -480,3 +480,7 @@ def zc_detail(request, id):
 
 def faq(request):
     return render(request, "frontend/faq.html")
+
+
+def login(request):
+    return render(request, "frontend/login.html")
