@@ -57,6 +57,9 @@ docker-compose up -d
 ```
 等待一段时间后访问`http://127.0.0.1:8000`
 
+## 交流社区
+Telegram交流群组:https://t.me/joinchat/AAAAAFgRC6n8pEiP7p1cjg
+
 ### 相关问题
 1. 因为依赖elasticsearch服务，内存一定要大于4G，8G最好，否则elasticsearch启动不了。
 2. 在Windows上安装，需要注意`.sh`文件格式问题 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  

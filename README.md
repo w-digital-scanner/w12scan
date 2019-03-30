@@ -54,6 +54,8 @@ cd w12scan
 docker-compose up -d
 ```
 Wait a while to visit `http://127.0.0.1:8000`
+## Telegram Group
+Telegram Group:https://t.me/joinchat/AAAAAFgRC6n8pEiP7p1cjg
 ### Some Issue
 1. Because relying on the elasticsearch service, please ensure that the memory is larger than 8G.
 2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
