@@ -58,7 +58,7 @@ docker-compose up -d
 等待一段时间后访问`http://127.0.0.1:8000`
 
 ## 交流社区
-Telegram交流群组:https://t.me/joinchat/AAAAAFgRC6n8pEiP7p1cjg
+Telegram交流群组:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
 
 ### 相关问题
 1. 因为依赖elasticsearch服务，内存一定要大于4G，8G最好，否则elasticsearch启动不了。
