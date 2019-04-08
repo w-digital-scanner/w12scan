@@ -1,7 +1,5 @@
 [TOC]
 
-
-
 ## 基于docker单机部署
 
 ```bash
@@ -10,15 +8,7 @@ cd w12scan
 docker-compose up -d
 ```
 
-## 使用Elasticsearch云服务与docker部署
-
-适用于vps配置无法运行Elasticsearch的情况，
-
-1. 配置Elasticsearch密码,修改`config.py`中`ELASTICSEARCH_AUTH = ('elastic','password')`更换为对应的用户名和密码。
-2. 修改docker-compose.yml中web的`ELASTICSEARCH_HOSTS`为elasticsearch服务器对应地址    ![Tux, the Linux mascot](https://user-images.githubusercontent.com/19923974/54098563-1977bb80-43f0-11e9-8b34-b937d45b1db0.png)
-3. `docker-compose up -d`启动！
-
-## 基于docker的分布式部署
+## 基于Docker的分布式部署
 
 需要增加`docker-compose.yml`的client节点，例如
 
@@ -81,6 +71,7 @@ services:
 
 便启动了三台节点。
 
-## Docker 多机部署方案
-w12scan依赖四种服务，web,client,redis,elasticsearch。redis在其中扮演着消息队列的角色，所有的任务分配都由redis分发，所以，redis需要部署到可以访问到的地方(最好外网)，其他服务web,client,elasticsearch内外网均可(web与elasticsearch能够互ping即可)。
+## 基于Docker的多机部署方案
+w12scan依赖四种服务，web,client,redis,elasticsearch。redis在其中扮演着消息队列的角色，所有的任务分配都由redis分发，所以，redis需要部署到可以访问到的地方(最好外网)，其他服务web,client,elasticsearch内外网均可(web与elasticsearch能够互ping即可)。在多机部署中，你至少需要三台服务器，web和redis部署在一起，client与elasticsearch单独部署。为了部署方便，全部以docker部署为例，你需要做的是修改一些配置文件。
+
 

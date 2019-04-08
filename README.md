@@ -57,7 +57,7 @@ Wait a while to visit `http://127.0.0.1:8000`
 ## Telegram Group
 Telegram Group:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
 ### Some Issue
-1. Because relying on the elasticsearch service, please ensure that the memory is larger than 8G.
+1. The elasticsearch memory usage capacity is 512M by default, please adjust dynamically according to the machine configuration.
 2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
 3. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
 ## Legal

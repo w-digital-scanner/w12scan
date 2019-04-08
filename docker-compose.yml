@@ -28,9 +28,6 @@ services:
       - "6379"
   elasticsearch:
     image: elasticsearch:5.6-alpine
-    ports:
-      - "9200:9200"
-    restart: always
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - cluster.name=docker-cluster
