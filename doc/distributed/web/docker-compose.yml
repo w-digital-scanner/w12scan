@@ -1,7 +1,8 @@
 version: '3'
 services:
   web:
-    build: .
+    build:
+      context: ../../../
     ports:
      - "8000:8000"
     environment:
