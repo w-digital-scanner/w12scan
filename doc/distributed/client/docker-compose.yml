@@ -1,0 +1,9 @@
+version: '3'
+services:
+  client:
+    image: boyhack/w12scan-client:latest
+    environment:
+      WEB_INTERFACE: http://web:8000
+      REDIS_HOST: 127.0.0.1:6379
+      REDIS_PASSWORD: hellow12scan
+      NODE_NAME: "w12scan_w8ay"

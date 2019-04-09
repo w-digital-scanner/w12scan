@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "8000:8000"
+    environment:
+      ELASTICSEARCH_HOSTS: elasticsearch:9200
+      REDIS_HOST: redis:6379
+      REDIS_PASSWORD: hellow12scan 
+    depends_on:
+      - redis
+  redis:
+    image: redis:5.0.3-stretch
+    command: redis-server --requirepass hellow12scan
+    ports:
+     - "6379:6379"

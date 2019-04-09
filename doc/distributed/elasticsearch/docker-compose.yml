@@ -1,0 +1,17 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:5.6-alpine
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200

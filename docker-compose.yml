@@ -6,7 +6,6 @@ services:
     ports:
      - "8000:8000"
     environment:
-      RUNMODEL: docker
       ELASTICSEARCH_HOSTS: elasticsearch:9200
       REDIS_HOST: redis:6379
     depends_on:
@@ -15,7 +14,6 @@ services:
   client:
     image: boyhack/w12scan-client:latest
     environment:
-      RUNMODEL: docker
       WEB_INTERFACE: http://web:8000
       REDIS_HOST: redis:6379
       NODE_NAME: "w12scan_w8ay"
