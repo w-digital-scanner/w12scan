@@ -22,7 +22,7 @@ docker-compose up -d
 将会启动elasticsearch服务，并开放9200端口。
 
 ### 部署Web与Redis
-- 如果Elasticsearch需要验证，在`docker-compose.yml`的web中加入环境变量`ELASTICSEARCH_AUTH = user:pass`
+- 如果Elasticsearch需要验证，在`docker-compose.yml`的web中加入环境变量`ELASTICSEARCH_AUTH: user:pass`
 - 默认会将redis部署到公网的6379端口上，并且设置密码为`hellow12scan`，在`doc/distributed/web/docker-compose.yml`中修改此密码
 在一台机器上，执行如下指令
 ```bash
