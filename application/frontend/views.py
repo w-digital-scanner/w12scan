@@ -6,13 +6,14 @@ import ipaddress
 import math
 import time
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 from elasticsearch import Elasticsearch, helpers
 from elasticsearch_dsl import Search
 from tld import get_fld
 
 from application.api.models import properly
+from application.utils.userinfo import user_check
 from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search, smartDate, lstrsub
 from config import ELASTICSEARCH_HOSTS, STATIC_TASKS
 from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
@@ -483,4 +484,11 @@ def faq(request):
 
 
 def login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        if username and password:
+            if user_check(username, password):
+                request.session["userinfo"] = {'username': username}
+                return redirect('/')
     return render(request, "frontend/login.html")
