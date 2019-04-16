@@ -47,7 +47,8 @@
                   </div>
                 </div>
                 <div class="form-group">
-                    <div class="item-wrapper d-flex pb-4 border-bottom">
+                    {% if msg %}
+                        <div class="item-wrapper d-flex pb-4 border-bottom">
                           <div class="status-wrapper d-flex align-items-start pr-3">
                             <span class="bg-warning rounded-circle p-1 mt-2 mx-auto"></span>
                           </div>
@@ -56,6 +57,7 @@
                             <small class="text-gray d-block">寻求管理员解决问题或重置密码</small>
                           </div>
                         </div>
+                    {% endif %}
                   <button class="btn btn-primary submit-btn btn-block">Login</button>
                 </div>
                 <div class="form-group d-flex justify-content-between">

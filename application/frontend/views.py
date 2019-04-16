@@ -484,6 +484,7 @@ def faq(request):
 
 
 def login(request):
+    info = {}
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -491,4 +492,6 @@ def login(request):
             if user_check(username, password):
                 request.session["userinfo"] = {'username': username}
                 return redirect('/')
-    return render(request, "frontend/login.html")
+            else:
+                info["msg"] = True
+    return render(request, "frontend/login.html", info)
