@@ -44,6 +44,50 @@
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between flex-grow-1">
 
                     <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
+                        <li class="nav-item dropdown d-none d-lg-flex nav-language">
+                            <div class="nav-link">
+                  <span class="dropdown-toggle btn btn-sm" id="languageDropdown" data-toggle="dropdown"
+                        aria-expanded="false">English
+                    <i class="flag-icon flag-icon-gb ml-2"></i>
+                  </span>
+                                <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                                    <a class="dropdown-item font-weight-medium">
+                                        French
+                                        <i class="flag-icon flag-icon-fr ml-2"></i>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item font-weight-medium">
+                                        Espanol
+                                        <i class="flag-icon flag-icon-es ml-2"></i>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item font-weight-medium">
+                                        Arabic
+                                        <i class="flag-icon flag-icon-sa ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown"
+                               aria-expanded="false">
+                                <img src="https://via.placeholder.com/39x39" alt="profile">
+                                <span class="nav-profile-name">{{ request.session.userinfo.username }}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                 aria-labelledby="profileDropdown">
+                                <a class="dropdown-item">
+                                    <i class="icon-settings text-primary mr-2"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item">
+                                    <i class="icon-logout text-primary mr-2"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
 
                     </ul>
                     <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
