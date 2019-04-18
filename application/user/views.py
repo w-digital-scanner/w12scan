@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.urls import reverse
+
 from application.user.utils import user_check
 
 
 def login(request):
     info = {}
+    # print(reverse('api:'))
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -16,3 +19,12 @@ def login(request):
             else:
                 info["msg"] = True
     return render(request, "frontend/login.html", info)
+
+
+def logout(request):
+    request.session.clear()
+    return redirect('/')
+
+
+def setting(request):
+    return render(request, 'user/setting.html')

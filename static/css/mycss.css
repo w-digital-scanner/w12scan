@@ -250,3 +250,6 @@
     cursor:pointer;
     margin-left: 1px;
 }
+.navbar-nav .nav-item a:hover{
+    color:black;
+}

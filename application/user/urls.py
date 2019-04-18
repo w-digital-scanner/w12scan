@@ -8,8 +8,18 @@ from django.conf.urls import url
 
 urlpatterns = [
     url(
-        regex=r'^login$',
+        regex=r'login$',
         view=views.login,
         name='login'
     ),
+    url(
+        regex=r'logout$',
+        view=views.logout,
+        name='logout'
+    ),
+    url(
+        regex=r'setting$',
+        view=views.setting,
+        name='setting'
+    )
 ]
