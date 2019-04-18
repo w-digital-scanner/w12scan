@@ -16,7 +16,7 @@ import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Server.settings')
 django.setup()
-from application.utils.userinfo import user_add
+from application.user.utils import user_add
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 

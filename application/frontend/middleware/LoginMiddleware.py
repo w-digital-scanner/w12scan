@@ -15,7 +15,7 @@ class LoginMiddleware:
 
     def __call__(self, request):
 
-        urllist = ['/login/']
+        urllist = [reverse('login')]
         if request.path not in urllist:
             if request.session.get('userinfo', None) is None:
                 return redirect(reverse('login'))

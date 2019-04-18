@@ -4,7 +4,7 @@
 # @Author  : w8ay
 # @File    : userinfo.py
 from django.contrib.auth.hashers import make_password, check_password
-from application.frontend.models import UserInfo
+from application.user.models import UserInfo
 from application.utils.util import random_str
 import hashlib
 
