@@ -56,6 +56,7 @@ cd w12scan
 docker-compose up -d
 ```
 等待一段时间后访问`http://127.0.0.1:8000`
+默认用户名密码`boyhack:boyhack`
 
 ## 交流社区
 Telegram交流群组:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
