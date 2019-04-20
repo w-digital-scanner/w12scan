@@ -30,3 +30,20 @@ def user_add(name, email, password):
     except Exception as e:
         return str(e)
     return True
+
+
+def user_update(origin, name, email, password=None):
+    try:
+        obj = UserInfo.objects.get(name=origin)
+    except Exception as e:
+        return str(e)
+    obj.name = name
+    obj.email = email
+    if password:
+        password = make_password(password + obj.token)
+        obj.password = password
+    try:
+        obj.save()
+    except Exception as e:
+        return str(e)
+    return True
