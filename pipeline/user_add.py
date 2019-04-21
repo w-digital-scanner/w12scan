@@ -4,12 +4,11 @@
 # @Author  : w8ay
 # @File    : user_add.py
 import sys
+import os
 
-sys.path.append("../")
-try:
-    from Server import settings
-except ImportError:
-    raise
+path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+sys.path.append(path)
+from Server import settings
 
 import os
 import django
