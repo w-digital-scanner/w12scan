@@ -56,7 +56,7 @@ docker-compose up -d
 Wait a while to visit `http://127.0.0.1:8000`
 Default account `boyhack:boyhack`
 ## Telegram Group
-Telegram Group:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
+Telegram Group:https://t.me/joinchat/MZ16xBd1HRD2Nq_o1T8XIQ
 ### Some Issue
 1. The elasticsearch memory usage capacity is 512M by default, please adjust dynamically according to the machine configuration.
 2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  

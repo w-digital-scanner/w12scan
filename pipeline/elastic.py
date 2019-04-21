@@ -32,7 +32,7 @@ class Location(InnerDoc):
 class Info(InnerDoc):
     extrainfo = Text()
     name = Keyword()
-    port = Integer(fielddata=True)
+    port = Integer()
     product = Text()
     version = Keyword()
 
