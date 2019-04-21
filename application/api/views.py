@@ -1,6 +1,4 @@
 import ipaddress
-
-from django.views.generic.base import View
 import json
 
 from django.http import JsonResponse, HttpRequest, QueryDict
@@ -8,12 +6,13 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search as Search2
 
 from application.api.models import properly
-from application.utils.util import format_convert, k2e_search, is_proper, datetime_string_format
+from application.user.models import UserInfo
+from application.utils.util import format_convert, k2e_search, datetime_string_format
 from config import AUTH_POST_KEY, ELASTICSEARCH_HOSTS
-from pipeline.elastic import Ips, Domains, es_search_ip
-from elasticsearch_dsl import Search as Search2
+from pipeline.elastic import Ips, Domains
 # Create your views here.
 from pipeline.redis import redis_verify, redis_con
 
@@ -186,7 +185,16 @@ class Search(View):
     def get(self, request):
         q = request.GET.get("q", None)
         page = request.GET.get("page", "1")
-        doc_type = request.GET.get("type", "all")  # all ip web
+        doc_type = request.GET.get("type", "all")  # all ips domains
+        token = request.GET.get("token", "")
+        try:
+            obj = UserInfo.objects.get(token=token)
+        except Exception as e:
+            obj = False
+        if not obj:
+            return JsonResponse({"code": 404, "msg": "token is unavailable"})
+        if doc_type == "all":
+            doc_type = ''
         try:
             page = int(page)
         except:
@@ -203,7 +211,7 @@ class Search(View):
             }
         else:
             _search, keywords = k2e_search(q, page)
-        s = Search2(using=es, index='w12scan').from_dict(_search)
+        s = Search2(using=es, index='w12scan', doc_type=doc_type).from_dict(_search)
         count = s.execute().hits.total
         datas = []
         for hit in s:
@@ -230,7 +238,8 @@ class Search(View):
         res = {
             "code": 200,
             "count": count,
-            "datas": datas
+            "datas": datas,
+            "page": page
         }
         return JsonResponse(res)
 
