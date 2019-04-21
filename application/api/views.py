@@ -7,12 +7,13 @@ from django.http import JsonResponse, HttpRequest, QueryDict
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
+from elasticsearch import Elasticsearch
 
 from application.api.models import properly
-from application.utils.util import format_convert
-from config import AUTH_POST_KEY
-from pipeline.elastic import Ips, Domains
-
+from application.utils.util import format_convert, k2e_search, is_proper, datetime_string_format
+from config import AUTH_POST_KEY, ELASTICSEARCH_HOSTS
+from pipeline.elastic import Ips, Domains, es_search_ip
+from elasticsearch_dsl import Search as Search2
 # Create your views here.
 from pipeline.redis import redis_verify, redis_con
 
@@ -177,6 +178,60 @@ class Proper(View):
         else:
             res["status"] = 400
             res["msg"] = "id don't exist"
+        return JsonResponse(res)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class Search(View):
+    def get(self, request):
+        q = request.GET.get("q", None)
+        page = request.GET.get("page", "1")
+        doc_type = request.GET.get("type", "all")  # all ip web
+        try:
+            page = int(page)
+        except:
+            page = 1
+        if page <= 0:
+            page = 1
+
+        es = Elasticsearch(ELASTICSEARCH_HOSTS)
+        if q is None:
+            _search = {
+                "from": (page - 1) * 20,
+                "size": 20,
+                "sort": {"published_from": {"order": "desc"}}
+            }
+        else:
+            _search, keywords = k2e_search(q, page)
+        s = Search2(using=es, index='w12scan').from_dict(_search)
+        count = s.execute().hits.total
+        datas = []
+        for hit in s:
+            doc_type = hit.meta.doc_type
+            id = hit.meta.id
+            d = {}
+            _temp = {}
+            if doc_type == "ips":
+                d = hit.to_dict()
+                _temp = {
+                    "doc_type": "ip",
+                    "target": d["ip"]
+                }
+            elif doc_type == "domains":
+                d = hit.to_dict()
+                _temp = {
+                    "doc_type": "domain",
+                    "target": d["url"]
+                }
+
+            _temp["id"] = id
+            _temp["published_from"] = datetime_string_format(d["published_from"])
+            datas.append(_temp)
+        res = {
+            "code": 200,
+            "count": count,
+            "datas": datas
+        }
         return JsonResponse(res)
 
 
