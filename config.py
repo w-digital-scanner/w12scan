@@ -5,7 +5,7 @@
 # @File    : config.py
 import os
 
-W12SCAN_VERSION = '0.1'
+W12SCAN_VERSION = '0.2'
 
 # Client端与Server端通信的口令
 AUTH_POST_KEY = "hello-w12scan!"
