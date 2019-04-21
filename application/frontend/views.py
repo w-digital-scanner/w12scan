@@ -8,14 +8,14 @@ import time
 
 from django.shortcuts import render
 import json
-from elasticsearch import Elasticsearch, helpers
+from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 from tld import get_fld
 
 from application.api.models import properly
 from application.utils.util import datetime_string_format, third_info, is_proper, k2e_search, smartDate, lstrsub
 from config import ELASTICSEARCH_HOSTS, STATIC_TASKS
-from pipeline.elastic import Ips, es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
+from pipeline.elastic import es_search_ip, count_app, count_country, count_name, count_port, total_data, total_bug, \
     es_search_ip_by_id, es, es_search_domain_by_ip, es_search_domain_by_url, get_bug_count
 from datetime import datetime
 from django.http import Http404
@@ -480,7 +480,3 @@ def zc_detail(request, id):
 
 def faq(request):
     return render(request, "frontend/faq.html")
-
-
-def login(request):
-    return render(request, "frontend/login.html")

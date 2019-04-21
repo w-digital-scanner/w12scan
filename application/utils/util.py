@@ -5,7 +5,9 @@
 # @File    : util.py
 import ipaddress
 import json
+import random
 import re
+import string
 import time
 from urllib import parse
 
@@ -294,6 +296,10 @@ def lstrsub(s: str, sub: str):
     if s[:len(sub)] == sub:
         return s[len(sub):]
     return s
+
+
+def random_str(length=10, chars=string.ascii_letters + string.digits):
+    return ''.join(random.sample(chars, length))
 
 
 if __name__ == '__main__':

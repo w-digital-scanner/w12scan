@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'application.frontend',
-    'application.api'
+    'application.api',
+    'application.user'
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #自定义的中间件
+    'application.frontend.middleware.LoginMiddleware.LoginMiddleware'
 ]
 
 ROOT_URLCONF = 'Server.urls'

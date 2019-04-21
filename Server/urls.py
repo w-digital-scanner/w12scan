@@ -23,7 +23,8 @@ urlpatterns = [
     url(r'^home/', frontend.dashboard, name='dashboard'),
     url(r'^detail/(.+)/$', frontend.detail, name='detail'),
     url(r'^zc-detail/(\d+)/$', frontend.zc_detail, name='zc-detail'),
-    url(r'^api/v1/', include("application.api.urls")),
     url(r'^faq/', frontend.faq, name='faq'),
-    url(r'^login/', frontend.login, name='login')
+    url(r'^user/', include("application.user.urls")),
+    url(r'^api/v1/', include("application.api.urls")),
+    # url(r'^login/', frontend.login, name='login')
 ]

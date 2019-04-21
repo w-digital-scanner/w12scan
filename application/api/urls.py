@@ -30,6 +30,10 @@ urlpatterns = [
     url(
         regex=r'^node$',
         view=views.NodeListView.as_view()
+    ),
+    url(
+        regex=r'^search$',
+        view=views.Search.as_view()
     )
 
 ]

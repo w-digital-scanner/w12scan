@@ -1,0 +1,56 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+    <div class="row profile-page">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body container">
+                    <h4 class="card-title">Search API</h4>
+                    <p>
+                        Search api example <br> <a href="/api/v1/search?q=1&page=1&type=all&token={{ userinfo.token }}"><code>/api/v1/search?q=1&page=1&type=all&token={{ userinfo.token }}</code></a>
+                        <ul>
+                            <li>q 搜索关键词，使用搜索语法</li>
+                            <li>page 当前页数</li>
+                            <li>type 搜索类型all、ip、web</li>
+                            <li>token 用户token</li>
+                        </ul>
+                    </p>
+                    <br>
+                    <h4 class="card-title">Account</h4>
+                    {% if err %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ err }}
+                        </div>
+                    {% endif %}
+                    <form class="forms-sample" action="" method="POST">
+                        <div class="form-group row">
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">API token</label>
+                            <div class="col-sm-9">
+                                <code>{{ userinfo.token }}</code>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">UserName</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="username" value="{{ userinfo.name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputMobile" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" name="email" value="{{ userinfo.email }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">New Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="password" placeholder="New Password">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

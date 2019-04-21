@@ -18610,7 +18610,7 @@ pre {
 }
 
 .navbar.horizontal-layout .nav-top .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
-  color: #c7c7c7;
+  color: #f5ffff;
   font-size: 14px;
   vertical-align: middle;
 }
@@ -18746,7 +18746,7 @@ pre {
 
 .navbar.horizontal-layout .nav-top .navbar-menu-wrapper .navbar-nav.navbar-nav-right .nav-item.nav-profile .nav-profile-name {
   vertical-align: middle;
-  color: #c7c7c7;
+  color: #f5ffff;
   margin-left: .25rem;
 }
 

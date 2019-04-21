@@ -44,6 +44,30 @@
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between flex-grow-1">
 
                     <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
+                        <li class="nav-item ">
+                            <span><i class="flag-icon flag-icon-cn" title="cn" id="cn"></i></span>
+                            <span><i class="flag-icon flag-icon-us" title="us" id="us"></i></span>
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown"
+                               aria-expanded="false">
+                                <span><i class="icon-user"></i></span>
+
+                                <span class="nav-profile-name">{{ request.session.userinfo.username }}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                 aria-labelledby="profileDropdown">
+                                <a class="dropdown-item" href="{% url 'setting' %}">
+                                    <i class="icon-settings text-primary mr-2"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="icon-logout text-primary mr-2"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
 
                     </ul>
                     <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
