@@ -223,7 +223,7 @@ class Search(View):
                 d = hit.to_dict()
                 _temp = {
                     "doc_type": "ip",
-                    "target": d["ip"]
+                    "target": d["target"]
                 }
             elif doc_type == "domains":
                 d = hit.to_dict()
