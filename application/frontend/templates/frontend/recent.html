@@ -96,7 +96,8 @@
                                     <div class="card-body-left">
                                         <h4 class="card-title"><a
                                                 href="{% url 'detail' data.id %}">{{ data.target }}</a></h4>
-                                        <p class="card-text">
+                                        <div class="card-text">
+                                        <p class="text-muted">
                                             {% for info in data.info_tags %}
                                                 <div class="badge badge-outline-info">{{ info }}</div>
                                             {% endfor %}
@@ -104,6 +105,7 @@
                                             <label class="badge badge-danger">存在威胁</label>
                                         {% endif %}
                                         </p>
+
                                         <p class="text-muted">
                                             {% if data.location %}
                                                 <span
@@ -119,13 +121,15 @@
                                         </p>
                                         <p class="text-muted"><span><i class="icon-clock"></i> {{ data.published_from }}</span>
                                         </p>
+                                        </div>
                                     </div>
                                     <pre>{{ data.infos }}</pre>
                                 {% elif data.doc_type == "domains" %}
                                     <div class="card-body-left">
                                         <h4 class="card-title"><a href="{% url 'detail' data.id %}"
                                                                   class="domain-inline">{{ data.target }}</a></h4>
-                                        <p class="card-text">
+                                        <div class="card-text">
+                                        <p class="text-muted">
                                             {% for app in data.app %}
                                                 {{ app|app_icon|safe }}
                                             {% endfor %}
@@ -151,11 +155,13 @@
                                         <p class="text-muted"><span><i class="icon-link"></i> {{ data.url }}</span><br/>
                                             <span><i class="icon-clock"></i> {{ data.published_from }}</span>
                                         </p>
+                                        </div>
                                     </div>
                                     <pre>{{ data.headers }}<br/><br/>{{ data.body }}
                                 </pre>
                                 {% endif %}
                             </div>
+                        <div style="clear: both"></div>
                         </div>
                     {% endfor %}
 
