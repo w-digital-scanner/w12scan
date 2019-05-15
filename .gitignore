@@ -104,3 +104,4 @@ venv.bak/
 .idea/
 .DS_Store
 w12scan.db
+migrations/
