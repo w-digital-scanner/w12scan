@@ -253,3 +253,6 @@
 .navbar-nav .nav-item a:hover{
     color:black;
 }
+.show-list .list-item .badge{
+    margin-bottom: .25rem;
+}
