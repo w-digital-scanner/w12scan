@@ -3,19 +3,19 @@
 
 W12scan is a network asset discovery engine that can automatically aggregates related assets for analysis and use. W12scan is also my graduation design. :)
 
-Here is a web source program,but the scanning end is at [w12scan-client](https://github.com/boy-hack/w12scan-client)
+Here is a web source program and the scanning end is at [w12scan-client](https://github.com/boy-hack/w12scan-client)
 
 [![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-3.mp4)
 
 ## Thinking
-Based on python3 + django + elasticsearch + redis and use the web restful api to add scan targets.
+Based on python3 + django + elasticsearch + redis.
 
 ![w12scan](doc/w12scan.jpg)
 
 ## Feature
 
 ### Web
-* Powerful search syntax
+* Search syntax
     * Search for cms, service, titles, country regions, etc., to quickly find relevant targets.
         - title=“abc” # Search from the title
         - header=“abc” # Search from http header
@@ -57,7 +57,7 @@ Wait a while to visit `http://127.0.0.1:8000`
 Default account `boyhack:boyhack`
 ## Telegram Group
 Telegram Group:https://t.me/joinchat/MZ16xBd1HRD2Nq_o1T8XIQ
-### Some Issue
+### Some Issues
 1. The elasticsearch memory usage capacity is 512M by default, please adjust dynamically according to the machine configuration.
 2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
 3. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
