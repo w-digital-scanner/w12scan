@@ -61,5 +61,9 @@ Telegram Group:https://t.me/joinchat/MZ16xBd1HRD2Nq_o1T8XIQ
 1. The elasticsearch memory usage capacity is 512M by default, please adjust dynamically according to the machine configuration.
 2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
 3. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
+
+### Links
+[如何构建一个网络空间搜索引擎-W12Scan-WEB篇](https://x.hacking8.com/post-340.html)
+
 ## Legal
 This program is mainly used to collect network data for analysis and research. Please follow the relevant local laws before using this program.
