@@ -63,6 +63,7 @@ Telegram Group:https://t.me/joinchat/MZ16xBd1HRD2Nq_o1T8XIQ
 3. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
 
 ### Links
+- [设计论文](./doc/网络资产发现引擎的设计.docx)
 - [如何构建一个网络空间搜索引擎-W12Scan-WEB篇](https://x.hacking8.com/post-340.html)
 - [如何在本机搭建W12Scan](https://x.hacking8.com/post-342.html)
 

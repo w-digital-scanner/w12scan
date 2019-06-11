@@ -69,6 +69,7 @@ Telegram交流群组:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
 5. 不要边扫描边搜索，elastisearch在插入数据时会作分析，分词等等操作（此时效率不高），如果在此时搜索可能会返回503，建议扫描完毕后在进行搜索。(后期会使用数据迁移解决)
 
 ### 相关链接
+- [设计论文](./doc/网络资产发现引擎的设计.docx)
 - [如何构建一个网络空间搜索引擎-W12Scan-WEB篇](https://x.hacking8.com/post-340.html)
 - [如何在本机搭建W12Scan](https://x.hacking8.com/post-342.html)
 
