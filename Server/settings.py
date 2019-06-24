@@ -43,16 +43,22 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #自定义的中间件
+    # 自定义的中间件
     'application.frontend.middleware.LoginMiddleware.LoginMiddleware'
 ]
 
 ROOT_URLCONF = 'Server.urls'
+
+# 翻译文件所在目录，需要手工创建
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 TEMPLATES = [
     {
@@ -65,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -106,13 +113,20 @@ AUTH_PASSWORD_VALIDATORS = [
 TIME_ZONE = 'Asia/Shanghai'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'en'
+LANGUAGE_COOKIE_NAME = "w12_lang"
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('zh-Hans', '中文简体'),
+)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -122,11 +136,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 # some interface
 with open(os.path.join(BASE_DIR, "application", "frontend", "data", "new_wappalyzer.json")) as f:
     try:
-        WAPP_ICON = json.load(f,encoding='utf-8')["apps"]
+        WAPP_ICON = json.load(f, encoding='utf-8')["apps"]
     except UnicodeDecodeError:
         WAPP_ICON = {}

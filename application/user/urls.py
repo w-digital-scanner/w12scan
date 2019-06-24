@@ -21,5 +21,10 @@ urlpatterns = [
         regex=r'setting$',
         view=views.setting,
         name='setting'
+    ),
+    url(
+        regex=r'language/(\w+)?',
+        view=views.switch_languag,
+        name='language'
     )
 ]

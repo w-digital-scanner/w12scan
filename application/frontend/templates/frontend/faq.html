@@ -1,27 +1,27 @@
 {% extends 'frontend/base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="row profile-page">
         <div class="col-12">
             <div class="card">
                 <div class="card-body container">
-                    <h4 class="card-title">搜索语法</h4>
-                    <p class="card-description">w12scan提供强大的搜索语法，通过组合查询能够得到想要的一切信息。也可以使用空格来组合搜索数据。</p>
+                    <h4 class="card-title">{% trans "Search Syntax" %}</h4>
+                    <p class="card-description">{% trans "W12scan provides powerful search syntax, and you can get all the information you want by combining queries. You can also use spaces to combine search data." %}</p>
                     <ul>
-                        <li>title=“abc” # 从标题中搜索</li>
-                        <li>header=“abc” # 从http头搜索</li>
-                        <li>body=“123” # 从body搜索</li>
-                        <li>url = “*.baidu.com” # 搜索baidu.com的子域名，<code>*</code>号是通配符</li>
-                        <li>ip = ‘1.1.1.1’ # 搜索IP，支持CIDR<code>'192.168.1.0/24'</code>和通配符搜索<code>'192.168.1.*'</code>
+                        <li>title=“abc” # {% trans "Search from the title" %}</li>
+                        <li>header=“abc” # {% trans "Search from http header" %}</li>
+                        <li>body=“123” # {% trans "Search from body text" %}</li>
+                        <li>url = “*.baidu.com” # {% trans "Search for subdomains of baidu.com" %}</li>
+                        <li>ip = ‘1.1.1.1’ # {% trans "Search from IP,support" %}<code>'192.168.1.0/24'</code>{% trans "and" %}<code>'192.168.1.*'</code>
                         </li>
-                        <li>port = ‘80’ # 搜索端口</li>
-                        <li>app = ’nginx’ # 搜索组件</li>
-                        <li>country = ‘cn’ # 搜索国家</li>
-                        <li>service = ‘mysql’ # 搜索服务</li>
-                        <li>bug = 'xx' # 寻找存在某个漏洞的地址</li>
+                        <li>port = ‘80’ # {% trans "Search form port" %}</li>
+                        <li>app = ’nginx’ # {% trans "Search application" %}</li>
+                        <li>country = ‘cn’ # {% trans "Search from country" %}</li>
+                        <li>service = ‘mysql’ # {% trans "Search from service" %}</li>
+                        <li>bug = 'xx' # {% trans "Search from Vulnerability" %}</li>
                     </ul>
                     <p class="card-description">
-                        需要注意的是，等于号后面的内容需要用单引号或双引号包裹，这些查询命令可以多个组合在一起，用空格分割开。如果你查询的语句中包含有单引号或者双引号，你需要用反斜杠 <code>\</code>
-                        来转义它们。</p>
+                        {% trans "It should be noted that the content after the equal sign needs to be wrapped in single or double quotes. These query commands can be combined together and separated by spaces. If the statement you are querying contains single or double quotes, you need to use a backslash <code>\</code>To escape them." %}</p>
                 </div>
             </div>
         </div>

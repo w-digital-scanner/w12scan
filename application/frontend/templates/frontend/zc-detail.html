@@ -1,33 +1,34 @@
 {% extends 'frontend/base.html' %}
 {% load app_icon %}
+{% load i18n %}
 {% block content %}
     <div class="row profile-page">
         <div class="col-12">
             <div class="card">
                 <div class="card-body ipdetail">
-                    <h3 class="card-title">资产详情 - {{ model.name }}</h3>
+                    <h3 class="card-title">{% trans "Asset detail" %} - {{ model.name }}</h3>
                     <ul class="list-ticked">
-                        <li>资产描述: {{ model.descript }}</li>
-                        <li>添加时间: {{ model.add_time }}</li>
-                        <li>域名资产: {{ domains | length }}</li>
-                        <li>IP资产: {{ ips | length }}</li>
+                        <li>{% trans "Asset name" %}: {{ model.descript }}</li>
+                        <li>{% trans "Time" %}: {{ model.add_time }}</li>
+                        <li>{% trans "Domain" %}: {{ domains | length }}</li>
+                        <li>{% trans "IP" %}: {{ ips | length }}</li>
                     </ul>
                     <div class="profile-body">
                         <ul class="nav tab-switch" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active show" id="user-profile-info-tab" data-toggle="pill"
                                    href="#user-profile-info" role="tab" aria-controls="user-profile-info"
-                                   aria-selected="true">信息统计</a>
+                                   aria-selected="true">{% trans "Information statistics" %}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="user-profile-activity-tab" data-toggle="pill"
                                    href="#user-profile-activity" role="tab" aria-controls="user-profile-activity"
-                                   aria-selected="false">域名资产</a>
+                                   aria-selected="false">{% trans "Domain" %}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="user-profile-info2-tab" data-toggle="pill"
                                    href="#user-profile-info2" role="tab" aria-controls="user-profile-info2"
-                                   aria-selected="false">IP资产</a>
+                                   aria-selected="false">{% trans "IP" %}</a>
                             </li>
                         </ul>
                         <div class="row">
@@ -40,7 +41,7 @@
                                                 <table class="table table-bordered">
                                                     <tbody>
                                                     <tr>
-                                                        <td>域名范围</td>
+                                                        <td>{% trans "Domain range" %}</td>
                                                         <td>
                                                             <ul>
                                                                 {% for data in show_data.domains %}
@@ -50,7 +51,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>IP范围</td>
+                                                        <td>{% trans "IP range" %}</td>
                                                         <td>
                                                             <ul>
                                                                 {% for data in show_data.ips %}
@@ -67,7 +68,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12 mt-5">
-                                                <p><h4>使用技术</h4></p>
+                                                <p><h4>{% trans "Technology" %}</h4></p>
                                                 <p>
                                                     {% for app in apps %}
 
@@ -81,7 +82,7 @@
                                         </div>
                                     <br />
                                         <div class="col-12">
-                                            <h4 class="card-title">服务统计</h4>
+                                            <h4 class="card-title">{% trans "Service statistics" %}</h4>
                                             <canvas id="pieChart"></canvas>
                                         </div>
 
@@ -93,19 +94,19 @@
                                                 <thead>
                                                 <tr>
                                                     <th>
-                                                        域名
+                                                        {% trans "Domain" %}
                                                     </th>
                                                     <th>
-                                                        ip
+                                                        {% trans "IP" %}
                                                     </th>
                                                     <th>
-                                                        标题
+                                                        {% trans "Title" %}
                                                     </th>
                                                     <th>
-                                                        使用技术
+                                                        {% trans "Technology" %}
                                                     </th>
                                                     <th>
-                                                        附加信息
+                                                        {% trans "Info" %}
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -129,7 +130,7 @@
                                                         </td>
                                                         <td>
                                                             {% if data.bugs %}
-                                                                <div class="badge badge-danger">存在威胁</div>
+                                                                <div class="badge badge-danger">{% trans "warning" %}</div>
                                                             {% endif %}
                                                         </td>
                                                     </tr>
@@ -147,9 +148,9 @@
                                                         ip
                                                     </th>
                                                     <th>
-                                                        开放端口
+                                                        {% trans "Port" %}
                                                     </th>
-                                                    <th>附加信息</th>
+                                                    <th>{% trans "Info" %}</th>
 
                                                 </tr>
                                                 </thead>
@@ -166,7 +167,7 @@
 
                                                         <td>
                                                             {% if data.bugs %}
-                                                                <div class="badge badge-danger">存在威胁</div>
+                                                                <div class="badge badge-danger">{% trans "warning" %}</div>
                                                             {% endif %}
                                                         </td>
                                                     </tr>

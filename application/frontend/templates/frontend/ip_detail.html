@@ -1,16 +1,17 @@
 {% extends 'frontend/base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="row profile-page">
         <div class="col-12">
             <div class="card">
                 <div class="card-body ipdetail">
-                    <h3 class="card-title">IP 具体详情</h3>
+                    <h3 class="card-title">{% trans "IP detail" %}</h3>
                     <p class="card-description">
                     <ul class="list-ticked">
                         <li>IP address: {{ data.target }}</li>
                         <li>Last record time: {{ data.published_from }}</li>
                         {% if data.proper %}
-                            <li>资产归属:
+                            <li>{% trans "Asset own" %}:
                                 {% for pp in data.proper %}
                                     <a
                                             href="{% url 'zc-detail' pp.1 %}">{{ pp.0 }}</a>&nbsp;
@@ -45,21 +46,21 @@
                                                 <table class="table table-bordered">
                                                     <tbody>
                                                     <tr>
-                                                        <td>IP地址</td>
+                                                        <td>{% trans "IP address" %}</td>
                                                         <td>{{ data.target }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>国家</td>
+                                                        <td>{% trans "Country" %}</td>
                                                         <td>
                                                             <i class="flag-icon flag-icon-{{ data.location.country_id|lower }}"></i> {{ data.location.country }}
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>城市</td>
+                                                        <td>{% trans "City" %}</td>
                                                         <td>{{ data.location.region }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>端口 / 服务</td>
+                                                        <td>{% trans "Ports" %} / {% trans "Services" %}</td>
                                                         <td>{% for info in data.infos %}
                                                             <div class="badge badge-primary badge-pill">{{ info.port }}/{{ info.name|default:"unknown" }}</div>
                                                         {% endfor %}
@@ -67,7 +68,7 @@
                                                     </tr>
                                                     {% if data.bugs %}
                                                         <tr>
-                                                            <td>漏洞分布</td>
+                                                            <td>{% trans "Warning" %}</td>
                                                             <td>{% for k,v in data.bugs.items %}
                                                                 <div class="badge badge-primary badge-pill">{{ k }}:{{ v }}</div>
                                                             {% endfor %}
@@ -80,14 +81,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12 mt-5">
-                                                <h5 class="mb-5">关联性</h5>
+                                                <h5 class="mb-5">{% trans "Relevance" %}</h5>
                                                 <div class="stage-wrapper pl-4">
                                                     <div class="stages border-left pl-5 pb-4">
                                                         <div class="btn btn-icons btn-rounded stage-badge btn-inverse-success">
                                                             <i class="icon-event"></i>
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">第三方信息</h5>
+                                                            <h5 class="mb-0">{% trans "Third information" %}</h5>
                                                         </div>
 
                                                         {{ third_infomation|safe }}
@@ -98,7 +99,7 @@
 
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">开放服务</h5>
+                                                            <h5 class="mb-0">{% trans "Open services" %}</h5>
                                                         </div>
 
                                                         <p>
@@ -106,10 +107,10 @@
                                                             <table class="table">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th>端口</th>
-                                                                    <th>服务类型</th>
-                                                                    <th>服务名称</th>
-                                                                    <th>版本</th>
+                                                                    <th>{% trans "Port" %}</th>
+                                                                    <th>{% trans "Service type" %}</th>
+                                                                    <th>{% trans "Service name" %}</th>
+                                                                    <th>{% trans "Version" %}</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -131,9 +132,9 @@
                                                             <i class="icon-checkbox-marked-circle-outline"></i>
                                                         </div>
                                                         <div class="d-flex align-items-center mb-2 justify-content-between">
-                                                            <h5 class="mb-0">关联域名</h5>
+                                                            <h5 class="mb-0">{% trans "Relevance http" %}</h5>
                                                         </div>
-                                                        <p>通过该ip关联到的http服务</p>
+                                                        <p>{% trans "Port" %}</p>
                                                         <ul class="list-ticked">
                                                             {% for u in union %}
                                                                 <li>
@@ -142,7 +143,7 @@
                                                             {% endfor %}
                                                         </ul>
                                                         {% if c_data %}
-                                                            <p>通过该ip关联到的C段IP</p>
+                                                            <p>{% trans "Http service associated with Ip" %}</p>
                                                             <ul class="list-ticked">
                                                                 {% for u in c_data %}
 

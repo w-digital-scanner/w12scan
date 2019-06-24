@@ -1,11 +1,12 @@
 {% load versiontag %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>W12SCAN 网络资产发现引擎</title>
+  <title>{% trans "W12Scan Search Engine For Cybersecurity" %}</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/static/vendors/iconfonts/simple-line-icon/css/simple-line-icons.css">
   <link rel="stylesheet" href="/static/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
@@ -53,8 +54,8 @@
                             <span class="bg-warning rounded-circle p-1 mt-2 mx-auto"></span>
                           </div>
                           <div class="text-wrapper">
-                            <small class="d-block mb-2"><strong>用户名或密码错误</strong></small>
-                            <small class="text-gray d-block">寻求管理员解决问题或重置密码</small>
+                            <small class="d-block mb-2"><strong>{% trans "Username or password error" %}</strong></small>
+                            <small class="text-gray d-block">{% trans "Ask an administrator to resolve a problem or reset your password" %}</small>
                           </div>
                         </div>
                     {% endif %}

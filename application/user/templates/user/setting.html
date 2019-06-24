@@ -1,4 +1,5 @@
 {% extends 'frontend/base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="row profile-page">
         <div class="col-12">
@@ -8,10 +9,10 @@
                     <p>
                         Search api example <br> <a href="/api/v1/search?q=1&page=1&type=all&token={{ userinfo.token }}"><code>/api/v1/search?q=1&page=1&type=all&token={{ userinfo.token }}</code></a>
                         <ul>
-                            <li>q 搜索关键词，使用搜索语法</li>
-                            <li>page 当前页数</li>
-                            <li>type 搜索类型all、ip、web</li>
-                            <li>token 用户token</li>
+                            <li>q : {% trans "search keywords" %}</li>
+                            <li>page : {% trans "current page" %}</li>
+                            <li>type : {% trans "search type" %}</li>
+                            <li>token : {% trans "user token" %}</li>
                         </ul>
                     </p>
                     <br>

@@ -1,15 +1,15 @@
 {% extends 'frontend/base.html' %}
+{% load i18n %}
 {% load app_icon %}
-{% block title %} W12SCAN 网络资产发现引擎{% endblock %}
 {% block content %}
     <div class="row show-center">
         <div class="col-3">
             <div class="show-left">
                 <div class="port">
-                    <h2>&nbsp;&nbsp;&nbsp;端口服务</h2>
+                    <h2>&nbsp;&nbsp;&nbsp;{% trans "Port services" %}</h2>
                 </div>
                 <div class="item">
-                    <h3>&nbsp;&nbsp;国家</h3>
+                    <h3>&nbsp;&nbsp;{% trans "Countries" %}</h3>
                     <div class="list-group">
                         {% for app in statistics.countrys %}
                             <a href="#" class="list-group-item list-group-item-action"
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="item">
-                    <h3>&nbsp;&nbsp;服务</h3>
+                    <h3>&nbsp;&nbsp;{% trans "Services" %}</h3>
                     <div class="list-group">
                         {% for app in statistics.names %}
                             <a href="#" class="list-group-item list-group-item-action"
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="item">
-                    <h3>&nbsp;&nbsp;端口</h3>
+                    <h3>&nbsp;&nbsp;{% trans "Ports" %}</h3>
                     <div class="list-group">
                         {% for app in statistics.ports %}
                             <a href="#" class="list-group-item list-group-item-action"
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="item">
-                    <h3>&nbsp;&nbsp;组件</h3>
+                    <h3>&nbsp;&nbsp;{% trans "builtwith" %}</h3>
                     <div class="list-group">
                         {% for app in statistics.apps %}
                             <a href="#" class="list-group-item list-group-item-action"
@@ -83,7 +83,7 @@
                             <div class="badge badge-primary">{{ item.1 }}="{{ item.2 }}" <i class="icon-close words-close"></i></div>
                         {% endfor %}
                     </p>
-                    <p class="text-muted">找到{{ count }}条结果，用时{{ second }}秒</p>
+                    <p class="text-muted">{% blocktrans %}Found {{ count }} results,took {{ second }}s{% endblocktrans %}</p>
                 </div>
 
 
@@ -102,7 +102,7 @@
                                                 <div class="badge badge-outline-info">{{ info }}</div>
                                             {% endfor %}
                                         {% if data.bugs %}
-                                            <label class="badge badge-danger">存在威胁</label>
+                                            <label class="badge badge-danger">{% trans "warning" %}</label>
                                         {% endif %}
                                         </p>
 
@@ -134,7 +134,7 @@
                                                 {{ app|app_icon|safe }}
                                             {% endfor %}
                                             {% if data.bugs %}
-                                                <label class="badge badge-danger">存在威胁</label>
+                                                <label class="badge badge-danger">{% trans "warning" %}</label>
                                             {% endif %}
                                         </p>
                                         <p class="text-muted">

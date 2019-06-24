@@ -1,8 +1,10 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
 
+from Server.settings import LANGUAGE_COOKIE_NAME
 from application.user.utils import user_check, user_update
 from application.user.models import UserInfo
 
@@ -45,3 +47,11 @@ def setting(request):
             return redirect(reverse("setting"))
 
     return render(request, 'user/setting.html', {"userinfo": obj})
+
+
+def switch_languag(request, s):
+    if s is None:
+        s = 'en'
+    response = HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    response.set_cookie(LANGUAGE_COOKIE_NAME, s)
+    return response

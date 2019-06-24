@@ -1,4 +1,5 @@
 {% extends 'frontend/base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="row">
         <div class="col-12 grid-margin">
@@ -9,7 +10,7 @@
                             <div class="d-flex justify-content-between border-right card-statistics-item">
                                 <div>
                                     <h1>{{ total.domains }}</h1>
-                                    <p class="text-muted mb-0">域名数据</p>
+                                    <p class="text-muted mb-0">{% trans "Domain datas" %}</p>
                                 </div>
                                 <i class="icon-layers text-primary icon-lg"></i>
                             </div>
@@ -18,7 +19,7 @@
                             <div class="d-flex justify-content-between border-right card-statistics-item">
                                 <div>
                                     <h1>{{ total.ips }}</h1>
-                                    <p class="text-muted mb-0">IP数据</p>
+                                    <p class="text-muted mb-0">{% trans "IP datas" %}</p>
                                 </div>
                                 <i class="icon-people text-primary icon-lg"></i>
                             </div>
@@ -27,7 +28,7 @@
                             <div class="d-flex justify-content-between border-right card-statistics-item">
                                 <div>
                                     <h1>{{ total.bugs }}</h1>
-                                    <p class="text-muted mb-0">漏洞数量</p>
+                                    <p class="text-muted mb-0">{% trans "Vulnerabilities" %}</p>
                                 </div>
                                 <i class="icon-pin text-primary icon-lg"></i>
                             </div>
@@ -36,7 +37,7 @@
                             <div class="d-flex justify-content-between card-statistics-item">
                                 <div>
                                     <h1>-</h1>
-                                    <p class="text-muted mb-0">插件库</p>
+                                    <p class="text-muted mb-0">{% trans "Plugins" %}</p>
                                 </div>
                                 <i class="icon-refresh text-primary icon-lg"></i>
                             </div>
@@ -51,7 +52,7 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">任务量报告</h4>
+                    <h4 class="card-title">{% trans "Tasks report" %}</h4>
                     <canvas id="lineChart"></canvas>
                 </div>
             </div>
@@ -67,7 +68,7 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">漏洞统计</h4>
+                    <h4 class="card-title">{% trans "Vulnerability statistics" %}</h4>
 {#                    <canvas id="doughnutChart"></canvas>#}
                     <div class="bug-statics">
                         {% for i in data_bugs %}
@@ -83,22 +84,22 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">运行节点</h4>
+                    <h4 class="card-title">{% trans "Nodes" %}</h4>
                     <p class="card-description">
-                        展现扫描节点的运行状态 <span class="icon-star" style="color:#439aff;"></span>
+                        {% trans "Show the status for running nodes" %}<span class="icon-star" style="color:#439aff;"></span>
                     </p>
                     <div class="table-responsive">
                         <table class="table running-node">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>节点名称</th>
-                                <th>扫描队列</th>
-                                <th>正在扫描</th>
-                                <th>已完成</th>
-                                <th>时间</th>
-                                <th>状态</th>
-                                <th>选项</th>
+                                <th>{% trans "Node name" %}</th>
+                                <th>{% trans "Scanning queue" %}</th>
+                                <th>{% trans "Running" %}</th>
+                                <th>{% trans "Finished" %}</th>
+                                <th>{% trans "Times" %}</th>
+                                <th>{% trans "Status" %}</th>
+                                <th>{% trans "Options" %}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -147,16 +148,16 @@
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">任务</h4>
+                    <h4 class="card-title">{% trans "Tasks" %}</h4>
                     <button class="btn btn-primary btn-sm mt-3 mb-4" data-toggle="modal" data-target="#task-modal"
-                            data-whatever="@mdo">新建任务
+                            data-whatever="@mdo">{% trans "New Tasks" %}
                     </button>
                     <blockquote class="blockquote blockquote-primary">
                         <p><code>POST /api/v1/scan</code></p>
-                        <p>body内容为url或ip，每行一个</p>
+                        <p>{% trans "Body content is url or ip, one per line" %}</p>
                         <p><code>GET /api/v1/scan?t=[url|ip]</code></p>
 
-                        <footer class="blockquote-footer">扫描API</footer>
+                        <footer class="blockquote-footer">{% trans "Scanning API" %}</footer>
                     </blockquote>
                 </div>
             </div>
@@ -169,15 +170,15 @@
                             <img src="/static/images/92x92.jpg" class="img-md rounded-circle mb-2"
                                  alt="profile image">
                             <div class="ml-3">
-                                <h4>资产配置</h4>
+                                <h4>{% trans "Assets config" %}</h4>
                                 <p class="text-muted mb-0">Developer</p>
                             </div>
                         </div>
                         <p class="mt-4 card-text">
-                            在此处输入相关资产，然后你就能查询得到
+                            {% trans "Enter the relevant assets here, then you can query" %}
                         </p>
                         <button class="btn btn-info btn-sm mt-3 mb-4" data-toggle="modal" data-target="#exampleModal-4"
-                                data-whatever="@mdo">新建资产
+                                data-whatever="@mdo">{% trans "New asset" %}
                         </button>
 
                         <div class="border-top pt-3">
@@ -189,16 +190,16 @@
                                             #
                                         </th>
                                         <th>
-                                            资产名称
+                                            {% trans "Asset name" %}
                                         </th>
                                         <th>
-                                            添加时间
+                                            {% trans "Times" %}
                                         </th>
                                         <th>
-                                            描述
+                                            {% trans "Descript" %}
                                         </th>
                                         <th>
-                                            操作
+                                            {% trans "Options" %}
                                         </th>
                                     </tr>
                                     </thead>
@@ -245,7 +246,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel-4">创建资产</h5>
+                    <h5 class="modal-title" id="exampleModalLabel-4">{% trans "Create asset" %}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -253,25 +254,25 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">资产名称:</label>
+                            <label for="recipient-name" class="col-form-label">{% trans "Asset name" %}:</label>
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">资产描述:</label>
+                            <label for="recipient-name" class="col-form-label">{% trans "Asset descript" %}:</label>
                             <input type="text" class="form-control" id="recipient-desc">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">域名:</label>
+                            <label for="message-text" class="col-form-label">{% trans "Domains" %}:</label>
                             <textarea class="form-control" id="domain-text" rows="4"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">IP:</label>
+                            <label for="message-text" class="col-form-label">{% trans "IPs" %}:</label>
                             <textarea class="form-control" id="ip-text" rows="5"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success zc-create">创建</button>
+                    <button type="button" class="btn btn-success zc-create">{% trans "Create" %}</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -283,7 +284,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel-4">查看资产</h5>
+                    <h5 class="modal-title" id="exampleModalLabel-4">{% trans "View asset" %}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -291,26 +292,26 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">资产名称:</label>
+                            <label for="recipient-name" class="col-form-label">{% trans "Asset name" %}:</label>
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">资产描述:</label>
+                            <label for="recipient-name" class="col-form-label">{% trans "Asset descript" %}:</label>
                             <input type="text" class="form-control" id="recipient-desc">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">域名:</label>
+                            <label for="message-text" class="col-form-label">{% trans "Domain" %}:</label>
                             <textarea class="form-control" id="domain-text" rows="4"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">IP:</label>
+                            <label for="message-text" class="col-form-label">{% trans "IP" %}:</label>
                             <textarea class="form-control" id="ip-text" rows="5"></textarea>
                             <input type="hidden" id="zc-id" value=""/>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success zc-update">更新</button>
+                    <button type="button" class="btn btn-success zc-update">{% trans "Update" %}</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -322,7 +323,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel-4">添加任务</h5>
+                    <h5 class="modal-title" id="exampleModalLabel-4">{% trans "Add task" %}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -331,12 +332,12 @@
                     <form>
                         <div class="form-group">
                             <textarea class="form-control" id="content-modal" rows="12"
-                                      placeholder="支持多条任务，一行一个，ip或域名，ip支持CIDR表达"></textarea>
+                                      placeholder="{% trans "Support multiple tasks, one line per line, ip or domain name, ip supports CIDR expression" %}"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success task-create">创建</button>
+                    <button type="button" class="btn btn-success task-create">{% trans "Create" %}</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -348,7 +349,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel-4">节点日志</h5>
+                    <h5 class="modal-title" id="exampleModalLabel-4">{% trans "Node logs" %}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

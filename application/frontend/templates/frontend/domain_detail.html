@@ -1,18 +1,19 @@
 {% extends 'frontend/base.html' %}
+{% load i18n %}
 {% load app_icon %}
 {% block content %}
     <div class="row profile-page">
         <div class="col-12">
             <div class="card">
                 <div class="card-body ipdetail">
-                    <h3 class="card-title">Domain 域名具体详情</h3>
+                    <h3 class="card-title">Domain {% trans "detail" %}</h3>
                     <p class="card-description">
                     <ul class="list-ticked">
-                        <li>域名: {{ data.url }}</li>
-                        <li>子域名个数: {{ sub_domain|length }}</li>
-                        <li>Last record time: {{ data.published_from }}</li>
+                        <li>{% trans "Domain" %}: {{ data.url }}</li>
+                        <li>{% trans "Subdomain" %}: {{ sub_domain|length }}</li>
+                        <li>{% trans "Last record time" %}: {{ data.published_from }}</li>
                         {% if data.proper %}
-                            <li>资产归属:
+                            <li>{% trans "Domain own" %}:
                                 {% for pp in data.proper %}
                                     <a
                                             href="{% url 'zc-detail' pp.1 %}">{{ pp.0 }}</a>&nbsp;
@@ -63,7 +64,7 @@
                                                 {% if data.bugs %}
                                                     <div class="d-flex align-items-start py-3 border-bottom">
                                                         <div class="wrapper pl-4 col-12">
-                                                            <p class="font-weight-bold mb-0">漏洞详情</p>
+                                                            <p class="font-weight-bold mb-0">{% trans "VULNERABILITY DETAIL" %}</p>
                                                             <ul class="list-ticked">
                                                                 {% for k,v in data.bugs.items %}
                                                                     <li>{{ k }} : {{ v }}</li>
@@ -75,7 +76,7 @@
                                                 {% if data.app %}
                                                     <div class="d-flex align-items-start py-3">
                                                         <div class="wrapper pl-4">
-                                                            <p class="font-weight-bold mb-0">使用技术</p>
+                                                            <p class="font-weight-bold mb-0">{% trans "Technology" %}</p>
                                                             <br>
                                                             <small>
                                                                 <ul>
@@ -97,7 +98,7 @@
 
                                         <div class="row">
                                             <div class="col-12 mt-5">
-                                                <h5 class="mb-1">子域名</h5>
+                                                <h5 class="mb-1">{% trans "Subdomain" %}</h5>
                                                 <div class="new-accounts">
                                                     <div class="table-responsive"
                                                          style="padding-right:32px;margin-top:20px;">
@@ -122,7 +123,7 @@
                                                                     {% endif %}
                                                                     {% if domain.bugs %}
                                                                         <li>
-                                                                            <label class="badge badge-danger">存在威胁</label>
+                                                                            <label class="badge badge-danger">{% trans "warning" %}</label>
                                                                         </li>
                                                                     {% endif %}
                                                                 </ul>
