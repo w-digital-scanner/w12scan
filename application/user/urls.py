@@ -23,7 +23,7 @@ urlpatterns = [
         name='setting'
     ),
     url(
-        regex=r'language/(\w+)?',
+        regex=r'language/([\w-]+)?',
         view=views.switch_languag,
         name='language'
     )
