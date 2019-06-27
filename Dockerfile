@@ -8,6 +8,7 @@ RUN set -x \
     && apk add bash \
     && apk add tzdata \
     && apk add gcc \
+    && apk add gettext \
     && apk add libc-dev \
     && apk add linux-headers \
     && apk add nginx \
