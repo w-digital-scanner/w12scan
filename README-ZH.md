@@ -62,7 +62,7 @@ docker-compose up -d
 Telegram交流群组:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
 
 ### 相关问题
-1. 根据服务器配置修改`docker-compose.yml`参数，设置elasticsearch内存占用大小，默认设置是521M，如果你是1G内存可以设置为128M。
+1. 为了保持高可用，请至少准备8G4H服务器进行测试(ES耗费内存)，如果服务器不满足这些要求，需要自行向dockerfile中es数据库添加`- "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"`来指定内存，但这样不保证高可用
 2. 在Windows上安装，需要注意`.sh`文件格式问题 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
 3. Q:如何分布式部署？A:[部署方案](./doc/DEPLOYMENT1.md)
 4. Q:启动后搜索数为0？A:需要添加扫描目标
