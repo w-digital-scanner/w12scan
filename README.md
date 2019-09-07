@@ -58,9 +58,8 @@ Default account `boyhack:boyhack`.
 ## Telegram Group
 Telegram Group:https://t.me/joinchat/MZ16xBd1HRD2Nq_o1T8XIQ
 ### Some Issues
-1. The elasticsearch memory usage capacity is 512M by default, please adjust dynamically according to the machine configuration.
-2. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
-3. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
+1. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
+2. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
 
 ### Links
 - [设计论文](./doc/网络资产发现引擎的设计.docx)
