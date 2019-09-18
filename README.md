@@ -1,7 +1,7 @@
 # w12scan
 [Chinese](README-ZH.md)
 
-W12scan is a network asset discovery engine that can automatically aggregates related assets for analysis and use. W12scan is also my graduation design. :)
+W12scan is a network asset discovery engine that can automatically aggregate related assets for analysis and use. W12scan is also my graduation design. :)
 
 Here is a web source program and the scanning end is at [w12scan-client](https://github.com/boy-hack/w12scan-client).
 
