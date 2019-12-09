@@ -58,9 +58,6 @@ docker-compose up -d
 等待一段时间后访问`http://127.0.0.1:8000`
 默认用户名密码`boyhack:boyhack`
 
-## 交流社区
-Telegram交流群组:https://t.me/joinchat/MZ16xA9dfmJCYm4kbv15nA
-
 ### 相关问题
 1. 为了保持高可用，请至少准备8G4H服务器进行测试(ES耗费内存)，如果服务器不满足这些要求，需要自行向dockerfile中es数据库添加`- "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"`来指定内存，但这样不保证高可用
 2. 在Windows上安装，需要注意`.sh`文件格式问题 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
