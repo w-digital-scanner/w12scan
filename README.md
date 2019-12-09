@@ -55,8 +55,7 @@ docker-compose up -d
 ```
 Wait a moment to visit `http://127.0.0.1:8000`.
 Default account `boyhack:boyhack`.
-## Telegram Group
-Telegram Group:https://t.me/joinchat/MZ16xBd1HRD2Nq_o1T8XIQ
+
 ### Some Issues
 1. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
 2. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
