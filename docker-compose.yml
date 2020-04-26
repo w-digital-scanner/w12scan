@@ -11,6 +11,8 @@ services:
     depends_on:
       - redis
       - elasticsearch
+    volumes:
+      - ~/w12scan-data/db:/opt/w12scan/db
   client:
     image: boyhack/w12scan-client:latest
     environment:
@@ -31,3 +33,5 @@ services:
       - bootstrap.memory_lock=true
     expose:
       - "9200"
+    volumes:
+      - ~/w12scan-data/data:/usr/share/elasticsearch/data

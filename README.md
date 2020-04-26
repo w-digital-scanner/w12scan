@@ -1,69 +1,78 @@
 # w12scan
-[Chinese](README-ZH.md)
+w12scan是一款网络资产发现引擎，通过WEB接口下发任务，w12scan会自动将相关的资产聚合在一起方便分析使用。w12scan也是我的毕业设计。
 
-W12scan is a network asset discovery engine that can automatically aggregate related assets for analysis and use. W12scan is also my graduation design. :)
+w12scan分为WEB端（用于展示显示数据）和Client端（用于搜索相关资产数据）。
 
-Here is a web source program and the scanning end is at [w12scan-client](https://github.com/boy-hack/w12scan-client).
+这里是web端的开源程序，client端在[https://github.com/boy-hack/w12scan-client](https://github.com/boy-hack/w12scan-client)
 
-[![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201902/w12scan-preview-3.mp4)
+一个视频了解W12SCAN
+[![w12scan](./doc/w12scan-preview.png)](https://x.hacking8.com/content/uploadfile/201903/uper_video_1556034118929372.mp4)
 
-## Thinking
-Based on python3 + django + elasticsearch + redis.
+
+## 设计思想
+基于python3 + django + elasticsearch + redis(去重+web与client通信中间件)，使用WEB API添加扫描目标，扫描完成后会在WEB端展示。
 
 ![w12scan](doc/w12scan.jpg)
 
-## Feature
+## 特点
 
-### Web
-* Search syntax
-    * Search for cms, service, titles, country regions, etc., to quickly find relevant targets.
-        - title=“abc” # Search from the title
-        - header=“abc” # Search from http header
-        - body=“123” # Search from body text
-        - url = “*.baidu.com” # Search for subdomains of baidu.com
-        - ip = ‘1.1.1.1’ # Search from IP,support `'192.168.1.0/24'` and `'192.168.1.*'`
-        - port = ‘80’ # Search form port 
-        - app = ’nginx’ # Search application
-        - country = ‘cn’ # Search from country
-        - service = ‘mysql’ # Search from service
-        - bug = 'xx' # Search from Vulnerability
-* Custom assert
-    * By customizing a company-related domain name or ip asset, w12scan will automatically help you find the corresponding asset target. When you browse the target, there is a prominent logo to remind you of the target's ownership.
-* Automatic association
-    * Enter the target details. If the target is ip, all domain names on the ip and the c class will be automatically associated. If the target is a domain name, the adjacent station, segment c and subdomain are automatically associated.
-* Multi-node management
-    * WEB will check the status of the node every few minutes and you can see the number of node scans and the node scan log.
-* Task restful
-    * W12Scan provides an interface to add tasks and you can add it on the WEB side or integrate it in any software.
+### WEB端
+* 强大的搜索语法
+    * 通过搜索语法可搜索cms，服务名称，标题，国家地区等等，能够迅速找到相关目标。
+        - title=“abc” # 从标题中搜索
+        - header=“abc” # 从http头搜索
+        - body=“123” # 从body搜索
+        - url = “*.baidu.com” # 搜索baidu.com的子域名，`*号是通配符`
+        - ip = ‘1.1.1.1’ # 搜索IP，支持CIDR`'192.168.1.0/24'`和通配符搜索`'192.168.1.*'`
+        - port = ‘80’ # 搜索端口
+        - app = ’nginx’ # 搜索组件
+        - country = ‘cn’ # 搜索国家
+        - service = ‘mysql’ # 搜索服务
+        - bug = 'xx' # 搜索存在的某个漏洞
+* 自定义资产配置
+    * 通过自定义某公司相关域名或ip资产，w12scan会自动帮你找到对应的资产目标，当你浏览该目标时，有醒目的标识提醒你该目标的归属。
+* 自动关联
+    * 进入目标详情，若目标为ip，则会自动关联该ip上的所有域名和该c段上的所有域名。若目标为域名，则自动关联旁站，c段和子域名。
+* 多节点管理
+    * WEB端会每隔几分钟检测一次节点的运行状况，你可以看到节点扫描的数量以及节点扫描日志。
+* 任务restful
+    * 提供添加任务的接口，你可以在WEB端添加或者在任何软件中集成该接口。
 
-### Scanning end
-* Poc
-    * Call the latest poc script online via [airbug](https://github.com/boy-hack/airbug).
-* Built-in scan script
-    * Common vulnerability verification service built into the scanner.
-* Scanning
-    * Use masscan，nmap，wappalyzer，w11scan.
-* Easy to distribute
-    * This is taken into account in the design of the program architecture. It is very easy to distribute and run the scan terminal directly on another machine. It also can be distributed based on docker, celery service.
+### 扫描端(Client)端
+* 及时的poc验证
+    * 通过对接[airbug](https://github.com/boy-hack/airbug)接口api，在线调用最新的poc验证脚本，airbug保证了漏洞更新的及时性，你也可以fork airbug项目后自行添加poc规则。
+* 验证性攻击
+    * 扫描端内置有常见的漏洞验证服务，每扫描一次网址，都会运行这些服务，结果最终会反馈到w12scan的WEB端展现。
+* 扫描与识别
+    * 端口扫描使用masscan，端口识别使用nmap，web应用识别调用wappalyzer和精简版的w11scan（指纹识别）
+* 容易的分布式
+    * 在程序架构设计就考虑到了这一点，扫描端只接受任务，最后的结果只和WEB端进行交互，所以在分布式上十分容易，直接在另一台机器上运行扫描端即可。能基于docker进行分布式，也能很方便集成celery服务。
 
-## Installation
-Quickly build an environment with docker
+## 安装
+基于docker一键部署
 ```bash
+mkdir ~/w12scan-data/db   # 该目录保存w12scan存储结果
+mkdir ~/w12scan-data/data # 该目录保存es存储的结果
 git clone https://github.com/boy-hack/w12scan
 cd w12scan
 docker-compose up -d
 ```
-Wait a moment to visit `http://127.0.0.1:8000`.
-Default account `boyhack:boyhack`.
+等待一段时间后访问`http://127.0.0.1:8000`
+默认用户名密码`boyhack:boyhack`
+### 数据存储
+- 可修改`docker-compose.yml`，搜索`~/w12scan-data/db`或`~/w12scan-data/data`来修改存储的位置
 
-### Some Issues
-1. For Windows, you need to pay attention to https://github.com/boy-hack/w12scan/issues/12 (thanks @Hotsunrize).  
-2. Q:How to install distributed A:[Deployment](./doc/DEPLOYMENT1.md)
+### 相关问题
+1. 为了保持高可用，请至少准备8G4H服务器进行测试(ES耗费内存)，如果服务器不满足这些要求，需要自行向dockerfile中es数据库添加`- "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"`来指定内存，但这样不保证高可用
+2. 在Windows上安装，需要注意`.sh`文件格式问题 https://github.com/boy-hack/w12scan/issues/12 (感谢 @Hotsunrize).  
+3. Q:如何分布式部署？A:[部署方案](./doc/DEPLOYMENT1.md)
+4. Q:启动后搜索数为0？A:需要添加扫描目标
+5. 不要边扫描边搜索，elastisearch在插入数据时会作分析，分词等等操作（此时效率不高），如果在此时搜索可能会返回503，建议扫描完毕后在进行搜索。(后期会使用数据迁移解决)
 
-### Links
+### 相关链接
 - [设计论文](./doc/网络资产发现引擎的设计.docx)
 - [如何构建一个网络空间搜索引擎-W12Scan-WEB篇](https://x.hacking8.com/post-340.html)
 - [如何在本机搭建W12Scan](https://x.hacking8.com/post-342.html)
 
-## Legal
-This program is mainly used to collect network data for analysis and research. Please follow the relevant local laws before using this program.
+## 法律
+本程序主要用于收集网络数据用于分析研究。在使用该程序之前请遵守当地相关法律进行。
